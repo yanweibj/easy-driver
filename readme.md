@@ -139,7 +139,7 @@ const easyd = new EasyDriver('zh-tw');
 
 > If ***type*** (css, class, id, name, xpath) is not specified, locator starting with `//` or `(` will be parsed as **xpath**, while `.`, `[` and `#` are treated as **css**.
 
-> css pseudo selector support => `:eq()`
+> **css** pseudo selector support => `:eq()`
 
 ## Enumeration Key
 
