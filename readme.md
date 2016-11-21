@@ -98,6 +98,7 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.clickAt(loc_or_web, offset = {x: 0, y: 0})`
 * `easyd.getAttribute(loc_or_web, attributeName) -> Thenable<(string|null)>`
 * `easyd.getRect(loc_or_web) -> Thenable<{x: number, y: number, height: number, width: number}>`
+* `easyd.getTagName(loc_or_web) -> Thenable<string>`
 * `easyd.getText(loc_or_web) -> Thenable<string>`
 * `easyd.isDisplayed(loc_or_web) -> Thenable<boolean>`
 * `easyd.isEnabled(loc_or_web) -> Thenable<boolean>`
@@ -119,8 +120,9 @@ const easyd = new EasyDriver('zh-tw');
 
 ##### easyd (Custom functions)
 * `easyd.createDirectories(dirtree)`
-* `easyd.createToolTip(loc_or_web, offset = {x: 5, y: 15}, fromLastPos = false)`
 * `easyd.clearEasyDriverElements()`
+* `easyd.drawSelect(loc_or_web, offset = {x: 0, y: 0})`
+* `easyd.drawToolTip(loc_or_web, offset = {x: 5, y: 15}, fromLastPos = false)`
 * `easyd.redMark(loc_or_web, padding = {top: 0, left: 0, bottom: 0, right: 0})`
 
 

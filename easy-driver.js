@@ -326,6 +326,15 @@ class EasyDriver {
   }
 
   /**
+   * Get Get tag name of an element
+   * @param {(string|WebElement)} locator - Element locator.
+   * @return {Thenable<string>}
+   */
+  getTagName(locator) {
+    return this.findElement(locator).getTagName();
+  }
+
+  /**
    * Get Get the visible innerText of an element
    * @param {(string|WebElement)} locator - Element locator.
    * @return {Thenable<string>}
@@ -513,18 +522,89 @@ class EasyDriver {
   }
 
   /**
-   * Create tooltip for an element
+   * Clear all elements created by EasyDriver
+   * @return {Thenable<(T|null)>}
+   */
+  clearEasyDriverElements() {
+    return this.wd.executeScript(`
+      var elements = window.document.body.querySelectorAll('div[id*="easydriver_"]');
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].remove();
+      }
+      window.easydriverTPSymbol = 9311;
+      window.easydriverTPLastPos = {x: 0, y: 0};
+    `);
+  }
+
+  /**
+   * Draw drop-down menu for <select> element
+   * @param {(string|WebElement)} locator - Element locator.
+   * @param {{x: number, y: number}} [offset={x: 5, y: 15}] - Tooltip offset from the element
+   * @return {Thenable<(T|null)>}
+   */
+  drawSelect(locator, offset = {x: 0, y: 0}) {
+    const element = this.findElement(locator, true);
+    const sId = getId();
+
+    this.getTagName(element).then(function (tagname) {
+      if (tagname !== 'select') console.error('Element is not a select element: ${tagname}.');
+    });
+
+    this.waitForVisible(element);
+
+    return this.wd.executeScript(`
+      var element = arguments[0];
+      var offsetX = arguments[1];
+      var offsetY = arguments[2];
+
+      var rect = element.getBoundingClientRect();
+    	var x = rect.left;
+    	var y = rect.bottom;
+    	var width = element.offsetWidth;
+
+    	var content = "";
+    	for (var i = 0; i < element.length; i++) {
+    		if (!element.options[i].disabled) content += element.options[i].text + "<br/>";
+    	}
+
+    	var dropdown = document.createElement('div');
+    	dropdown.id = "${sId}";
+      dropdown.innerHTML = content;
+    	dropdown.style.position = 'absolute';
+    	dropdown.style.color = '#000';
+    	dropdown.style.backgroundColor = '#fff';
+    	dropdown.style.border = '1px solid #000';
+    	dropdown.style.padding = '2px';
+    	dropdown.style.fontSize = '12px';
+    	dropdown.style.zIndex = '99999';
+    	dropdown.style.display = 'block';
+    	dropdown.style.height = '1px';
+    	dropdown.style.width = width + 'px';
+
+    	document.body.appendChild(dropdown);
+    	dropdown.style.height = (dropdown.scrollHeight + 8) + 'px';
+    	if (dropdown.scrollWidth > width) {
+    		dropdown.style.width = (dropdown.scrollWidth + 8) + 'px';
+    	}
+    	dropdown.style.left = (x + offsetX) + "px";
+    	dropdown.style.top = (y + offsetY) + "px";
+
+    `, element, offset.x, offset.y);
+  }
+
+  /**
+   * Draw tooltip for an element
    * @param {(string|WebElement)} locator - Element locator.
    * @param {{x: number, y: number}} [offset={x: 5, y: 15}] - Tooltip offset from the element
    * @param {boolean} [fromLastPos=false] - Tooltip drawn from the last tooltip's position.
    * @return {Thenable<(T|null)>}
    */
-  createToolTip(locator, offset = {x: 5, y: 15}, fromLastPos = false) {
+  drawToolTip(locator, offset = {x: 5, y: 15}, fromLastPos = false) {
     const element = this.findElement(locator, true);
     const sId = getId();
     const tpId = getId();
 
-    this.wait(this.until.elementIsVisible(element));
+    this.waitForVisible(element);
 
     return this.wd.executeScript(`
       var element = arguments[0];
@@ -579,21 +659,6 @@ class EasyDriver {
       window.easydriverTPLastPos = {x: lastPos.left, y: lastPos.bottom};
 
     `, element, offset.x, offset.y, fromLastPos);
-  }
-
-  /**
-   * Clear all elements created by EasyDriver
-   * @return {Thenable<(T|null)>}
-   */
-  clearEasyDriverElements() {
-    return this.wd.executeScript(`
-      var elements = window.document.body.querySelectorAll('div[id*="easydriver_"]');
-      for (var i = 0; i < elements.length; i++) {
-        elements[i].remove();
-      }
-      window.easydriverTPSymbol = 9311;
-      window.easydriverTPLastPos = {x: 0, y: 0};
-    `);
   }
 
   /**

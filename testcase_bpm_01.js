@@ -47,6 +47,11 @@ easyd.waitForVisible('//div[@class="TabbedPropertiesPane"]//span[@class="tabLabe
 easyd.click('.bpmClickyThumbUp');
 // Click on "Implmentation" (2nd element in the tabs)
 easyd.click('xpath=(//div[@class="TabbedPropertiesPane"]//span[@class="tabLabel"])[2]');
+// Capture "Operation Name" drop-down menu
+easyd.drawSelect('css=select[data-test-attr="service-flow-impl-operation"]');
+easyd.redMark('css=[id*="easydriver_"]');
+easyd.takeScreenshot(`${lang}/22.200.210`)
+easyd.clearEasyDriverElements();
 // Get all options of "Operation Name"
 easyd.findElements('css=select[data-test-attr="service-flow-impl-operation"] > option')
 .then(function (options) {
@@ -66,9 +71,9 @@ easyd.findElements('css=select[data-test-attr="service-flow-impl-operation"] > o
       // Create tooltips for all links
       links.forEach(function (link, index) {
         if (index === 0) { // First tooltip
-          easyd.createToolTip(link, {x: -250, y: 175}, false);
+          easyd.drawToolTip(link, {x: -250, y: 175}, false);
         } else { // The rest of tooltips
-          easyd.createToolTip(link, {x: 0, y: 0}, true);
+          easyd.drawToolTip(link, {x: 0, y: 0}, true);
         }
       });
     });
