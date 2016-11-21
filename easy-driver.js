@@ -228,12 +228,13 @@ class EasyDriver {
 
   /**
    * Switch to frame
-   * @param {(number|WebElement|null)} id - The frame locator.
+   * @param {(string|WebElement)} locator - The frame locator.
    * @return {Thenable<undefined>}
    */
-  switchToFrame(id) {
-    return this.wd.switchTo().defaultContent().then(function () {
-      return this.wd.switchTo().frame(id);
+  switchToFrame(locator) {
+    const self = this;
+    return self.wd.switchTo().defaultContent().then(function () {
+      return self.wd.switchTo().frame(self.findElement(locator));
     });
   }
 
