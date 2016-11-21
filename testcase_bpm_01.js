@@ -27,7 +27,7 @@ easyd.findElement('.savePrefsButton').then(function (saveButton) {
     else easyd.click('.closeButton'); // Or, close Preferences
   });
 });
-// Click on "TVTAPP01" ProcApp
+// Click on Process App: procApp
 easyd.click(`//span[text()="${procApp}"]/../../../../../../..//span[@class="openInDesignerActionIcon actIcon"]`);
 // Click on "Services" and select "Service Flow01"
 easyd.click('id=dijit__TreeNode_5');
@@ -46,7 +46,7 @@ easyd.findElements('css=g+image+rect')
 easyd.waitForVisible('//div[@class="TabbedPropertiesPane"]//span[@class="tabLabel"]');
 // Expand the "Properties" panal
 easyd.click('.bpmClickyThumbUp');
-// Click on "Implmentation" (2ndd element in the tabs)
+// Click on "Implmentation" (2nd element in the tabs)
 easyd.click('xpath=(//div[@class="TabbedPropertiesPane"]//span[@class="tabLabel"])[2]');
 // Get all options of "Operation Name"
 easyd.findElements('css=select[data-test-attr="service-flow-impl-operation"] > option')
@@ -64,11 +64,11 @@ easyd.findElements('css=select[data-test-attr="service-flow-impl-operation"] > o
     // Find all links
     easyd.findElements('.TabbedPropertiesPane .dijitTabPaneWrapper .dijitVisible .imageHyperLinkText')
     .then(function (links) {
-      // Create tooltips for the links
+      // Create tooltips for all links
       links.forEach(function (link, index) {
-        if (index === 0) {
+        if (index === 0) { // First tooltip
           easyd.createToolTip(link, {x: -250, y: 175}, false);
-        } else {
+        } else { // The rest of tooltips
           easyd.createToolTip(link, {x: 0, y: 0}, true);
         }
       });
