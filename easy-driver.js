@@ -5,6 +5,13 @@ const chrome = require('selenium-webdriver/chrome');
 const chromePath = require('chromedriver').path;
 const fs = require('fs-extra');
 
+// TODO: https://www.npmjs.com/package/css-selector-parser
+// TODO: https://www.npmjs.com/package/firefox-profile
+// TODO: https://www.npmjs.com/package/webdriver-sizzle-promised
+// TODO: https://www.npmjs.com/package/html-dnd
+// TODO: https://www.npmjs.com/package/selenium-query
+// TODO: https://github.com/mcherryleigh/webdriver-marker/blob/master/index.js
+
 class EasyDriver {
   /**
    * @param {string} [locale=en] - The locale of WebDriver
@@ -131,7 +138,7 @@ class EasyDriver {
       if (locator.string.startsWith('//') || locator.string.startsWith('(')) {
         return this.By.xpath(locator.string);
       }
-      if (locator.string.startsWith('.') || locator.string.startsWith('#')) {
+      if (locator.string.startsWith('.') || locator.string.startsWith('[') || locator.string.startsWith('#')) {
         return this.By.css(locator.string);
       }
       console.error(`Can not locate an element with '${locator.string}'.`);
