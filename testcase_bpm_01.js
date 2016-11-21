@@ -36,9 +36,8 @@ easyd.click('//*[text()="Service Flow01"]');
 easyd.waitForVisible('//div[@dojoattachpoint="canvasNode"]');
 easyd.sleep(2000);
 // Click on "Content Integration" when enabled
-easyd.findElements('css=g+image+rect')
-.then(function (elements) { // All tasks found
-  const element = elements[2]; // Content Integration is the 3rd task
+easyd.findElement('css=g+image+rect:eq(2)')
+.then(function (element) {
   easyd.waitForEnabled(element);
   easyd.clickAt(element);
 });

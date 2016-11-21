@@ -58,15 +58,39 @@ class EasyDriver {
       return locator;
     }
 
-    const byLocator = this.locateElementBy(locator);
+    // Add ':eq()' support to css selector
+    const re = /:eq\((\d+)\)/;
+    const found = locator.match(re);
 
-    this.wait(this.until.elementsLocated(byLocator));
+    if(!found) {
+      const byLocator = this.locateElementBy(locator);
 
-    const element = this.wd.findElement(byLocator);
+      this.wait(this.until.elementsLocated(byLocator));
 
-    if (isDisplayed) this.wait(this.until.elementIsVisible(element));
+      const element = this.wd.findElement(byLocator);
 
-    return element;
+      if (isDisplayed) this.wait(this.until.elementIsVisible(element));
+
+      return element;
+    }
+
+    const query = locator.substring(0, found['index']);
+    const nth = found[1];
+    const self = this;
+
+    return new Promise(function (resolve, reject) {
+      self.findElements(query).then(function (elements) {
+        if (nth > elements.length) {
+          console.error('Maximum index for ${locator} is ${elements.length}.');
+          reject(null);
+        }
+        const element = elements[nth];
+
+        if (isDisplayed) self.wait(self.until.elementIsVisible(element));
+
+        resolve(element);
+      });
+    });
   }
 
   /**
