@@ -48,12 +48,12 @@ easyd.click('.bpmClickyThumbUp');
 // Click on "Implmentation" (2nd element in the tabs)
 easyd.click('xpath=(//div[@class="TabbedPropertiesPane"]//span[@class="tabLabel"])[2]');
 // Capture "Operation Name" drop-down menu
-easyd.drawSelect('css=select[data-test-attr="service-flow-impl-operation"]');
-easyd.redMark('css=[id*="easydriver_"]');
+easyd.drawSelect('[data-test-attr="service-flow-impl-operation"]');
+easyd.redMark('[id*="easydriver_"]');
 easyd.takeScreenshot(`${lang}/22.200.210`)
 easyd.clearEasyDriverElements();
 // Get all options of "Operation Name"
-easyd.findElements('css=select[data-test-attr="service-flow-impl-operation"] > option')
+easyd.findElements('[data-test-attr="service-flow-impl-operation"] > option')
 .then(function (options) {
   options.shift();  // remove the 1st opiton: "None"
   // Loop through the rest of options
