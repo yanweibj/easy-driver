@@ -37,8 +37,6 @@ git clone https://github.ibm.com/aaronhc/easy-driver
 cd easy-driver
 
 npm install
-
-npm start
 ```
 
 ## Run Sample Test Cases

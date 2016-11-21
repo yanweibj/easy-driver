@@ -1,5 +1,6 @@
 const EasyDriver = require('./easy-driver');
 const lang = 'en';
+const procApp = 'TVTAPP01';
 let tcNum = 220;
 
 const easyd = new EasyDriver(lang);
@@ -26,8 +27,8 @@ easyd.findElement('.savePrefsButton').then(function (saveButton) {
     else easyd.click('.closeButton'); // Or, close Preferences
   });
 });
-// Click on the first ProcApp
-easyd.click('(//span[@class="openInDesignerActionIcon actIcon"])[1]');
+// Click on "TVTAPP01" ProcApp
+easyd.click(`//span[text()="${procApp}"]/../../../../../../..//span[@class="openInDesignerActionIcon actIcon"]`);
 // Click on "Services" and select "Service Flow01"
 easyd.click('id=dijit__TreeNode_5');
 easyd.click('//*[text()="Service Flow01"]');
@@ -36,7 +37,7 @@ easyd.waitForVisible('//div[@dojoattachpoint="canvasNode"]');
 easyd.sleep(2000);
 // Click on "Content Integration" when enabled
 easyd.findElements('css=g+image+rect')
-.then(function (elements) { // Find all tasks
+.then(function (elements) { // All tasks found
   const element = elements[2]; // Content Integration is the 3rd task
   easyd.waitForEnabled(element);
   easyd.clickAt(element);
@@ -50,7 +51,7 @@ easyd.click('xpath=(//div[@class="TabbedPropertiesPane"]//span[@class="tabLabel"
 // Get all options of "Operation Name"
 easyd.findElements('css=select[data-test-attr="service-flow-impl-operation"] > option')
 .then(function (options) {
-  options.shift();  // remove the 1st opiton "None"
+  options.shift();  // remove the 1st opiton: "None"
   // Loop through the rest of options
   options.forEach(function (option) {
     option.click();
@@ -83,7 +84,7 @@ easyd.findElements('css=select[data-test-attr="service-flow-impl-operation"] > o
     // Clear EasyDriver elements
     easyd.clearEasyDriverElements();
 
-    // Got back to "Implmentation"
+    // Got back to "Implmentation" so that we can click on another <option>
     easyd.click('xpath=(//div[@class="TabbedPropertiesPane"]//span[@class="tabLabel"])[2]');
   });
 });
