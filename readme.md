@@ -86,7 +86,7 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.runScript(script, callback) -> callback(retval)`
 * `easyd.setTimeout(timeout)`
 * `easyd.sleep(ms)`
-* `easyd.switchToFrame(loc_or_web)`
+* `easyd.switchToFrame(number_or_loc_or_web)`
 * `easyd.switchToWindow(nameOrHandle)`
 * `easyd.takeScreenshot(png_filename)`
 * `easyd.until` (See **until Conditions**)

@@ -85,18 +85,16 @@ class EasyDriver {
     const nth = found[1];
     const self = this;
 
-    return new Promise(function (resolve, reject) {
-      self.findElements(query).then(function (elements) {
-        if (nth > elements.length) {
-          console.error('Maximum index for ${locator} is ${elements.length}.');
-          reject(null);
-        }
-        const element = elements[nth];
+    return self.findElements(query)
+    .then(function (elements) {
+      if (nth > elements.length) {
+        console.error('Maximum index for ${locator} is ${elements.length}.');
+        return elements;
+      }
 
-        if (isDisplayed) self.wait(self.until.elementIsVisible(element));
-
-        resolve(element);
-      });
+      const element = elements[nth];
+      if (isDisplayed) self.wait(self.until.elementIsVisible(element));
+      return element;
     });
   }
 
@@ -228,13 +226,15 @@ class EasyDriver {
 
   /**
    * Switch to frame
-   * @param {(string|WebElement)} locator - The frame locator.
+   * @param {(number|string|WebElement)} locator - The frame locator.
    * @return {Thenable<undefined>}
    */
   switchToFrame(locator) {
     const self = this;
+    const element = (isNaN(locator)) ? self.findElement(locator) : locator;
+
     return self.wd.switchTo().defaultContent().then(function () {
-      return self.wd.switchTo().frame(self.findElement(locator));
+      return self.wd.switchTo().frame(element);
     });
   }
 
@@ -302,8 +302,10 @@ class EasyDriver {
    * @param {{x: number, y: number}} [offset={x: 0, y: 0}] - An offset within the element.
    */
   clickAt(locator, offset = {x: 0, y: 0}) {
-    const element = this.findElement(locator, true);
-    this.actions().mouseMove(element, offset).click().perform();
+    const self = this;
+    self.findElement(locator, true).then(function (element) {
+      self.actions().mouseMove(element, offset).click().perform();
+    });
   }
 
   /**
