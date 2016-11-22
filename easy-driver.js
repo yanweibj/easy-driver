@@ -613,12 +613,20 @@ class EasyDriver {
   /**
    * Draw tooltip for an element
    * @param {(string|WebElement)} locator - Element locator.
-   * @param {{x: number, y: number}} [offset={x: 5, y: 15}] - Tooltip offset from the element
-   * @param {boolean} [fromLastPos=false] - Tooltip drawn from the last tooltip's position.
+   * @param {{attribute: string, offsetX: number, offsetY: number, fromLastPos: boolean}}
+            [settings={attribute: 'title', offsetX: 5, offsetY: 15, fromLastPos: false}]
+            - attribute: draw flyover on element's attribute,
+              offsetX: offset X from the element,
+              offsetY: offset Y from the element,
+              fromLastPos: draw from last Flyover position.
    * @return {Thenable<(T|null)>}
    */
-  drawToolTip(locator, offset = {x: 5, y: 15}, fromLastPos = false) {
+  drawFlyover(locator, settings = {attribute: 'title', offsetX: 5, offsetY: 15, fromLastPos: false}) {
     const element = this.findElement(locator, true);
+    const attribute = settings.attribute || 'title';
+    const offsetX = settings.offsetX || 5;
+    const offsetY = settings.offsetY || 15;
+    const fromLastPos = settings.fromLastPos || false;
     const sId = getId();
     const tpId = getId();
 
@@ -636,7 +644,7 @@ class EasyDriver {
 
       var rect = element.getBoundingClientRect();
 
-      var title = element.getAttribute("title") || 'N/A';
+      var title = element.getAttribute("${attribute}") || 'N/A';
 
       var left = rect.left;
       var top = rect.top;
@@ -676,7 +684,7 @@ class EasyDriver {
       var lastPos = tooltip.getBoundingClientRect();
       window.easydriverTPLastPos = {x: lastPos.left, y: lastPos.bottom};
 
-    `, element, offset.x, offset.y, fromLastPos);
+    `, element, offsetX, offsetY, fromLastPos);
   }
 
   /**

@@ -1,6 +1,6 @@
 const EasyDriver = require('./easy-driver');
-const languages = ['en', 'zh-tw'];
-const pcServer = 'lsc218.tw.ibm.com';
+const languages = ['en'];
+const pcServer = 'lsc556.tw.ibm.com';
 
 languages.forEach(function (lang) {
   // New a driver with locale: lang
@@ -79,9 +79,9 @@ languages.forEach(function (lang) {
         // Create tooltips for all links
         links.forEach(function (link, index) {
           if (index === 0) { // First tooltip
-            easyd.drawToolTip(link, {x: -270, y: 180}, false);
+            easyd.drawFlyover(link, {offsetX: -270, offsetY: 180, fromLastPos: false});
           } else { // The rest of tooltips
-            easyd.drawToolTip(link, {x: 0, y: 0}, true);
+            easyd.drawFlyover(link, {offsetX: 0, offsetY: 0, fromLastPos: true});
           }
         });
       });
