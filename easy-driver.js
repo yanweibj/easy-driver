@@ -326,10 +326,18 @@ class EasyDriver {
   getRect(locator) {
     const element = this.findElement(locator);
 
-    return new Promise(function (resolve, reject) {
-      element.getLocation().then(function (position) {
-        element.getSize().then(function (size) {
-          resolve({x: position.x, y: position.y, width: size.width, height: size.height});
+    // return new Promise(function (resolve, reject) {
+    //   element.getLocation().then(function (position) {
+    //     element.getSize().then(function (size) {
+    //       resolve({x: position.x, y: position.y, width: size.width, height: size.height});
+    //     });
+    //   });
+    // });
+
+    return webdriver.promise.consume(function* () {
+      return element.getLocation().then(function (position) {
+        return element.getSize().then(function (size) {
+          return ({x: position.x, y: position.y, width: size.width, height: size.height});
         });
       });
     });

@@ -1,5 +1,6 @@
 const EasyDriver = require('./easy-driver');
 const languages = ['en', 'zh-tw'];
+const pcServer = 'lsc218.tw.ibm.com';
 
 languages.forEach(function (lang) {
   // New a driver with locale: lang
@@ -14,7 +15,7 @@ languages.forEach(function (lang) {
   // Create a lang directory to hold all screenshots
   easyd.createDirectories(screenDir);
   // Open "Process Center"
-  easyd.open('https://lsc556.tw.ibm.com:9443/ProcessCenter/login.jsp');
+  easyd.open(`https://${pcServer}:9443/ProcessCenter/login.jsp`);
   // Maximize the window to the screen
   easyd.maximizeToScreenSize();
   // Login
@@ -64,6 +65,7 @@ languages.forEach(function (lang) {
 
     // Loop through the rest of options
     options.forEach(function (option) {
+      // Select the option
       option.click();
 
       // Click on "Data Mapping" (3rd element in the tabs)
@@ -77,7 +79,7 @@ languages.forEach(function (lang) {
         // Create tooltips for all links
         links.forEach(function (link, index) {
           if (index === 0) { // First tooltip
-            easyd.drawToolTip(link, {x: -250, y: 175}, false);
+            easyd.drawToolTip(link, {x: -270, y: 180}, false);
           } else { // The rest of tooltips
             easyd.drawToolTip(link, {x: 0, y: 0}, true);
           }
