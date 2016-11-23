@@ -25,7 +25,7 @@ easyd.getTitle(function (title) {
   console.log('Title: ' + title);
 });
 // Clear redmark
-easyd.clearEasyDriverElements();
+easyd.clearAllDrawings();
 // Sleep 6 seconds
 easyd.sleep(6000);
 // Quit

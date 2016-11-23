@@ -95,7 +95,7 @@ languages.forEach(function (lang) {
   easyd.drawRedMark('[id*="easydriver_"]');
   easyd.drawArrow('[data-test-attr="service-flow-impl-operation"]', '[id*="easydriver_"]');
   easyd.takeScreenshot(`${screenDir}/22.200.210`) // drop-down test case
-  easyd.clearEasyDriverElements();
+  easyd.clearAllDrawings();
   // Get all options of "Operation Name"
   easyd.findElements('[data-test-attr="service-flow-impl-operation"] > option')
   .then(function (options) {
@@ -131,7 +131,7 @@ languages.forEach(function (lang) {
         easyd.takeScreenshot(`${screenDir}/${testcaseMapping[val]}`);
 
         // Clear EasyDriver elements
-        easyd.clearEasyDriverElements();
+        easyd.clearAllDrawings();
 
         // Got back to "Implmentation" so that we can click on another <option>
         easyd.click('xpath=(//div[@class="TabbedPropertiesPane"]//span[@class="tabLabel"])[2]');

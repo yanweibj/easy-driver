@@ -81,7 +81,7 @@ class EasyDriver {
       return element;
     }
 
-    const query = locator.substring(0, found['index']);
+    const query = locator.substring(0, found.index);
     const nth = found[1];
     const self = this;
 
@@ -361,7 +361,7 @@ class EasyDriver {
     // });
 
     return webdriver.promise.consume(function* () {
-      return element.getLocation().then(function (position) {
+      return yield element.getLocation().then(function (position) {
         return element.getSize().then(function (size) {
           return ({x: position.x, y: position.y, width: size.width, height: size.height});
         });
@@ -576,18 +576,10 @@ class EasyDriver {
   /*--- ************** ---*/
 
   /**
-   * Create directories
-   * @param {string} dirtree - Directories to create.
-   */
-  createDirectories(dirtree) {
-    if (! fs.existsSync(dirtree)){ fs.mkdirsSync(dirtree); }
-  }
-
-  /**
    * Clear all elements created by EasyDriver
    * @return {Thenable<(T|null)>}
    */
-  clearEasyDriverElements() {
+  clearAllDrawings() {
     return this.wd.executeScript(`
       var elements = window.document.body.querySelectorAll('[id*="easydriver_"]');
       for (var i = 0; i < elements.length; i++) {
@@ -596,6 +588,14 @@ class EasyDriver {
       window.easydriverTPSymbol = 9311;
       window.easydriverTPLastPos = {x: 0, y: 0};
     `);
+  }
+
+  /**
+   * Create directories
+   * @param {string} dirtree - Directories to create.
+   */
+  createDirectories(dirtree) {
+    if (! fs.existsSync(dirtree)){ fs.mkdirsSync(dirtree); }
   }
 
   /**
@@ -871,6 +871,6 @@ function parseLocator (locator) {
     return { type: type, string: actualLocator };
   }
   return { type: 'implicit', string: locator };
-};
+}
 
 module.exports = EasyDriver;

@@ -122,8 +122,8 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.waitForVisible(loc_or_web)`
 
 ##### easyd (Custom functions)
+* `easyd.clearAllDrawings()`
 * `easyd.createDirectories(dirtree)`
-* `easyd.clearEasyDriverElements()`
 * `easyd.drawArrow(from_loc_or_web, to_loc_or_web)`
 * `easyd.drawFlyover(loc_or_web, settings = {attribute: 'title', offsetX: 5, offsetY: 15, fromLastPos: false, drawSymbol: false})`
 * `easyd.drawRedMark(loc_or_web, padding = {top: 0, left: 0, bottom: 0, right: 0})`
