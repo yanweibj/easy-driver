@@ -94,7 +94,7 @@ languages.forEach(function (lang) {
   easyd.drawRedMark('[data-test-attr="service-flow-impl-operation"]');
   easyd.drawRedMark('[id*="easydriver_"]');
   easyd.drawArrow('[data-test-attr="service-flow-impl-operation"]', '[id*="easydriver_"]');
-  easyd.takeScreenshot(`${screenDir}/22.200.210`) // drop-down test case
+  easyd.takeScreenshot(`${screenDir}/22.200.210`); // drop-down test case
   easyd.clearAllDrawings();
   // Get all options of "Operation Name"
   easyd.findElements('[data-test-attr="service-flow-impl-operation"] > option')

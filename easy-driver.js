@@ -855,6 +855,50 @@ class EasyDriver {
     });
   }
 
+  takeElementShot(locator, filename) {
+    const self = this;
+    const element = self.findElement(locator);
+
+    if (!filename.endsWith('.png')) filename += '.png';
+
+    self.wd.takeScreenshot().then(function (screenData) {
+      self.wd.executeScript(`
+        var element = arguments[0];
+        var screenData = arguments[1];
+
+        var rect = element.getBoundingClientRect();
+
+        var image = new Image();
+        image.src = 'data:image/png;base64,' + screenData;
+
+        var canvas = document.createElement('canvas');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(
+          image,
+          0,
+          0,
+          window.innerWidth,
+          window.innerHeight,
+          rect.left,
+          rect.top,
+          rect.width,
+          rect.height
+        );
+
+        return canvas.toDataURL();
+      `, element, screenData)
+      .then(function (elementData) {
+        const base64Data = elementData.replace(/^data:image\/png;base64,/, "");
+        fs.writeFile(filename, base64Data, 'base64', function (err) {
+          if(err) console.error(err);
+        });
+      });
+    });
+  }
+
 }
 
 // --- Internal Functions --- //
