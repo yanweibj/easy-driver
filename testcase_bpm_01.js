@@ -90,8 +90,8 @@ languages.forEach(function (lang) {
   easyd.waitForEnabled('[data-test-attr="service-flow-impl-operation"]');
   // Capture "Operation Name" drop-down menu
   easyd.drawSelect('[data-test-attr="service-flow-impl-operation"]', {x: -465, y: -100});
-  easyd.redMark('[data-test-attr="service-flow-impl-operation"]');
-  easyd.redMark('[id*="easydriver_"]');
+  easyd.drawRedMark('[data-test-attr="service-flow-impl-operation"]');
+  easyd.drawRedMark('[id*="easydriver_"]');
   easyd.takeScreenshot(`${screenDir}/22.200.210`) // drop-down test case
   easyd.clearEasyDriverElements();
   // Get all options of "Operation Name"

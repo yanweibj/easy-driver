@@ -557,7 +557,7 @@ class EasyDriver {
   }
 
   /**
-   * Draw tooltip for an element
+   * Draw flyover for an element
    * @param {(string|WebElement)} locator - Element locator.
    * @param {{attribute: string, offsetX: number, offsetY: number, fromLastPos: boolean, drawSymbol: boolean}}
             [settings={attribute: 'title', offsetX: 5, offsetY: 15, fromLastPos: false, drawSymbol: false}]
@@ -644,6 +644,44 @@ class EasyDriver {
   }
 
   /**
+   * Draw red-mark around an element
+   * @param {(string|WebElement)} locator - Element locator.
+   * @param {{top: number, left: number, bottom: number, right: number}} [padding={top: 0, left: 0, bottom: 0, right: 0}] - Remark padding.
+   * @return {WebElementPromise}
+   */
+  drawRedMark(locator, padding = {top: 0, left: 0, bottom: 0, right: 0}) {
+    const self = this;
+    const element = this.findElement(locator, true);
+    const id = getId();
+
+    return element.getLocation().then(function (location) {
+      return element.getSize().then(function (size) {
+        return self.wd.executeScript(`
+          var redmark = window.document.createElement('div');
+        	redmark.id = '${id}';
+        	redmark.style.position = 'absolute';
+        	redmark.style.border = '3px solid red';
+        	redmark.style.zIndex = '99999';
+        	redmark.style.display = 'block';
+        	redmark.style.padding = '0px';
+        	redmark.style.margin = '0px';
+        	redmark.style.left = (${location.x} - 4 - ${padding.left}) + 'px';
+        	redmark.style.top = (${location.y} - 4 - ${padding.top}) + 'px';
+        	redmark.style.width = (${size.width} + 8 + ${padding.right}) + 'px';
+        	redmark.style.height = (${size.height} + 8 + ${padding.bottom}) + 'px';
+
+        	window.document.body.appendChild(redmark);
+
+          return;
+        `)
+        .then(function () {
+          return self.findElement(`[id="${id}"]`);
+        });
+      });
+    });
+  }
+
+  /**
    * Draw drop-down menu for <select> element
    * @param {(string|WebElement)} locator - Element locator.
    * @param {{x: number, y: number}} [offset={x: 5, y: 15}] - Tooltip offset from the element
@@ -705,38 +743,6 @@ class EasyDriver {
     `, element, offset.x, offset.y)
     .then(function () {
       return self.findElement(`[id="${sId}"]`);
-    });
-  }
-
-  /**
-   * Create tooltip for an element
-   * @param {(string|WebElement)} locator - Element locator.
-   * @param {{top: number, left: number, bottom: number, right: number}} [padding={top: 0, left: 0, bottom: 0, right: 0}] - Remark padding.
-   */
-  redMark(locator, padding = {top: 0, left: 0, bottom: 0, right: 0}) {
-    const self = this;
-    const element = this.findElement(locator, true);
-    const id = getId();
-
-    element.getLocation().then(function (location) {
-      element.getSize().then(function (size) {
-        self.wd.executeScript(`
-          var redmark = window.document.createElement('div');
-        	redmark.id = '${id}';
-        	redmark.style.position = 'absolute';
-        	redmark.style.border = '3px solid red';
-        	redmark.style.zIndex = '99999';
-        	redmark.style.display = 'block';
-        	redmark.style.padding = '0px';
-        	redmark.style.margin = '0px';
-        	redmark.style.left = (${location.x} - 4 - ${padding.left}) + 'px';
-        	redmark.style.top = (${location.y} - 4 - ${padding.top}) + 'px';
-        	redmark.style.width = (${size.width} + 8 + ${padding.right}) + 'px';
-        	redmark.style.height = (${size.height} + 8 + ${padding.bottom}) + 'px';
-
-        	window.document.body.appendChild(redmark);
-        `);
-      });
     });
   }
 

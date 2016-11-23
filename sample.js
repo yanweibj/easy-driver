@@ -15,7 +15,7 @@ easyd.sendKeys('name=q', 'webdriver' + easyd.Key.ENTER);
 // Wait till search results are done
 easyd.waitForVisible('id=rso');
 // Red-mark 'Send Feedback'
-easyd.redMark('(//*[@class="_Gs"])[2]');
+easyd.drawRedMark('(//*[@class="_Gs"])[2]');
 // Scroll to 'Send Feedback' at the bottom of the page
 easyd.scrollIntoView('(//*[@class="_Gs"])[2]');
 // Capture the page

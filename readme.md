@@ -122,8 +122,8 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.createDirectories(dirtree)`
 * `easyd.clearEasyDriverElements()`
 * `easyd.drawFlyover(loc_or_web, settings = {attribute: 'title', offsetX: 5, offsetY: 15, fromLastPos: false, drawSymbol: false})`
+* `easyd.drawRedMark(loc_or_web, padding = {top: 0, left: 0, bottom: 0, right: 0})`
 * `easyd.drawSelect(loc_or_web, offset = {x: 0, y: 0})`
-* `easyd.redMark(loc_or_web, padding = {top: 0, left: 0, bottom: 0, right: 0})`
 
 
 ## Supported ***locator*** Formats
