@@ -280,6 +280,18 @@ class EasyDriver {
   /*--- ****************** ---*/
 
   /**
+   * Remove focus from an element
+   * @param {(string|WebElement)} locator - Element locator.
+   */
+  blur(locator) {
+    const element = this.findElement(locator);
+    this.wd.executeScript(`
+      var element = arguments[0];
+      element.blur();
+    `, element);
+  }
+
+  /**
    * Clear the value of an element
    * @param {(string|WebElement)} locator - Element locator.
    * @return {Thenable<undefined>}
@@ -308,6 +320,18 @@ class EasyDriver {
     self.findElement(locator, true).then(function (element) {
       self.actions().mouseMove(element, offset).click().perform();
     });
+  }
+
+  /**
+   * Give focus to an element
+   * @param {(string|WebElement)} locator - Element locator.
+   */
+  focus(locator) {
+    const element = this.findElement(locator);
+    this.wd.executeScript(`
+      var element = arguments[0];
+      element.focus();
+    `, element);
   }
 
   /**

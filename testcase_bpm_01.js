@@ -69,6 +69,8 @@ languages.forEach(function (lang) {
       else easyd.click('.closeButton'); // Or, close Preferences
     });
   });
+  // Wait and make sure lang preferences are saved to pcServer.
+  easyd.sleep(500);
   // Click on Process App: procApp
   easyd.click(`//span[text()="${procApp}"]/../../../../../../..//span[@class="openInDesignerActionIcon actIcon"]`);
   // Click on "Services" and select "Service Flow01"
