@@ -107,6 +107,7 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.scrollIntoView(loc_or_web)`
 * `easyd.select(select_loc_or_web, option_locator)`
 * `easyd.sendKeys(loc_or_web, keys)`
+* `easyd.setAttribute(loc_or_web, attribute, value)`
 * `easyd.waitForDisabled(loc_or_web)`
 * `easyd.waitForEnabled(loc_or_web)`
 * `easyd.waitForNotPresent(loc_or_web)`
@@ -121,6 +122,7 @@ const easyd = new EasyDriver('zh-tw');
 ##### easyd (Custom functions)
 * `easyd.createDirectories(dirtree)`
 * `easyd.clearEasyDriverElements()`
+* `easyd.drawArrow(from_loc_or_web, to_loc_or_web)`
 * `easyd.drawFlyover(loc_or_web, settings = {attribute: 'title', offsetX: 5, offsetY: 15, fromLastPos: false, drawSymbol: false})`
 * `easyd.drawRedMark(loc_or_web, padding = {top: 0, left: 0, bottom: 0, right: 0})`
 * `easyd.drawSelect(loc_or_web, offset = {x: 0, y: 0})`

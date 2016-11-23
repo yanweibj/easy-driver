@@ -416,7 +416,7 @@ class EasyDriver {
   /**
    * Select an option in a drop-down menu
    * @param {(string|WebElement)} select_locator - <select> element locator.
-   * @param {(string)} option_locator - <option> element locator.
+   * @param {string} option_locator - <option> element locator.
    * @return {Thenable<undefined>}
    */
   select(select_locator, option_locator) {
@@ -430,11 +430,29 @@ class EasyDriver {
   /**
    * Send keys to an element
    * @param {(string|WebElement)} locator - Element locator.
-   * @param {(string)} keys - Keys to send.
+   * @param {string} keys - Keys to send.
    * @return {Thenable<undefined>}
    */
   sendKeys(locator, keys) {
     return this.findElement(locator).sendKeys(keys);
+  }
+
+  /**
+   * Set attribute value for an element
+   * @param {(string|WebElement)} select_locator - <select> element locator.
+   * @param {string} attribute - attribute name
+   * @param {string} value - attribute value
+   */
+  setAttribute(locator, attribute, value) {
+    const element = this.findElement(locator);
+
+    this.wd.executeScript(`
+      var element = arguments[0];
+      var attribute = arguments[1];
+      var value = arguments[2];
+
+      element.setAttribute(attribute, value);
+    `, element, attribute, value);
   }
 
   /**
@@ -547,13 +565,90 @@ class EasyDriver {
    */
   clearEasyDriverElements() {
     return this.wd.executeScript(`
-      var elements = window.document.body.querySelectorAll('div[id*="easydriver_"]');
+      var elements = window.document.body.querySelectorAll('[id*="easydriver_"]');
       for (var i = 0; i < elements.length; i++) {
         elements[i].remove();
       }
       window.easydriverTPSymbol = 9311;
       window.easydriverTPLastPos = {x: 0, y: 0};
     `);
+  }
+
+  /**
+   * Draw an arrow between 2 element
+   * @param {(string|WebElement)} from_locator - Element locator.
+   * @param {(string|WebElement)} to_locator - Element locator.
+   * @return {WebElementPromise}
+   */
+  drawArrow(from_locator, to_locator) {
+    const self = this;
+    const from = self.findElement(from_locator);
+    const to = self.findElement(to_locator);
+    const cId = getId();
+
+    self.wd.executeScript(`
+      var element1 = arguments[0];
+      var element2 = arguments[1];
+
+      var rect1 = element1.getBoundingClientRect();
+      var rect2 = element2.getBoundingClientRect();
+
+      var left1 = rect1.left;
+      var right1 = rect1.right;
+
+      var left2 = rect2.left;
+      var right2 = rect2.right;
+
+      var from = {y: rect1.top + 4};
+      var to = {y: rect2.top + 4};
+
+      if (left1 > left2) {
+        from.x = left1;
+        to.x = right2;
+      } else {
+        from.x = right1;
+        to.x = left2;
+      }
+
+      // create canvas
+      var canvas = document.createElement('canvas');
+      canvas.id = "${cId}";
+      canvas.style.left = "0px";
+      canvas.style.top = "0px";
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      canvas.style.zIndex = '100000';
+      canvas.style.position = "absolute";
+      document.body.appendChild(canvas);
+
+      var headlen = 10;
+      var angle = Math.atan2(to.y - from.y, to.x - from.x);
+      var ctx = canvas.getContext("2d");
+
+      // line
+      ctx.beginPath();
+      ctx.moveTo(from.x, from.y);
+      ctx.lineTo(to.x, to.y);
+      ctx.lineWidth  = 3;
+      ctx.strokeStyle = '#ff0000';
+      ctx.stroke();
+
+      // arrow
+      ctx.beginPath();
+      ctx.moveTo(to.x, to.y);
+      ctx.lineTo(to.x - headlen * Math.cos(angle - Math.PI/7), to.y - headlen * Math.sin(angle - Math.PI/7));
+      ctx.lineTo(to.x - headlen * Math.cos(angle + Math.PI/7), to.y - headlen * Math.sin(angle + Math.PI/7));
+      ctx.lineTo(to.x, to.y);
+      ctx.lineTo(to.x - headlen * Math.cos(angle - Math.PI/7), to.y - headlen * Math.sin(angle - Math.PI/7));
+      ctx.lineWidth  = 3;
+      ctx.strokeStyle = '#ff0000';
+      ctx.stroke();
+
+      return;
+    `, from, to)
+    .then(function () {
+      return self.findElement(`[id="${cId}"]`);
+    });
   }
 
   /**

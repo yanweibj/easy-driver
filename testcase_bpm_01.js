@@ -1,8 +1,7 @@
 const EasyDriver = require('./easy-driver');
 const languages = [
-  'en', 'zh', 'zh-tw', 'ja', 'ko', 'it', 'fr', 'de', 'es', 'pt-br',
-  'pt', 'nb', 'fi', 'sv', 'da', 'tr', 'nl', 'cs', 'hu', 'ru', 'ro',
-  'pl', 'el'
+  'en', 'zh', 'zh-tw', 'ja', 'ko', 'it', 'fr', 'de', 'es', 'pt-br', 'pt',
+  'nb', 'fi', 'sv', 'da', 'tr', 'nl', 'cs', 'hu', 'ru', 'ro', 'pl', 'el'
 ];
 const pcServer = 'lsc218.tw.ibm.com';
 const testcaseMapping = {
@@ -92,6 +91,7 @@ languages.forEach(function (lang) {
   easyd.drawSelect('[data-test-attr="service-flow-impl-operation"]', {x: -465, y: -100});
   easyd.drawRedMark('[data-test-attr="service-flow-impl-operation"]');
   easyd.drawRedMark('[id*="easydriver_"]');
+  easyd.drawArrow('[data-test-attr="service-flow-impl-operation"]', '[id*="easydriver_"]');
   easyd.takeScreenshot(`${screenDir}/22.200.210`) // drop-down test case
   easyd.clearEasyDriverElements();
   // Get all options of "Operation Name"
