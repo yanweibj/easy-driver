@@ -630,7 +630,7 @@ class EasyDriver {
     	tooltip.style.left = ((fromLastPos) ? window.easydriverTPLastPos.x : (left + offsetX)) + 'px';
     	document.body.appendChild(tooltip);
     	if (tooltip.scrollHeight > tooltip.offsetHeight) {
-    		tooltip.style.height = (tooltip.scrollHeight + 8) + 'px';
+    		tooltip.style.height = (tooltip.scrollHeight + 3) + 'px';
     	}
 
       var lastPos = tooltip.getBoundingClientRect();

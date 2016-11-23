@@ -5,6 +5,38 @@ const languages = [
   'pl', 'el'
 ];
 const pcServer = 'lsc218.tw.ibm.com';
+const testcaseMapping = {
+  DOC_OP_ADD_DOCUMENT_TO_FOLDER: "22.200.220",
+  FOLDER_OP_ADD_FOLDER_TO_FOLDER: "22.200.221",
+  DOC_OP_CANCEL_CHECK_OUT_DOCUMENT: "22.200.222",
+  DOC_OP_CHECK_IN_DOCUMENT: "22.200.223",
+  DOC_OP_CHECK_OUT_DOCUMENT: "22.200.224",
+  DOC_OP_COPY_DOCUMENT: "22.200.225",
+  DOC_OP_CREATE_DOCUMENT: "22.200.226",
+  FOLDER_OP_CREATE_FOLDER: "22.200.227",
+  DOC_OP_DELETE_DOCUMENT: "22.200.228",
+  FOLDER_OP_DELETE_FOLDER: "22.200.229",
+  DOC_OP_GET_ALL_DOCUMENT_VERSIONS: "22.200.230",
+  FOLDER_OP_GET_CHILDREN: "22.200.231",
+  DOC_OP_GET_DOCUMENT: "22.200.232",
+  DOC_OP_GET_DOCUMENT_CONTENT: "22.200.233",
+  FOLDER_OP_GET_DOCS_IN_FOLDER: "22.200.234",
+  FOLDER_OP_GET_FOLDER: "22.200.235",
+  FOLDER_OP_GET_FOLDER_BY_PATH: "22.200.236",
+  FOLDER_OP_GET_FOLDER_TREE: "22.200.237",
+  SERVER_OP_GET_TYPE_DEFINITION: "22.200.238",
+  SERVER_OP_GET_TYPE_DESCENDANTS: "22.200.239",
+  DOC_OP_MOVE_DOCUMENT: "22.200.240",
+  FOLDER_OP_MOVE_FOLDER: "22.200.241",
+  DOC_OP_REMOVE_DOCUMENT_FROM_FOLDER: "22.200.242",
+  FOLDER_OP_REMOVE_FOLDER_FROM_FOLDER: "22.200.243",
+  DOC_OP_RENAME_REFERENCE: "22.200.244",
+  FOLDER_OP_RENAME_REFERENCE: "22.200.245",
+  SEARCH_OP: "22.200.246",
+  DOC_OP_SET_DOCUMENT_CONTENT: "22.200.247",
+  DOC_OP_UPDATE_DOCUMENT_PROPERTIES: "22.200.248",
+  FOLDER_OP_UPDATE_FOLDER_PROPERTIES: "22.200.249",
+};
 
 languages.forEach(function (lang) {
   // New a driver with locale: lang
@@ -15,9 +47,6 @@ languages.forEach(function (lang) {
 
   // Process App used
   const procApp = 'TVTAPP01';
-
-  // Tooltip test case number starts with:
-  let tcNum = 220;
 
   // Create a lang directory to hold all screenshots
   easyd.createDirectories(screenDir);
@@ -75,34 +104,37 @@ languages.forEach(function (lang) {
       // Select the option
       easyd.click(option);
 
-      // Click on "Data Mapping" (3rd element in the tabs)
-      easyd.click('xpath=(//div[@class="TabbedPropertiesPane"]//span[@class="tabLabel"])[3]');
+      // Get the option value, so that we can map it to the test case number in testcaseMapping
+      easyd.getAttribute(option, 'value').then(function (val) {
+        // Click on "Data Mapping" (3rd element in the tabs)
+        easyd.click('xpath=(//div[@class="TabbedPropertiesPane"]//span[@class="tabLabel"])[3]');
 
-      // Wait till all inuput fields are present
-      easyd.wait(easyd.until.elementsLocated(easyd.locateElementBy('.textviewContent')));
-      // Find all links
-      easyd.findElements('.TabbedPropertiesPane .dijitTabPaneWrapper .dijitVisible .imageHyperLinkText')
-      .then(function (links) {
-        // Create tooltips for all links
-        links.forEach(function (link, index) {
-          if (index === 0) { // First tooltip
-            easyd.drawFlyover(link, {offsetX: -320, offsetY: 180, fromLastPos: false, drawSymbol: true});
-          } else { // The rest of tooltips
-            easyd.drawFlyover(link, {offsetX: 0, offsetY: 0, fromLastPos: true, drawSymbol: true});
-          }
+        // Wait till all inuput fields are present
+        easyd.wait(easyd.until.elementsLocated(easyd.locateElementBy('.textviewContent')));
+
+        // Find all links
+        easyd.findElements('.TabbedPropertiesPane .dijitTabPaneWrapper .dijitVisible .imageHyperLinkText')
+        .then(function (links) {
+          // Create tooltips for all links
+          links.forEach(function (link, index) {
+            if (index === 0) { // First tooltip
+              easyd.drawFlyover(link, {offsetX: -380, offsetY: 180, fromLastPos: false, drawSymbol: true});
+            } else { // The rest of tooltips
+              easyd.drawFlyover(link, {offsetX: 0, offsetY: 0, fromLastPos: true, drawSymbol: true});
+            }
+          });
         });
-      });
 
-      // Take a screenshot
-      easyd.takeScreenshot(`${screenDir}/22.200.${tcNum}`);
-      tcNum++; // Next test case number
+        // Take a screenshot
+        easyd.takeScreenshot(`${screenDir}/${testcaseMapping[val]}`);
 
-      // Clear EasyDriver elements
-      easyd.clearEasyDriverElements();
+        // Clear EasyDriver elements
+        easyd.clearEasyDriverElements();
 
-      // Got back to "Implmentation" so that we can click on another <option>
-      easyd.click('xpath=(//div[@class="TabbedPropertiesPane"]//span[@class="tabLabel"])[2]');
-    });
+        // Got back to "Implmentation" so that we can click on another <option>
+        easyd.click('xpath=(//div[@class="TabbedPropertiesPane"]//span[@class="tabLabel"])[2]');
+      }); // end of option value
+    }); // end of options loop
   });
 
   // Quit the driver
