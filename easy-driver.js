@@ -617,22 +617,12 @@ class EasyDriver {
       var rect1 = element1.getBoundingClientRect();
       var rect2 = element2.getBoundingClientRect();
 
-      var left1 = rect1.left;
-      var right1 = rect1.right;
+      var from = {y: rect1.top};
+      var to = {y: rect2.top};
 
-      var left2 = rect2.left;
-      var right2 = rect2.right;
-
-      var from = {y: rect1.top + 4};
-      var to = {y: rect2.top + 4};
-
-      if (left1 > left2) {
-        from.x = left1;
-        to.x = right2;
-      } else {
-        from.x = right1;
-        to.x = left2;
-      }
+      if (rect1.left > rect2.left) { from.x = rect1.left; to.x = rect2.right; }
+      else if (rect1.left < rect2.left) { from.x = rect1.right; to.x = rect2.left; }
+      else { from.x = rect1.left; to.x = rect2.left; }
 
       // create canvas
       var canvas = document.createElement('canvas');
