@@ -254,6 +254,8 @@ class EasyDriver {
   takeScreenshot(filename) {
     if (!filename.endsWith('.png')) filename += '.png';
 
+    this.sleep(500);
+
     this.wd.takeScreenshot().then(function (data) {
       const base64Data = data.replace(/^data:image\/png;base64,/, "");
       fs.writeFile(filename, base64Data, 'base64', function (err) {
@@ -555,22 +557,110 @@ class EasyDriver {
   }
 
   /**
+   * Draw tooltip for an element
+   * @param {(string|WebElement)} locator - Element locator.
+   * @param {{attribute: string, offsetX: number, offsetY: number, fromLastPos: boolean, drawSymbol: boolean}}
+            [settings={attribute: 'title', offsetX: 5, offsetY: 15, fromLastPos: false, drawSymbol: false}]
+            - attribute: draw flyover on element's attribute,
+              offsetX: offset X from the element,
+              offsetY: offset Y from the element,
+              fromLastPos: draw from last Flyover position,
+              drawSymbol: draw symbol on the flyover.
+   * @return {WebElementPromise}
+   */
+  drawFlyover(locator, settings = {attribute: 'title', offsetX: 5, offsetY: 15, fromLastPos: false, drawSymbol: false}) {
+    const self = this;
+    const element = self.findElement(locator, true);
+    const attribute = settings.attribute || 'title';
+    const offsetX = settings.offsetX || 5;
+    const offsetY = settings.offsetY || 15;
+    const fromLastPos = settings.fromLastPos || false;
+    const drawSymbol = settings.drawSymbol || false;
+    const sId = getId();
+    const tpId = getId();
+
+    self.waitForVisible(element);
+
+    return self.wd.executeScript(`
+      var element = arguments[0];
+      var offsetX = arguments[1];
+      var offsetY = arguments[2];
+      var fromLastPos = arguments[3];
+      var drawSymbol = arguments[4];
+
+      if (! window.easydriverTPSymbol) window.easydriverTPSymbol = 9311;
+      if (! window.easydriverTPLastPos) window.easydriverTPLastPos = {x: 0, y: 0};
+
+      var rect = element.getBoundingClientRect();
+
+      var title = element.getAttribute("${attribute}") || 'N/A';
+
+      var left = rect.left;
+      var top = rect.top;
+
+      if (drawSymbol) {
+        window.easydriverTPSymbol++;
+        var symbol = document.createElement('div');
+        symbol.id = "${sId}";
+        symbol.textContent = String.fromCharCode(easydriverTPSymbol);
+        symbol.style.position = 'absolute';
+        symbol.style.color = '#ff0000';
+        symbol.style.fontSize = '12px';
+        symbol.style.zIndex = '99999';
+        symbol.style.display = 'block';
+        symbol.style.top = top + 'px';
+      	symbol.style.left = (left - 12) + 'px';
+        document.body.appendChild(symbol);
+      }
+
+      var tooltip = document.createElement('div');
+    	tooltip.id = "${tpId}";
+    	tooltip.textContent = (drawSymbol) ? String.fromCharCode(easydriverTPSymbol) + " " + title : title;
+    	tooltip.style.position = 'absolute';
+    	tooltip.style.color = '#000';
+    	tooltip.style.backgroundColor = '#F5FCDE';
+    	tooltip.style.border = '3px solid #ff0000';
+    	tooltip.style.fontSize = '12px';
+    	tooltip.style.zIndex = '99999';
+    	tooltip.style.display = 'block';
+    	tooltip.style.height = '16px';
+    	tooltip.style.padding = '2px';
+    	tooltip.style.verticalAlign = 'middle';
+    	tooltip.style.top = ((fromLastPos) ? window.easydriverTPLastPos.y : (top + offsetY)) + 'px';
+    	tooltip.style.left = ((fromLastPos) ? window.easydriverTPLastPos.x : (left + offsetX)) + 'px';
+    	document.body.appendChild(tooltip);
+    	if (tooltip.scrollHeight > tooltip.offsetHeight) {
+    		tooltip.style.height = (tooltip.scrollHeight + 8) + 'px';
+    	}
+
+      var lastPos = tooltip.getBoundingClientRect();
+      window.easydriverTPLastPos = {x: lastPos.left, y: lastPos.bottom};
+
+      return;
+    `, element, offsetX, offsetY, fromLastPos, drawSymbol)
+    .then(function () {
+      return self.findElement(`[id="${tpId}"]`);
+    });
+  }
+
+  /**
    * Draw drop-down menu for <select> element
    * @param {(string|WebElement)} locator - Element locator.
    * @param {{x: number, y: number}} [offset={x: 5, y: 15}] - Tooltip offset from the element
-   * @return {Thenable<(T|null)>}
+   * @return {WebElementPromise}
    */
   drawSelect(locator, offset = {x: 0, y: 0}) {
-    const element = this.findElement(locator, true);
+    const self = this;
+    const element = self.findElement(locator, true);
     const sId = getId();
 
-    this.getTagName(element).then(function (tagname) {
+    self.getTagName(element).then(function (tagname) {
       if (tagname !== 'select') console.error('Element is not a select element: ${tagname}.');
     });
 
-    this.waitForVisible(element);
+    self.waitForVisible(element);
 
-    return this.wd.executeScript(`
+    return self.wd.executeScript(`
       var element = arguments[0];
       var offsetX = arguments[1];
       var offsetY = arguments[2];
@@ -580,9 +670,13 @@ class EasyDriver {
     	var y = rect.bottom;
     	var width = element.offsetWidth;
 
+      function escape(str) {
+      	return str.replace(/[\\x26\\x0A<>'"]/g, function(r){ return "&#" + r.charCodeAt(0) + ";"; });
+      }
+
     	var content = "";
     	for (var i = 0; i < element.length; i++) {
-    		if (!element.options[i].disabled) content += element.options[i].text + "<br/>";
+    		if (!element.options[i].disabled) content += escape(element.options[i].text) + "<br/>";
     	}
 
     	var dropdown = document.createElement('div');
@@ -607,84 +701,11 @@ class EasyDriver {
     	dropdown.style.left = (x + offsetX) + "px";
     	dropdown.style.top = (y + offsetY) + "px";
 
-    `, element, offset.x, offset.y);
-  }
-
-  /**
-   * Draw tooltip for an element
-   * @param {(string|WebElement)} locator - Element locator.
-   * @param {{attribute: string, offsetX: number, offsetY: number, fromLastPos: boolean}}
-            [settings={attribute: 'title', offsetX: 5, offsetY: 15, fromLastPos: false}]
-            - attribute: draw flyover on element's attribute,
-              offsetX: offset X from the element,
-              offsetY: offset Y from the element,
-              fromLastPos: draw from last Flyover position.
-   * @return {Thenable<(T|null)>}
-   */
-  drawFlyover(locator, settings = {attribute: 'title', offsetX: 5, offsetY: 15, fromLastPos: false}) {
-    const element = this.findElement(locator, true);
-    const attribute = settings.attribute || 'title';
-    const offsetX = settings.offsetX || 5;
-    const offsetY = settings.offsetY || 15;
-    const fromLastPos = settings.fromLastPos || false;
-    const sId = getId();
-    const tpId = getId();
-
-    this.waitForVisible(element);
-
-    return this.wd.executeScript(`
-      var element = arguments[0];
-      var offsetX = arguments[1];
-      var offsetY = arguments[2];
-      var fromLastPos = arguments[3];
-
-      if (! window.easydriverTPSymbol) window.easydriverTPSymbol = 9311;
-      if (! window.easydriverTPLastPos) window.easydriverTPLastPos = {x: 0, y: 0};
-      window.easydriverTPSymbol++;
-
-      var rect = element.getBoundingClientRect();
-
-      var title = element.getAttribute("${attribute}") || 'N/A';
-
-      var left = rect.left;
-      var top = rect.top;
-
-      var symbol = document.createElement('div');
-      symbol.id = "${sId}";
-      symbol.textContent = String.fromCharCode(easydriverTPSymbol);
-      symbol.style.position = 'absolute';
-      symbol.style.color = '#ff0000';
-      symbol.style.fontSize = '12px';
-      symbol.style.zIndex = '99999';
-      symbol.style.display = 'block';
-      symbol.style.top = top + 'px';
-    	symbol.style.left = (left - 12) + 'px';
-      document.body.appendChild(symbol);
-
-      var tooltip = document.createElement('div');
-    	tooltip.id = "${tpId}";
-    	tooltip.textContent = String.fromCharCode(easydriverTPSymbol) + " " + title;
-    	tooltip.style.position = 'absolute';
-    	tooltip.style.color = '#000';
-    	tooltip.style.backgroundColor = '#F5FCDE';
-    	tooltip.style.border = '3px solid #ff0000';
-    	tooltip.style.fontSize = '12px';
-    	tooltip.style.zIndex = '99999';
-    	tooltip.style.display = 'block';
-    	tooltip.style.height = '16px';
-    	tooltip.style.padding = '2px';
-    	tooltip.style.verticalAlign = 'middle';
-    	tooltip.style.top = ((fromLastPos) ? window.easydriverTPLastPos.y : (top + offsetY)) + 'px';
-    	tooltip.style.left = ((fromLastPos) ? window.easydriverTPLastPos.x : (left + offsetX)) + 'px';
-    	document.body.appendChild(tooltip);
-    	if (tooltip.scrollHeight > tooltip.offsetHeight) {
-    		tooltip.style.height = (tooltip.scrollHeight + 8) + 'px';
-    	}
-
-      var lastPos = tooltip.getBoundingClientRect();
-      window.easydriverTPLastPos = {x: lastPos.left, y: lastPos.bottom};
-
-    `, element, offsetX, offsetY, fromLastPos);
+      return;
+    `, element, offset.x, offset.y)
+    .then(function () {
+      return self.findElement(`[id="${sId}"]`);
+    });
   }
 
   /**

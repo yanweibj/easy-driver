@@ -1,16 +1,23 @@
 const EasyDriver = require('./easy-driver');
-const languages = ['en'];
-const pcServer = 'lsc556.tw.ibm.com';
+const languages = [
+  'en', 'zh', 'zh-tw', 'ja', 'ko', 'it', 'fr', 'de', 'es', 'pt-br',
+  'pt', 'nb', 'fi', 'sv', 'da', 'tr', 'nl', 'cs', 'hu', 'ru', 'ro',
+  'pl', 'el'
+];
+const pcServer = 'lsc218.tw.ibm.com';
 
 languages.forEach(function (lang) {
   // New a driver with locale: lang
   const easyd = new EasyDriver(lang);
 
   // Screenshot directory
-  const screenDir = `screens/${lang}`;
+  const screenDir = `bpm_screens/${lang}`;
 
   // Process App used
   const procApp = 'TVTAPP01';
+
+  // Tooltip test case number starts with:
+  let tcNum = 220;
 
   // Create a lang directory to hold all screenshots
   easyd.createDirectories(screenDir);
@@ -42,7 +49,7 @@ languages.forEach(function (lang) {
   // Wait for the diagram to load
   easyd.waitForVisible('//div[@dojoattachpoint="canvasNode"]');
   // Click on "Content Integration"
-  easyd.sleep(2000); // wait a couple of seconds to make sure JS is loaded
+  easyd.sleep(2000); // wait a few seconds to make sure JS is loaded
   easyd.clickAt('css=g+image+rect:eq(2)');
   // Wait for the "Properties" panel to load
   easyd.waitForVisible('//div[@class="TabbedPropertiesPane"]//span[@class="tabLabel"]');
@@ -50,23 +57,23 @@ languages.forEach(function (lang) {
   easyd.click('.bpmClickyThumbUp');
   // Click on "Implmentation" (2nd element in the tabs)
   easyd.click('xpath=(//div[@class="TabbedPropertiesPane"]//span[@class="tabLabel"])[2]');
+  // Wait till "Operation Name" select box is enabled
+  easyd.waitForEnabled('[data-test-attr="service-flow-impl-operation"]');
   // Capture "Operation Name" drop-down menu
-  easyd.drawSelect('[data-test-attr="service-flow-impl-operation"]');
+  easyd.drawSelect('[data-test-attr="service-flow-impl-operation"]', {x: -465, y: -100});
+  easyd.redMark('[data-test-attr="service-flow-impl-operation"]');
   easyd.redMark('[id*="easydriver_"]');
   easyd.takeScreenshot(`${screenDir}/22.200.210`) // drop-down test case
   easyd.clearEasyDriverElements();
   // Get all options of "Operation Name"
   easyd.findElements('[data-test-attr="service-flow-impl-operation"] > option')
   .then(function (options) {
-    options.shift();  // remove the 1st opiton: "None"
-
-    // Tooltip test case number starts with:
-    let tcNum = 220;
+    options.shift();  // remove the 1st opiton: "<None>"
 
     // Loop through the rest of options
     options.forEach(function (option) {
       // Select the option
-      option.click();
+      easyd.click(option);
 
       // Click on "Data Mapping" (3rd element in the tabs)
       easyd.click('xpath=(//div[@class="TabbedPropertiesPane"]//span[@class="tabLabel"])[3]');
@@ -79,19 +86,16 @@ languages.forEach(function (lang) {
         // Create tooltips for all links
         links.forEach(function (link, index) {
           if (index === 0) { // First tooltip
-            easyd.drawFlyover(link, {offsetX: -270, offsetY: 180, fromLastPos: false});
+            easyd.drawFlyover(link, {offsetX: -320, offsetY: 180, fromLastPos: false, drawSymbol: true});
           } else { // The rest of tooltips
-            easyd.drawFlyover(link, {offsetX: 0, offsetY: 0, fromLastPos: true});
+            easyd.drawFlyover(link, {offsetX: 0, offsetY: 0, fromLastPos: true, drawSymbol: true});
           }
         });
       });
 
-      // Sleep 0.5s to make sure all tooltips are drawn
-      easyd.sleep(500);
-
       // Take a screenshot
       easyd.takeScreenshot(`${screenDir}/22.200.${tcNum}`);
-      tcNum++;
+      tcNum++; // Next test case number
 
       // Clear EasyDriver elements
       easyd.clearEasyDriverElements();
