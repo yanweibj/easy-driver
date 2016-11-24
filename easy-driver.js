@@ -225,15 +225,23 @@ class EasyDriver {
   }
 
   /**
+   * Switch to the default content
+   * @return {Thenable<undefined>}
+   */
+  switchToDefaultContent() {
+    return this.wd.switchTo().defaultContent();
+  }
+
+  /**
    * Switch to frame
    * @param {(number|string|WebElement)} locator - The frame locator.
    * @return {Thenable<undefined>}
    */
   switchToFrame(locator) {
     const self = this;
-    const element = (isNaN(locator)) ? self.findElement(locator) : locator;
 
     return self.wd.switchTo().defaultContent().then(function () {
+      const element = (isNaN(locator)) ? self.findElement(locator) : locator;
       return self.wd.switchTo().frame(element);
     });
   }
@@ -862,38 +870,40 @@ class EasyDriver {
     if (!filename.endsWith('.png')) filename += '.png';
 
     self.wd.takeScreenshot().then(function (screenData) {
-      self.wd.executeScript(`
-        var element = arguments[0];
-        var screenData = arguments[1];
+      self.getRect(element).then(function (rect) {
+        console.log(rect);
+        self.wd.switchTo().defaultContent();
+        self.wd.executeScript(`
+          var rect = arguments[0];
+          var screenData = arguments[1];
 
-        var rect = element.getBoundingClientRect();
+          var image = new Image();
+          image.src = 'data:image/png;base64,' + screenData;
 
-        var image = new Image();
-        image.src = 'data:image/png;base64,' + screenData;
+          var canvas = document.createElement('canvas');
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
 
-        var canvas = document.createElement('canvas');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+          var ctx = canvas.getContext("2d");
+          ctx.drawImage(
+            image,
+            0,
+            0,
+            window.innerWidth,
+            window.innerHeight,
+            rect.x,
+            rect.y,
+            rect.width,
+            rect.height
+          );
 
-        var ctx = canvas.getContext("2d");
-        ctx.drawImage(
-          image,
-          0,
-          0,
-          window.innerWidth,
-          window.innerHeight,
-          rect.left,
-          rect.top,
-          rect.width,
-          rect.height
-        );
-
-        return canvas.toDataURL();
-      `, element, screenData)
-      .then(function (elementData) {
-        const base64Data = elementData.replace(/^data:image\/png;base64,/, "");
-        fs.writeFile(filename, base64Data, 'base64', function (err) {
-          if(err) console.error(err);
+          return canvas.toDataURL();
+        `, rect, screenData)
+        .then(function (elementData) {
+          const base64Data = elementData.replace(/^data:image\/png;base64,/, "");
+          fs.writeFile(filename, base64Data, 'base64', function (err) {
+            if(err) console.error(err);
+          });
         });
       });
     });

@@ -23,8 +23,9 @@ brew update
 brew install node6-lts
 ```
 
-## Clone EasyDriver repository
+## Clone EasyDriver repository or use easy-driver-master.zip
 
+### Clone EasyDriver
 > (For Windows) Please download [Git for Windows](https://git-scm.com/download/win) and install.
 
 In Terminal, run:
@@ -38,6 +39,10 @@ cd easy-driver
 
 npm install
 ```
+
+### Use easy-driver-master.zip
+
+[easy-driver-master.zip](https://github.ibm.com/aaronhc/easy-driver/archive/master.zip)
 
 ## Run Sample Test Cases
 
@@ -86,6 +91,7 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.runScript(script, callback) -> callback(retval)`
 * `easyd.setTimeout(timeout)`
 * `easyd.sleep(ms)`
+* `easyd.switchToDefaultContent()`
 * `easyd.switchToFrame(number_or_loc_or_web)`
 * `easyd.switchToWindow(nameOrHandle)`
 * `easyd.takeScreenshot(png_filename)`
