@@ -72,7 +72,7 @@ npm install
 
 # Usage
 
-## Available Functions
+## Instance Methods
 
 ```javascript
 const EasyDriver = require('./easy-driver');
@@ -81,7 +81,7 @@ const easyd = new EasyDriver('zh-tw');
 
 \*\* **loc_or_web**: Parameter can be either ***locater*** or ***WebElement***.
 
-##### easyd (WebDriver functions)
+##### easyd (WebDriver methods)
 * `easyd.actions() -> ActionSequence` See **Class ActionSequence**
 * `easyd.close()`
 * `easyd.findElement(locator, isDisplayed = false) -> WebElementPromise`
@@ -102,8 +102,9 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.until` See **until Conditions**
 * `easyd.wait(fn, timeout)`
 
-##### easyd (WebElement functions)
+##### easyd (WebElement methods)
 * `easyd.blur(loc_or_web)`
+* `easyd.checkAll(loc_or_web)`
 * `easyd.clear(loc_or_web)`
 * `easyd.click(loc_or_web, ms)`
 * `easyd.clickAt(loc_or_web, offset = {x: 0, y: 0})`
@@ -120,6 +121,7 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.select(select_loc_or_web, option_locator)`
 * `easyd.sendKeys(loc_or_web, keys)`
 * `easyd.setAttribute(loc_or_web, attribute, value)`
+* `easyd.unCheckAll(loc_or_web)`
 * `easyd.waitForDisabled(loc_or_web)`
 * `easyd.waitForEnabled(loc_or_web)`
 * `easyd.waitForNotPresent(loc_or_web)`
@@ -131,7 +133,7 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.waitForTextIs(loc_or_web, text)`
 * `easyd.waitForVisible(loc_or_web)`
 
-##### easyd (Custom functions)
+##### easyd (Custom methods)
 * `easyd.clearAllDrawings()`
 * `easyd.createDirectories(dirtree)`
 * `easyd.drawArrow(from_loc_or_web, to_loc_or_web)`

@@ -299,6 +299,23 @@ class EasyDriver {
   }
 
   /**
+   * Check all checkboxes under an element
+   * @param {(string|WebElement)} locator - Element locator.
+   */
+  checkAll(locator) {
+    const element = this.findElement(locator);
+
+    element.findElements(this.locateElementBy('css=input[type="checkbox"]'))
+    .then(function (checkboxes) {
+      checkboxes.forEach(function (checkbox) {
+        checkbox.isSelected().then(function (isChecked) {
+          if (!isChecked) checkbox.click();
+        });
+      });
+    });
+  }
+
+  /**
    * Clear the value of an element
    * @param {(string|WebElement)} locator - Element locator.
    * @return {Thenable<undefined>}
@@ -484,6 +501,23 @@ class EasyDriver {
 
       element.setAttribute(attribute, value);
     `, element, attribute, value);
+  }
+
+  /**
+   * Uncheck all checkboxes under an element
+   * @param {(string|WebElement)} locator - Element locator.
+   */
+  unCheckAll(locator) {
+    const element = this.findElement(locator);
+
+    element.findElements(this.locateElementBy('css=input[type="checkbox"]'))
+    .then(function (checkboxes) {
+      checkboxes.forEach(function (checkbox) {
+        checkbox.isSelected().then(function (isChecked) {
+          if (isChecked) checkbox.click();
+        });
+      });
+    });
   }
 
   /**
@@ -866,6 +900,8 @@ class EasyDriver {
    * Take a screenshot on an element
    * @param {(string|WebElement)} locator - Element locator.
    * @param {string} filename - File name (.png) of the screenshot.
+   *
+   * References for detecting Retina: http://stackoverflow.com/questions/19689715
    */
   takeElementShot(locator, filename) {
     const self = this;
@@ -920,9 +956,12 @@ class EasyDriver {
     });
   }
 
-  /*--- *** ---*/
-  /*--- End ---*/
-  /*--- *** ---*/
+  /*--- *************************** ---*/
+  /*--- Not-yet-implemented Methods ---*/
+  /*--- *************************** ---*/
+  captureScrollBoth() {}
+  captureScrollHorizontal() {}
+  captureScrollVertical() {}
 }
 
 // --- Internal Functions --- //
