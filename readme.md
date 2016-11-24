@@ -23,9 +23,9 @@ brew update
 brew install node6-lts
 ```
 
-## Clone EasyDriver repository or use easy-driver-master.zip
+## Get EasyDriver
 
-### Clone EasyDriver
+### Method 1: Clone EasyDriver
 > (For Windows) Please download [Git for Windows](https://git-scm.com/download/win) and install.
 
 In Terminal, run:
@@ -40,13 +40,17 @@ cd easy-driver
 npm install
 ```
 
-### Use easy-driver-master.zip
+### Methodd 2: Use easy-driver-master.zip
 
-[easy-driver-master.zip](https://github.ibm.com/aaronhc/easy-driver/archive/master.zip)
+1. Download [easy-driver-master.zip](https://github.ibm.com/aaronhc/easy-driver/archive/master.zip)
+2. Unzip **easy-driver-master.zip** to a directory of your choice
+3. In Terminal, go to that directory, and run `npm install`.
+
+
 
 ## Run Sample Test Cases
 
-In Terminal: run:
+In Terminal: Go to your easy-driver directory, and run:
 
 ```shell
 node sample
