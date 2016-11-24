@@ -956,12 +956,53 @@ class EasyDriver {
     });
   }
 
+  /**
+   * Take a screenshot on an element
+   * @param {(string|WebElement)} locator - Element locator.
+   * @param {string} filename - File name (.png) of the screenshot.
+   */
+  takeScrollShot(locator, filename) {
+    const self = this;
+    const element = self.findElement(locator);
+
+    self.wd.executeScript(`
+      var element = arguments[0];
+
+      while ((element.scrollHeight <= element.offsetHeight ) || (parseInt(element.scrollWidth)>=99000)){
+    		element = element.parentElement;
+    	}
+
+    	var old_maxWidth = element.style.maxWidth;
+    	element.style.maxWidth = 'none';
+    	var old_maxHeight = element.style.maxHeight;
+    	element.style.maxHeight = 'none';
+
+      var old_width = element.clientWidth;
+    	element.style.width = element.scrollWidth + "px";
+    	var old_height = element.clientHeight;
+    	element.style.height = element.scrollHeight + "px";
+
+      return {mW: old_maxWidth, mH: old_maxHeight, w: old_width, h: old_height};
+    `, element).then(function (scrollData) {
+      self.takeElementShot(element, filename);
+
+      self.wd.executeScript(`
+        var element = arguments[0];
+        var scrollData = arguments[1];
+
+        element.style.maxWidth = scrollData.mW;
+      	element.style.maxHeight = scrollData.mH;
+
+      	element.style.height = scrollData.h + "px";
+      	element.style.width = scrollData.w + "px";
+      `, element, scrollData);
+    });
+  }
+
   /*--- *************************** ---*/
   /*--- Not-yet-implemented Methods ---*/
   /*--- *************************** ---*/
-  captureScrollBoth() {}
-  captureScrollHorizontal() {}
-  captureScrollVertical() {}
+
 }
 
 // --- Internal Functions --- //
