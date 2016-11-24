@@ -20,7 +20,7 @@ In Terminal, run:
 
 ```shell
 brew update
-brew install node6-lts
+brew install node
 ```
 
 ## Get EasyDriver
@@ -50,7 +50,7 @@ npm install
 
 ## Run Sample Test Cases
 
-In Terminal: Go to your easy-driver directory, and run:
+In Terminal: Go to your **EasyDriver** directory, and run:
 
 ```shell
 node sample
@@ -82,12 +82,12 @@ const easyd = new EasyDriver('zh-tw');
 \*\* **loc_or_web**: Parameter can be either ***locater*** or ***WebElement***.
 
 ##### easyd (WebDriver functions)
-* `easyd.actions() -> ActionSequence` (See **Class ActionSequence**)
+* `easyd.actions() -> ActionSequence` See **Class ActionSequence**
 * `easyd.close()`
 * `easyd.findElement(locator, isDisplayed = false) -> WebElementPromise`
 * `easyd.findElements(locator) -> Thenable<Array<WebElement>>`
 * `easyd.getTitle() -> Thenable<string>`
-* `easyd.Key`  (See **Enumeration Key**)
+* `easyd.Key`  See **Enumeration Key**
 * `easyd.maximizeWindow()`
 * `easyd.maximizeToScreenSize()`
 * `easyd.open(url)`
@@ -99,7 +99,7 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.switchToFrame(number_or_loc_or_web)`
 * `easyd.switchToWindow(nameOrHandle)`
 * `easyd.takeScreenshot(png_filename)`
-* `easyd.until` (See **until Conditions**)
+* `easyd.until` See **until Conditions**
 * `easyd.wait(fn, timeout)`
 
 ##### easyd (WebElement functions)
@@ -138,7 +138,7 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.drawFlyover(loc_or_web, settings = {attribute: 'title', offsetX: 5, offsetY: 15, fromLastPos: false, drawSymbol: false})`
 * `easyd.drawRedMark(loc_or_web, padding = {top: 0, left: 0, bottom: 0, right: 0})`
 * `easyd.drawSelect(loc_or_web, offset = {x: 0, y: 0})`
-* `easyd.takeElementShot(loc_or_web, png_filename)` (***Limitation***: **Only elements in defaultContent.**)
+* `easyd.takeElementShot(loc_or_web, png_filename)` ***Limitation***: **Only elements in defaultContent.**
 
 
 ## Supported ***locator*** Formats

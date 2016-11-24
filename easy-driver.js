@@ -265,8 +265,7 @@ class EasyDriver {
     this.sleep(500);
 
     this.wd.takeScreenshot().then(function (data) {
-      const base64Data = data.replace(/^data:image\/png;base64,/, "");
-      fs.writeFile(filename, base64Data, 'base64', function (err) {
+      fs.writeFile(filename, data, 'base64', function (err) {
         if(err) console.error(err);
       });
     });
