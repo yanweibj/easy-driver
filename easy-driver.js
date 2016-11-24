@@ -863,6 +863,11 @@ class EasyDriver {
     });
   }
 
+  /**
+   * Take a screenshot on an element
+   * @param {(string|WebElement)} locator - Element locator.
+   * @param {string} filename - File name (.png) of the screenshot.
+   */
   takeElementShot(locator, filename) {
     const self = this;
     const element = self.findElement(locator);
@@ -870,45 +875,55 @@ class EasyDriver {
     if (!filename.endsWith('.png')) filename += '.png';
 
     self.wd.takeScreenshot().then(function (screenData) {
-      self.getRect(element).then(function (rect) {
-        console.log(rect);
-        self.wd.switchTo().defaultContent();
-        self.wd.executeScript(`
-          var rect = arguments[0];
-          var screenData = arguments[1];
+      self.wd.executeScript(`
+        var element = arguments[0];
+        var screenData = arguments[1];
 
-          var image = new Image();
-          image.src = 'data:image/png;base64,' + screenData;
+        function isRetinaDisplay() {
+          if (window.matchMedia) {
+            var mq = window.matchMedia("only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 1.3dppx)");
+            return (mq && mq.matches || (window.devicePixelRatio > 1));
+          }
+        }
 
-          var canvas = document.createElement('canvas');
-          canvas.width = window.innerWidth;
-          canvas.height = window.innerHeight;
+        var ratio = (isRetinaDisplay()) ? 2 : 1;
 
-          var ctx = canvas.getContext("2d");
-          ctx.drawImage(
-            image,
-            0,
-            0,
-            window.innerWidth,
-            window.innerHeight,
-            rect.x,
-            rect.y,
-            rect.width,
-            rect.height
-          );
+        var rect = element.getBoundingClientRect();
 
-          return canvas.toDataURL();
-        `, rect, screenData)
-        .then(function (elementData) {
-          const base64Data = elementData.replace(/^data:image\/png;base64,/, "");
-          fs.writeFile(filename, base64Data, 'base64', function (err) {
-            if(err) console.error(err);
-          });
+        var image = new Image();
+        image.src = 'data:image/png;base64,' + screenData;
+
+        var canvas = document.createElement('canvas');
+        canvas.width = rect.width * ratio;
+        canvas.height = rect.height * ratio;
+
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(
+          image,
+          rect.left * ratio,
+          rect.top * ratio,
+          rect.width * ratio,
+          rect.height * ratio,
+          0,
+          0,
+          rect.width * ratio,
+          rect.height * ratio
+        )
+
+        return canvas.toDataURL();
+      `, element, screenData)
+      .then(function (elementData) {
+        const base64Data = elementData.replace(/^data:image\/png;base64,/, "");
+        fs.writeFile(filename, base64Data, 'base64', function (err) {
+          if(err) console.error(err);
         });
       });
     });
   }
 
+  /*--- *** ---*/
+  /*--- End ---*/
+  /*--- *** ---*/
 }
 
 // --- Internal Functions --- //

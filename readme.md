@@ -25,7 +25,7 @@ brew install node6-lts
 
 ## Get EasyDriver
 
-### Method 1: Clone EasyDriver
+##### Method 1: Clone EasyDriver
 > (For Windows) Please download [Git for Windows](https://git-scm.com/download/win) and install.
 
 In Terminal, run:
@@ -40,10 +40,10 @@ cd easy-driver
 npm install
 ```
 
-### Methodd 2: Use easy-driver-master.zip
+##### Methodd 2: Use easy-driver-master.zip
 
-1. Download [easy-driver-master.zip](https://github.ibm.com/aaronhc/easy-driver/archive/master.zip)
-2. Unzip **easy-driver-master.zip** to a directory of your choice
+1. Download [easy-driver-master.zip](https://github.ibm.com/aaronhc/easy-driver/archive/master.zip).
+2. Unzip **easy-driver-master.zip** to a directory of your choice.
 3. In Terminal, go to that directory, and run `npm install`.
 
 
@@ -138,6 +138,7 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.drawFlyover(loc_or_web, settings = {attribute: 'title', offsetX: 5, offsetY: 15, fromLastPos: false, drawSymbol: false})`
 * `easyd.drawRedMark(loc_or_web, padding = {top: 0, left: 0, bottom: 0, right: 0})`
 * `easyd.drawSelect(loc_or_web, offset = {x: 0, y: 0})`
+* `easyd.takeElementShot(loc_or_web, png_filename)` (***Limitation***: **Only elements in defaultContent.**)
 
 
 ## Supported ***locator*** Formats
@@ -174,11 +175,11 @@ const easyd = new EasyDriver('zh-tw');
 ```javascript
 easyd.findElements('css=[id*="item"]').then(function (elements) {
   easyd.actions()
-          .keyDown(easyd.Key.SHIFT)
-          .click(elements[0])
-          .click(elements[2])
-          .keyUp(easyd.Key.SHIFT)
-          .perform();
+       .keyDown(easyd.Key.SHIFT)
+       .click(elements[0])
+       .click(elements[2])
+       .keyUp(easyd.Key.SHIFT)
+       .perform();
 });
 ```
 
