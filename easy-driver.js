@@ -397,7 +397,7 @@ class EasyDriver {
     //   });
     // });
 
-    return webdriver.promise.consume(function* () {
+    return this.promise.consume(function* () {
       return yield element.getLocation().then(function (position) {
         return element.getSize().then(function (size) {
           return ({x: position.x, y: position.y, width: size.width, height: size.height});
