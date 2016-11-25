@@ -84,10 +84,11 @@ const easyd = new EasyDriver('zh-tw');
 ##### easyd (WebDriver methods)
 * `easyd.actions() -> ActionSequence` => See **Class ActionSequence**
 * `easyd.close()`
-* `easyd.findElement(locator, isDisplayed = false) -> WebElementPromise`
+* `easyd.findElement(locator, isVisible = false) -> WebElementPromise`
 * `easyd.findElements(locator) -> Thenable<Array<WebElement>>`
 * `easyd.getTitle() -> Thenable<string>`
 * `easyd.Key`  => See **Enumeration Key**
+* `easyd.locateElementBy(locator) -> By`
 * `easyd.maximizeWindow()`
 * `easyd.maximizeToScreenSize()`
 * `easyd.open(url)`

@@ -21,6 +21,7 @@ class EasyDriver {
     this.By = webdriver.By;
     this.Key = webdriver.Key;
     this.until = webdriver.until;
+    this.promise = webdriver.promise;
 
     this.TIMEOUT = 30000;
 
@@ -56,12 +57,14 @@ class EasyDriver {
   /**
    * Find Element
    * @param {string} locator - Element locator.
-   * @param {bool} [isDisplayed=false] Wait until WebElement is displayed.
+   * @param {bool} [isVisible=false] Wait until WebElement is visible.
    * @return {WebElementPromise} - A WebElement that can be used to issue commands against the located element.
    */
-  findElement(locator, isDisplayed = false) {
+  findElement(locator, isVisible = false) {
+    this.log(`--- Locating ${locator}`);
+
     if (locator instanceof webdriver.WebElement) {
-      if (isDisplayed) this.wait(this.until.elementIsVisible(locator));
+      if (isVisible) this.wait(this.until.elementIsVisible(locator));
       return locator;
     }
 
@@ -76,7 +79,7 @@ class EasyDriver {
 
       const element = this.wd.findElement(byLocator);
 
-      if (isDisplayed) this.wait(this.until.elementIsVisible(element));
+      if (isVisible) this.wait(this.until.elementIsVisible(element));
 
       return element;
     }
@@ -93,7 +96,7 @@ class EasyDriver {
       }
 
       const element = elements[nth];
-      if (isDisplayed) self.wait(self.until.elementIsVisible(element));
+      if (isVisible) self.wait(self.until.elementIsVisible(element));
       return element;
     });
   }
@@ -104,6 +107,8 @@ class EasyDriver {
    * @return {Thenable<Array<WebElement>>} - A promise that will resolve to an array of WebElements.
    */
   findElements(locator) {
+    this.log(`--- Locating ${locator}`);
+    
     const byLocator = this.locateElementBy(locator);
 
     this.wait(this.until.elementsLocated(byLocator));
@@ -136,7 +141,7 @@ class EasyDriver {
       if (locator.string.startsWith('//') || locator.string.startsWith('(')) {
         return this.By.xpath(locator.string);
       }
-      if (locator.string.startsWith('.') || locator.string.startsWith('[') || locator.string.startsWith('#')) {
+      if (locator.string.startsWith('.') || locator.string.startsWith('#') || locator.string.startsWith('[')) {
         return this.By.css(locator.string);
       }
       console.error(`Can not locate an element with '${locator.string}'.`);
@@ -146,6 +151,18 @@ class EasyDriver {
 
     console.log(`Supported locator types are: css=, xpath=, class=, id=, name=.`);
     process.exit(1);
+  }
+
+  /**
+   * Log messages
+   * @param {string} msg - Messages to log.
+   */
+  log(msg) {
+    const defer = this.promise.defer();
+    defer.fulfill(msg);
+    defer.promise.then(function (msg) {
+      console.log(msg);
+    });
   }
 
   /**
@@ -238,12 +255,8 @@ class EasyDriver {
    * @return {Thenable<undefined>}
    */
   switchToFrame(locator) {
-    const self = this;
-
-    return self.wd.switchTo().defaultContent().then(function () {
-      const element = (isNaN(locator)) ? self.findElement(locator) : locator;
-      return self.wd.switchTo().frame(element);
-    });
+    const element = (isNaN(locator)) ? this.findElement(locator) : locator;
+    return this.wd.switchTo().frame(element);
   }
 
   /**
