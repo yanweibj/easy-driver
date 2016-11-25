@@ -777,24 +777,24 @@ class EasyDriver {
       }
 
       var tooltip = document.createElement('div');
-    	tooltip.id = "${tpId}";
-    	tooltip.textContent = (drawSymbol) ? String.fromCharCode(easydriverTPSymbol) + " " + title : title;
-    	tooltip.style.position = 'absolute';
-    	tooltip.style.color = '#000';
-    	tooltip.style.backgroundColor = '#F5FCDE';
-    	tooltip.style.border = '3px solid #ff0000';
-    	tooltip.style.fontSize = '12px';
-    	tooltip.style.zIndex = '99999';
-    	tooltip.style.display = 'block';
-    	tooltip.style.height = '16px';
-    	tooltip.style.padding = '2px';
-    	tooltip.style.verticalAlign = 'middle';
-    	tooltip.style.top = ((fromLastPos) ? window.easydriverTPLastPos.y : (top + offsetY)) + 'px';
-    	tooltip.style.left = ((fromLastPos) ? window.easydriverTPLastPos.x : (left + offsetX)) + 'px';
-    	document.body.appendChild(tooltip);
-    	if (tooltip.scrollHeight > tooltip.offsetHeight) {
-    		tooltip.style.height = (tooltip.scrollHeight + 3) + 'px';
-    	}
+      tooltip.id = "${tpId}";
+      tooltip.textContent = (drawSymbol) ? String.fromCharCode(easydriverTPSymbol) + " " + title : title;
+      tooltip.style.position = 'absolute';
+      tooltip.style.color = '#000';
+      tooltip.style.backgroundColor = '#F5FCDE';
+      tooltip.style.border = '3px solid #ff0000';
+      tooltip.style.fontSize = '12px';
+      tooltip.style.zIndex = '99999';
+      tooltip.style.display = 'block';
+      tooltip.style.height = '16px';
+      tooltip.style.padding = '2px';
+      tooltip.style.verticalAlign = 'middle';
+      tooltip.style.top = ((fromLastPos) ? window.easydriverTPLastPos.y : (top + offsetY)) + 'px';
+      tooltip.style.left = ((fromLastPos) ? window.easydriverTPLastPos.x : (left + offsetX)) + 'px';
+      document.body.appendChild(tooltip);
+      if (tooltip.scrollHeight > tooltip.offsetHeight) {
+      	tooltip.style.height = (tooltip.scrollHeight + 3) + 'px';
+      }
 
       var lastPos = tooltip.getBoundingClientRect();
       window.easydriverTPLastPos = {x: lastPos.left, y: lastPos.bottom};
@@ -867,20 +867,20 @@ class EasyDriver {
       var offsetY = arguments[2];
 
       var rect = element.getBoundingClientRect();
-    	var x = rect.left;
-    	var y = rect.bottom;
-    	var width = element.offsetWidth;
+      var x = rect.left;
+      var y = rect.bottom;
+      var width = element.offsetWidth;
 
       function escape(str) {
       	return str.replace(/[\\x26\\x0A<>'"]/g, function(r){ return "&#" + r.charCodeAt(0) + ";"; });
       }
 
-    	var content = "";
-    	for (var i = 0; i < element.length; i++) {
-    		if (!element.options[i].disabled) content += escape(element.options[i].text) + "<br/>";
-    	}
+      var content = "";
+      for (var i = 0; i < element.length; i++) {
+      	if (!element.options[i].disabled) content += escape(element.options[i].text) + "<br/>";
+      }
 
-    	var dropdown = document.createElement('div');
+      var dropdown = document.createElement('div');
       dropdown.id = "${sId}";
       dropdown.innerHTML = content;
       dropdown.style.position = 'absolute';
@@ -894,13 +894,13 @@ class EasyDriver {
       dropdown.style.height = '1px';
       dropdown.style.width = width + 'px';
 
-    	document.body.appendChild(dropdown);
-    	dropdown.style.height = (dropdown.scrollHeight + 8) + 'px';
-    	if (dropdown.scrollWidth > width) {
-    		dropdown.style.width = (dropdown.scrollWidth + 8) + 'px';
-    	}
-    	dropdown.style.left = (x + offsetX) + "px";
-    	dropdown.style.top = (y + offsetY) + "px";
+      document.body.appendChild(dropdown);
+      dropdown.style.height = (dropdown.scrollHeight + 8) + 'px';
+      if (dropdown.scrollWidth > width) {
+      	dropdown.style.width = (dropdown.scrollWidth + 8) + 'px';
+      }
+      dropdown.style.left = (x + offsetX) + "px";
+      dropdown.style.top = (y + offsetY) + "px";
 
       return;
     `, element, offset.x, offset.y)
