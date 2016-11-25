@@ -108,7 +108,7 @@ class EasyDriver {
    */
   findElements(locator) {
     this.log(`--- Locating ${locator}`);
-    
+
     const byLocator = this.locateElementBy(locator);
 
     this.wait(this.until.elementsLocated(byLocator));
@@ -160,8 +160,8 @@ class EasyDriver {
   log(msg) {
     const defer = this.promise.defer();
     defer.fulfill(msg);
-    defer.promise.then(function (msg) {
-      console.log(msg);
+    defer.promise.then(function (message) {
+      console.log(message);
     });
   }
 
