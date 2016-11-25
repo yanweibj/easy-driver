@@ -821,19 +821,19 @@ class EasyDriver {
       return element.getSize().then(function (size) {
         return self.wd.executeScript(`
           var redmark = window.document.createElement('div');
-        	redmark.id = '${id}';
-        	redmark.style.position = 'absolute';
-        	redmark.style.border = '3px solid red';
-        	redmark.style.zIndex = '99999';
-        	redmark.style.display = 'block';
-        	redmark.style.padding = '0px';
-        	redmark.style.margin = '0px';
-        	redmark.style.left = (${location.x} - 4 - ${padding.left}) + 'px';
-        	redmark.style.top = (${location.y} - 4 - ${padding.top}) + 'px';
-        	redmark.style.width = (${size.width} + 8 + ${padding.right}) + 'px';
-        	redmark.style.height = (${size.height} + 8 + ${padding.bottom}) + 'px';
+          redmark.id = '${id}';
+          redmark.style.position = 'absolute';
+          redmark.style.border = '3px solid red';
+          redmark.style.zIndex = '99999';
+          redmark.style.display = 'block';
+          redmark.style.padding = '0px';
+          redmark.style.margin = '0px';
+          redmark.style.left = (${location.x} - 4 - ${padding.left}) + 'px';
+          redmark.style.top = (${location.y} - 4 - ${padding.top}) + 'px';
+          redmark.style.width = (${size.width} + 8 + ${padding.right}) + 'px';
+          redmark.style.height = (${size.height} + 8 + ${padding.bottom}) + 'px';
 
-        	window.document.body.appendChild(redmark);
+          window.document.body.appendChild(redmark);
 
           return;
         `)
@@ -881,18 +881,18 @@ class EasyDriver {
     	}
 
     	var dropdown = document.createElement('div');
-    	dropdown.id = "${sId}";
+      dropdown.id = "${sId}";
       dropdown.innerHTML = content;
-    	dropdown.style.position = 'absolute';
-    	dropdown.style.color = '#000';
-    	dropdown.style.backgroundColor = '#fff';
-    	dropdown.style.border = '1px solid #000';
-    	dropdown.style.padding = '2px';
-    	dropdown.style.fontSize = '12px';
-    	dropdown.style.zIndex = '99999';
-    	dropdown.style.display = 'block';
-    	dropdown.style.height = '1px';
-    	dropdown.style.width = width + 'px';
+      dropdown.style.position = 'absolute';
+      dropdown.style.color = '#000';
+      dropdown.style.backgroundColor = '#fff';
+      dropdown.style.border = '1px solid #000';
+      dropdown.style.padding = '2px';
+      dropdown.style.fontSize = '12px';
+      dropdown.style.zIndex = '99999';
+      dropdown.style.display = 'block';
+      dropdown.style.height = '1px';
+      dropdown.style.width = width + 'px';
 
     	document.body.appendChild(dropdown);
     	dropdown.style.height = (dropdown.scrollHeight + 8) + 'px';
@@ -981,19 +981,19 @@ class EasyDriver {
     self.wd.executeScript(`
       var element = arguments[0];
 
-      while ((element.scrollHeight <= element.offsetHeight ) || (parseInt(element.scrollWidth)>=99000)){
-    		element = element.parentElement;
-    	}
+      while ((element.scrollHeight <= element.offsetHeight ) || (parseInt(element.scrollWidth) >= 99000)) {
+        element = element.parentElement;
+      }
 
-    	var old_maxWidth = element.style.maxWidth;
-    	element.style.maxWidth = 'none';
-    	var old_maxHeight = element.style.maxHeight;
-    	element.style.maxHeight = 'none';
+      var old_maxWidth = element.style.maxWidth;
+      element.style.maxWidth = 'none';
+      var old_maxHeight = element.style.maxHeight;
+      element.style.maxHeight = 'none';
 
       var old_width = element.clientWidth;
-    	element.style.width = element.scrollWidth + "px";
-    	var old_height = element.clientHeight;
-    	element.style.height = element.scrollHeight + "px";
+      element.style.width = element.scrollWidth + "px";
+      var old_height = element.clientHeight;
+      element.style.height = element.scrollHeight + "px";
 
       return {mW: old_maxWidth, mH: old_maxHeight, w: old_width, h: old_height};
     `, element).then(function (scrollData) {
