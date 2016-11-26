@@ -4,8 +4,11 @@ const test = require('selenium-webdriver/testing');
 test.describe('EasyDriver Test Suite', function() {
   let easyd;
 
+  this.timeout(60000);
+
   test.before(function() {
     easyd = new EasyDriver('en');
+    easyd.createDirectories('tests');
   });
 
   test.after(function() {
@@ -34,7 +37,7 @@ test.describe('EasyDriver Test Suite', function() {
     easyd.sendKeys('name=q', 'webdriver' + easyd.Key.ENTER);
     easyd.waitForVisible('id=rso');
     easyd.scrollIntoView('(//*[@class="_Gs"])[2]');
-    easyd.takeElementShot('id=foot', 'test02.png');
+    easyd.takeElementShot('id=foot', 'tests/test_1_1.png');
     easyd.sleep(2000);
     done();
   });
@@ -52,10 +55,10 @@ test.describe('EasyDriver Test Suite', function() {
   test.it('Test Case: takeScrollShot()', function(done) {
     easyd.open('https://jsfiddle.net/aaronchen/x86j7qo2/show/');
     easyd.switchToFrame('//iframe');
-    easyd.takeScrollShot('id=c1', 'test02_s1.png');
-    easyd.takeScrollShot('id=c2', 'test02_s2.png');
-    easyd.takeScrollShot('id=c3', 'test02_s3.png');
-    easyd.takeScrollShot('id=c4', 'test02_s4.png');
+    easyd.takeScrollShot('id=c1', 'tests/test_2_1.png');
+    easyd.takeScrollShot('id=c2', 'tests/test_2_2.png');
+    easyd.takeScrollShot('id=c3', 'tests/test_2_3.png');
+    easyd.takeScrollShot('id=c4', 'tests/test_2_4.png');
     easyd.sleep(2000);
     done();
   });
