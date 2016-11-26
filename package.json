@@ -4,7 +4,8 @@
   "description": "A wrapper on top of selenium-webdriver",
   "main": "sample.js",
   "scripts": {
-    "start": "node sample"
+    "start": "node sample",
+    "test": "mocha -t 60000 test"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,8 @@
     "chromedriver": "2.25.1",
     "fs-extra": "1.0.0",
     "selenium-webdriver": "2.53.3"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
   }
 }

@@ -51,6 +51,8 @@ class EasyDriver {
    * @return {Thenable<undefined>}
    */
   close() {
+    this.log(`  [-] close()`);
+
     return this.wd.close();
   }
 
@@ -61,7 +63,7 @@ class EasyDriver {
    * @return {WebElementPromise} - A WebElement that can be used to issue commands against the located element.
    */
   findElement(locator, isVisible = false) {
-    this.log(`--- Locating ${locator}`);
+    this.log(`      Locating: ${locator}`);
 
     if (locator instanceof webdriver.WebElement) {
       if (isVisible) this.wait(this.until.elementIsVisible(locator));
@@ -107,7 +109,7 @@ class EasyDriver {
    * @return {Thenable<Array<WebElement>>} - A promise that will resolve to an array of WebElements.
    */
   findElements(locator) {
-    this.log(`--- Locating ${locator}`);
+    this.log(`      Locating: ${locator}`);
 
     const byLocator = this.locateElementBy(locator);
 
@@ -170,6 +172,7 @@ class EasyDriver {
    * @return {Thenable<undefined>}
    */
   maximizeWindow() {
+    this.log(`  [-] maximizeWindow()`);
     return this.wd.manage().window().maximize();
   }
 
@@ -177,6 +180,8 @@ class EasyDriver {
    * Maximize the window to the screen size
    */
   maximizeToScreenSize() {
+    this.log(`  [-] maximizeToScreenSize()`);
+
     const self = this;
     self.wd.executeScript(`
       return {width: window.screen.width, height: window.screen.height};
@@ -192,6 +197,7 @@ class EasyDriver {
    * @return {Thenable<undefined>}
    */
   open(url) {
+    this.log(`  [-] open(${url})`);
     return this.wd.get(url);
   }
 
@@ -200,6 +206,7 @@ class EasyDriver {
    * @return {Thenable<undefined>}
    */
   quit() {
+    this.log(`  [-] quit()`);
     return this.wd.quit();
   }
 
@@ -209,6 +216,8 @@ class EasyDriver {
    * @param {Function} fn - A callback function aftrer the script is executed.
    */
   runScript(script, fn) {
+    this.log(`  [-] runScript()`);
+
     this.wd.executeScript(script)
     .then(function (retval) {
       // * For a HTML element, the value will resolve to a WebElement
@@ -228,6 +237,7 @@ class EasyDriver {
    * @param {number} timeout - Default timeout in milliseconds.
    */
   setTimeout(timeout) {
+    this.log(`  [-] setTimeout(${timeout})`);
     this.TIMEOUT = parseInt(timeout) || this.TIMEOUT;
   }
 
@@ -246,6 +256,7 @@ class EasyDriver {
    * @return {Thenable<undefined>}
    */
   switchToDefaultContent() {
+    this.log(`  [-] switchToDefaultContent()`);
     return this.wd.switchTo().defaultContent();
   }
 
@@ -255,6 +266,8 @@ class EasyDriver {
    * @return {Thenable<undefined>}
    */
   switchToFrame(locator) {
+    this.log(`  [-] switchToFrame()`);
+
     const element = (isNaN(locator)) ? this.findElement(locator) : locator;
     return this.wd.switchTo().frame(element);
   }
@@ -265,6 +278,7 @@ class EasyDriver {
    * @return {Thenable<undefined>}
    */
   switchToWindow(nameOrHandle) {
+    this.log(`  [-] switchToWindow(${nameOrHandle})`);
     return this.wd.switchTo().window(nameOrHandle);
   }
 
@@ -273,6 +287,8 @@ class EasyDriver {
    * @param {string} filename - File name (.png) of the screenshot.
    */
   takeScreenshot(filename) {
+    this.log(`  [-] takeScreenshot(${filename})`);
+
     if (!filename.endsWith('.png')) filename += '.png';
 
     this.sleep(500);
@@ -304,6 +320,8 @@ class EasyDriver {
    * @param {(string|WebElement)} locator - Element locator.
    */
   blur(locator) {
+    this.log(`  [-] blur()`);
+
     const element = this.findElement(locator);
     this.wd.executeScript(`
       var element = arguments[0];
@@ -316,6 +334,8 @@ class EasyDriver {
    * @param {(string|WebElement)} locator - Element locator.
    */
   checkAll(locator) {
+    this.log(`  [-] checkAll()`);
+
     const element = this.findElement(locator);
 
     element.findElements(this.locateElementBy('css=input[type="checkbox"]'))
@@ -334,6 +354,7 @@ class EasyDriver {
    * @return {Thenable<undefined>}
    */
   clear(locator) {
+    this.log(`  [-] clear()`);
     return this.findElement(locator).clear();
   }
 
@@ -343,6 +364,8 @@ class EasyDriver {
    * @param {number} ms - Sleep in milliseconds after clicking the element.
    */
   click(locator, ms) {
+    this.log(`  [-] click()`);
+
     this.findElement(locator, true).click();
     this.sleep(ms);
   }
@@ -353,6 +376,8 @@ class EasyDriver {
    * @param {{x: number, y: number}} [offset={x: 0, y: 0}] - An offset within the element.
    */
   clickAt(locator, offset = {x: 0, y: 0}) {
+    this.log(`  [-] clickAt()`);
+
     const self = this;
     self.findElement(locator, true).then(function (element) {
       self.actions().mouseMove(element, offset).click().perform();
@@ -364,6 +389,8 @@ class EasyDriver {
    * @param {(string|WebElement)} locator - Element locator.
    */
   focus(locator) {
+    this.log(`  [-] focus()`);
+
     const element = this.findElement(locator);
     this.wd.executeScript(`
       var element = arguments[0];
@@ -378,6 +405,7 @@ class EasyDriver {
    * @return {Thenable<(string|null)>}
    */
   getAttribute(locator, attributeName) {
+    this.log(`  [-] getAttribute()`);
     return this.findElement(locator).getAttribute(attributeName);
   }
 
@@ -387,6 +415,8 @@ class EasyDriver {
    * @return {Thenable<{x: number, y: number, width: number, height: number}>}
    */
   getRect(locator) {
+    this.log(`  [-] getRect()`);
+
     const element = this.findElement(locator);
 
     // return new Promise(function (resolve, reject) {
@@ -412,6 +442,7 @@ class EasyDriver {
    * @return {Thenable<string>}
    */
   getTagName(locator) {
+    this.log(`  [-] getTagName()`);
     return this.findElement(locator).getTagName();
   }
 
@@ -421,6 +452,7 @@ class EasyDriver {
    * @return {Thenable<string>}
    */
   getText(locator) {
+    this.log(`  [-] getText()`);
     return this.findElement(locator).getText();
   }
 
@@ -432,6 +464,7 @@ class EasyDriver {
    * @return {Thenable<boolean>}
    */
   isDisplayed(locator) {
+    this.log(`  [-] isDisplayed()`);
     return this.findElement(locator).isDisplayed();
   }
 
@@ -442,6 +475,7 @@ class EasyDriver {
    * @return {Thenable<boolean>}
    */
   isEnabled(locator) {
+    this.log(`  [-] isEnabled()`);
     return this.findElement(locator).isEnabled();
   }
 
@@ -452,6 +486,7 @@ class EasyDriver {
    * @return {Thenable<boolean>}
    */
   isSelected(locator) {
+    this.log(`  [-] isSelected()`);
     return this.findElement(locator).isSelected();
   }
 
@@ -462,6 +497,7 @@ class EasyDriver {
    * @return {Thenable}
    */
   mouseMove(locator, offset = {x: 0, y: 0}) {
+    this.log(`  [-] mouseMove()`);
     return this.actions().mouseMove(this.findElement(locator, true), offset).perform();
   }
 
@@ -471,6 +507,7 @@ class EasyDriver {
    * @return {Thenable(T|null)}
    */
   scrollIntoView(locator) {
+    this.log(`  [-] scrollIntoView()`);
     return this.wd.executeScript(`arguments[0].scrollIntoView(true);`, this.findElement(locator));
   }
 
@@ -481,6 +518,8 @@ class EasyDriver {
    * @return {Thenable<undefined>}
    */
   select(select_locator, option_locator) {
+    this.log(`  [-] select()`);
+
     const select = this.findElement(select_locator, true);
 
     return select.findElement(this.locateElementBy(option_locator)).then(function (option) {
@@ -495,6 +534,7 @@ class EasyDriver {
    * @return {Thenable<undefined>}
    */
   sendKeys(locator, keys) {
+    this.log(`  [-] sendKeys()`);
     return this.findElement(locator).sendKeys(keys);
   }
 
@@ -505,6 +545,8 @@ class EasyDriver {
    * @param {string} value - attribute value
    */
   setAttribute(locator, attribute, value) {
+    this.log(`  [-] setAttribute()`);
+
     const element = this.findElement(locator);
 
     this.wd.executeScript(`
@@ -521,6 +563,8 @@ class EasyDriver {
    * @param {(string|WebElement)} locator - Element locator.
    */
   unCheckAll(locator) {
+    this.log(`  [-] unCheckAll()`);
+
     const element = this.findElement(locator);
 
     element.findElements(this.locateElementBy('css=input[type="checkbox"]'))
@@ -539,6 +583,7 @@ class EasyDriver {
    * @return {Thenable}
    */
   waitForDisabled(locator) {
+    this.log(`  [-] waitForDisabled()`);
     return this.wait(this.until.elementIsDisabled(this.findElement(locator)));
   }
 
@@ -548,6 +593,7 @@ class EasyDriver {
    * @return {Thenable}
    */
   waitForEnabled(locator) {
+    this.log(`  [-] waitForEnabled()`);
     return this.wait(this.until.elementIsEnabled(this.findElement(locator)));
   }
 
@@ -557,6 +603,7 @@ class EasyDriver {
    * @return {Thenable}
    */
   waitForNotPresent(locator) {
+    this.log(`  [-] waitForNotPresent()`);
     return this.wait(this.until.stalenessOf(this.findElement(locator)));
   }
 
@@ -566,6 +613,7 @@ class EasyDriver {
    * @return {Thenable}
    */
   waitForNotSelected(locator) {
+    this.log(`  [-] waitForNotSelected()`);
     return this.wait(this.until.elementIsNotSelected(this.findElement(locator)));
   }
 
@@ -575,6 +623,7 @@ class EasyDriver {
    * @return {Thenable}
    */
   waitForNotVisible(locator) {
+    this.log(`  [-] waitForNotVisible()`);
     return this.wait(this.until.elementIsNotVisible(this.findElement(locator)));
   }
 
@@ -584,6 +633,7 @@ class EasyDriver {
    * @return {Thenable}
    */
   waitForPresent(locator) {
+    this.log(`  [-] waitForPresent()`);
     return this.wait(this.until.elementsLocated(this.locateElementBy(locator)));
   }
 
@@ -593,6 +643,7 @@ class EasyDriver {
    * @return {Thenable}
    */
   waitForSelected(locator) {
+    this.log(`  [-] waitForSelected()`);
     return this.wait(this.until.elementIsSelected(this.findElement(locator)));
   }
 
@@ -603,6 +654,7 @@ class EasyDriver {
    * @return {Thenable}
    */
   waitForTextContains(locator, substr) {
+    this.log(`  [-] waitForTextContains()`);
     return this.wait(this.until.elementTextContains(this.findElement(locator), substr));
   }
 
@@ -613,6 +665,7 @@ class EasyDriver {
    * @return {Thenable}
    */
   waitForTextIs(locator, text) {
+    this.log(`  [-] waitForTextIs()`);
     return this.wait(this.until.elementTextIs(this.findElement(locator), text));
   }
 
@@ -622,6 +675,7 @@ class EasyDriver {
    * @return {Thenable}
    */
   waitForVisible(locator) {
+    this.log(`  [-] waitForVisible()`);
     return this.wait(this.until.elementIsVisible(this.findElement(locator)));
   }
 
@@ -634,6 +688,8 @@ class EasyDriver {
    * @return {Thenable<(T|null)>}
    */
   clearAllDrawings() {
+    this.log(`  [-] clearAllDrawings()`);
+
     return this.wd.executeScript(`
       var elements = window.document.body.querySelectorAll('[id*="easydriver_"]');
       for (var i = 0; i < elements.length; i++) {
@@ -649,6 +705,8 @@ class EasyDriver {
    * @param {string} dirtree - Directories to create.
    */
   createDirectories(dirtree) {
+    this.log(`  [-] createDirectories(${dirtree})`);
+
     if (! fs.existsSync(dirtree)){ fs.mkdirsSync(dirtree); }
   }
 
@@ -659,6 +717,8 @@ class EasyDriver {
    * @return {WebElementPromise}
    */
   drawArrow(from_locator, to_locator) {
+    this.log(`  [-] drawArrow()`);
+
     const self = this;
     const from = self.findElement(from_locator);
     const to = self.findElement(to_locator);
@@ -732,6 +792,8 @@ class EasyDriver {
    * @return {WebElementPromise}
    */
   drawFlyover(locator, settings = {attribute: 'title', offsetX: 5, offsetY: 15, fromLastPos: false, drawSymbol: false}) {
+    this.log(`  [-] drawFlyover()`);
+
     const self = this;
     const element = self.findElement(locator, true);
     const attribute = settings.attribute || 'title';
@@ -813,6 +875,8 @@ class EasyDriver {
    * @return {WebElementPromise}
    */
   drawRedMark(locator, padding = {top: 0, left: 0, bottom: 0, right: 0}) {
+    this.log(`  [-] drawRedMark()`);
+
     const self = this;
     const element = this.findElement(locator, true);
     const id = getId();
@@ -851,6 +915,8 @@ class EasyDriver {
    * @return {WebElementPromise}
    */
   drawSelect(locator, offset = {x: 0, y: 0}) {
+    this.log(`  [-] drawSelect()`);
+
     const self = this;
     const element = self.findElement(locator, true);
     const sId = getId();
@@ -917,6 +983,8 @@ class EasyDriver {
    * References for detecting Retina: http://stackoverflow.com/questions/19689715
    */
   takeElementShot(locator, filename) {
+    this.log(`  [-] takeElementShot()`);
+
     const self = this;
     const element = self.findElement(locator);
 
@@ -975,6 +1043,8 @@ class EasyDriver {
    * @param {string} filename - File name (.png) of the screenshot.
    */
   takeScrollShot(locator, filename) {
+    this.log(`  [-] takeScrollShot()`);
+
     const self = this;
     const element = self.findElement(locator);
 
