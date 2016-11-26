@@ -53,8 +53,8 @@ npm install
 In Terminal: Go to your **EasyDriver** directory, and run:
 
 ```shell
-node sample
-node testcase_bpm_01
+node testcase_sample
+node testcase_bpm
 ```
 
 Or, you can create your own test case (mytest01.js), and run it like:

@@ -1,3 +1,9 @@
+/*--- ********************* ---*/
+/*--- EasyDriver Test Suite ---*/
+/*--- ********************* ---*/
+
+// Test Cases to test EasyDriver methods.
+
 const EasyDriver = require('./easy-driver');
 const test = require('selenium-webdriver/testing');
 
