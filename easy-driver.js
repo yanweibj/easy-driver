@@ -52,7 +52,6 @@ class EasyDriver {
    */
   close() {
     this.log(`  [-] close()`);
-
     return this.wd.close();
   }
 
