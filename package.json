@@ -4,7 +4,7 @@
   "description": "A wrapper on top of selenium-webdriver",
   "main": "sample.js",
   "scripts": {
-    "start": "node sample",
+    "start": "node testcase_sample",
     "test": "mocha test"
   },
   "repository": {
