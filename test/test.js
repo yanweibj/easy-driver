@@ -4,24 +4,25 @@
 
 // Test Cases to test EasyDriver methods.
 
-const EasyDriver = require('./easy-driver');
+const EasyDriver = require('../easy-driver');
 const test = require('selenium-webdriver/testing');
 
 test.describe('EasyDriver Test Suite', function() {
   let easyd;
+  const imgDir = 'test_img';
 
-  this.timeout(60000);
+  // this.timeout(60000);
 
   test.before(function() {
     easyd = new EasyDriver('en');
-    easyd.createDirectories('tests');
+    easyd.createDirectories(imgDir);
   });
 
   test.after(function() {
     easyd.quit();
   });
 
-  test.it('Test Case: wait(), getRect(), setAttribute(), drawFlyover(), drawArrow()', function(done) {
+  test.it('Test Case: click(), getRect(), setAttribute(), drawFlyover(), drawArrow()', function(done) {
     easyd.open('https://jsfiddle.net/9snhn98w/show/');
     easyd.switchToFrame('//iframe');
     easyd.click('id=p1');
@@ -43,7 +44,7 @@ test.describe('EasyDriver Test Suite', function() {
     easyd.sendKeys('name=q', 'webdriver' + easyd.Key.ENTER);
     easyd.waitForVisible('id=rso');
     easyd.scrollIntoView('(//*[@class="_Gs"])[2]');
-    easyd.takeElementShot('id=foot', 'tests/test_1_1.png');
+    easyd.takeElementShot('id=foot', `${imgDir}/test_1_1.png`);
     easyd.sleep(2000);
     done();
   });
@@ -61,10 +62,10 @@ test.describe('EasyDriver Test Suite', function() {
   test.it('Test Case: takeScrollShot()', function(done) {
     easyd.open('https://jsfiddle.net/aaronchen/x86j7qo2/show/');
     easyd.switchToFrame('//iframe');
-    easyd.takeScrollShot('id=c1', 'tests/test_2_1.png');
-    easyd.takeScrollShot('id=c2', 'tests/test_2_2.png');
-    easyd.takeScrollShot('id=c3', 'tests/test_2_3.png');
-    easyd.takeScrollShot('id=c4', 'tests/test_2_4.png');
+    easyd.takeScrollShot('id=c1', `${imgDir}/test_2_1.png`);
+    easyd.takeScrollShot('id=c2', `${imgDir}/test_2_2.png`);
+    easyd.takeScrollShot('id=c3', `${imgDir}/test_2_3.png`);
+    easyd.takeScrollShot('id=c4', `${imgDir}/test_2_4.png`);
     easyd.sleep(2000);
     done();
   });
