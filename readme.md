@@ -216,3 +216,7 @@ easyd.findElements('css=[id*="item"]').then(function (elements) {
 ## selenium-webdriver
 
 > [Documentation](https://seleniumhq.github.io/selenium/docs/api/javascript/index.html)
+
+## Limitation
+
+Chrome can only take screenshot of viewport.  It is currently not possible to take a full-page screenshot.
