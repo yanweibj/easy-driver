@@ -1,12 +1,12 @@
-# Installation (Mac)
+# Installation
 
 ## Install Homebrew
 
-> (For Windows) Please skip this step.
+> (For Windows) Please skip this.
 
-> (For Mac) Please make sure you have **Xcode Command Line Tools** installed by running `xcode-select -p` in Terminal.
+> (For Mac) Please make sure you have **Xcode Command Line Tools** installed first by running `xcode-select -p` in Terminal.
 
-In Terminal, run:
+(For Mac) In Terminal, run:
 
 ```shell
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -14,9 +14,9 @@ In Terminal, run:
 
 ## Install Node.js
 
-> (For Windows) Please download  [Nodes.js](https://nodejs.org/en/download/) and install.
+> (For Windows) Please download [Nodes.js](https://nodejs.org/en/download/) and install.
 
-In Terminal, run:
+(For Mac) In Terminal, run:
 
 ```shell
 brew update
@@ -26,7 +26,7 @@ brew install node
 ## Get EasyDriver
 
 ##### Method 1: Use Git
-> (For Windows) Please download [Git for Windows](https://git-scm.com/download/win) and install.
+> (For Windows) Please first download [Git for Windows](https://git-scm.com/download/win) and install.
 
 In Terminal, run:
 
