@@ -25,7 +25,7 @@ brew install node
 
 ## Get EasyDriver
 
-##### Method 1: Clone EasyDriver
+##### Method 1: Use Git
 > (For Windows) Please download [Git for Windows](https://git-scm.com/download/win) and install.
 
 In Terminal, run:
@@ -44,8 +44,7 @@ npm install
 
 1. Download [easy-driver-master.zip](https://github.ibm.com/aaronhc/easy-driver/archive/master.zip).
 2. Unzip **easy-driver-master.zip** to a directory of your choice.
-3. In Terminal, go to that directory, and run `npm install`.
-
+3. In Terminal, change the current directory (`cd`) to the unzipped directory, and run `npm install`.
 
 
 ## Run Sample Test Cases
@@ -54,21 +53,24 @@ In Terminal: Go to your **EasyDriver** directory, and run:
 
 ```shell
 node testcase_sample
-node testcase_bpm
 ```
 
-Or, you can create your own test case (mytest01.js), and run it like:
-
-`node mytest01`
+Or, you can create your own test case (mytest01.js), and run it like: `node mytest01`
 
 ## Update EasyDriver
 
+##### Method 1: Use Git
 In Terminal, run:
 
 ```shell
 git pull
 npm install
 ```
+
+##### Methodd 2: Use easy-driver-master.zip
+1. Download the latest [easy-driver-master.zip](https://github.ibm.com/aaronhc/easy-driver/archive/master.zip).
+2. Unzip **easy-driver-master.zip** to a directory of your choice.
+3. In Terminal, change the current directory (`cd`) to the unzipped directory, and run `npm install`.
 
 # Usage
 
