@@ -89,6 +89,7 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.getTitle() -> Thenable<string>`
 * `easyd.Key`  => See **Enumeration Key**
 * `easyd.locateElementBy(locator) -> By`
+* `easyd.log(msg)`
 * `easyd.maximizeWindow()`
 * `easyd.maximizeToScreenSize()`
 * `easyd.open(url)`
@@ -102,6 +103,12 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.takeScreenshot(png_filename)`
 * `easyd.until` => See **until Conditions**
 * `easyd.wait(fn, timeout)`
+* `easyd.waitForTitleContains(substr)`
+* `easyd.waitForTitleIs(title)`
+* `easyd.waitForTitleMatches(regex)`
+* `easyd.waitForUrlContains(substrUrl)`
+* `easyd.waitForUrlIs(url)`
+* `easyd.waitForUrlMatches(regex)`
 
 ##### easyd (WebElement methods)
 * `easyd.blur(loc_or_web)`
@@ -123,6 +130,7 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.sendKeys(loc_or_web, keys)`
 * `easyd.setAttribute(loc_or_web, attribute, value)`
 * `easyd.unCheckAll(loc_or_web)`
+* `easyd.waitForAlertIsPresent() -> Thenable<Alert>`
 * `easyd.waitForDisabled(loc_or_web)`
 * `easyd.waitForEnabled(loc_or_web)`
 * `easyd.waitForNotPresent(loc_or_web)`
@@ -130,8 +138,10 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.waitForNotVisible(loc_or_web)`
 * `easyd.waitForPresent(locator)`
 * `easyd.waitForSelected(loc_or_web)`
+* `easyd.waitForSwitchToFrame(number_or_loc_or_web)`
 * `easyd.waitForTextContains(loc_or_web, substr)`
 * `easyd.waitForTextIs(loc_or_web, text)`
+* `easyd.waitForTextMatches(loc_or_web, regex)`
 * `easyd.waitForVisible(loc_or_web)`
 
 ##### easyd (Custom methods)
@@ -168,9 +178,11 @@ const easyd = new EasyDriver('zh-tw');
 
 ## ***until*** Conditions
 
+Almost all ***until*** conditions are integrated in `easy.waitFor`.  However, if you still want to call ***until***, you can use:
+
 `easyd.until`
 
-> Supported Conditions: [until](http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/until.html)
+> All Supported Conditions: [until](http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/until.html)
 
 ## Class **ActionSequence**
 

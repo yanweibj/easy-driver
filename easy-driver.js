@@ -310,6 +310,66 @@ class EasyDriver {
     return this.wd.wait(condition, timeout);
   }
 
+  /**
+   * Wait till Title contains substr
+   * @param {string} substr - The substring that should be present in the page title.
+   * @return {Thenable}
+   */
+  waitForTitleContains(substr) {
+    this.log(`  [-] waitForTitleContains()`);
+    return this.wait(this.until.titleContains(substr));
+  }
+
+  /**
+   * Wait till Title is title
+   * @param {string} title - The expected page title.
+   * @return {Thenable}
+   */
+  waitForTitleIs(title) {
+    this.log(`  [-] waitForTitleIs()`);
+    return this.wait(this.until.titleIs(title));
+  }
+
+  /**
+   * Wait till Title matches regex
+   * @param {RegExp} regex - The regular expression to test against.
+   * @return {Thenable}
+   */
+  waitForTitleMatches(regex) {
+    this.log(`  [-] waitForTitleMatches()`);
+    return this.wait(this.until.titleMatches(regex));
+  }
+
+  /**
+   * Wait till URL contains substrUrl
+   * @param {string} substrUrl - The substring that should be present in the current URL.
+   * @return {Thenable}
+   */
+  waitForUrlContains(substrUrl) {
+    this.log(`  [-] waitForUrlContains()`);
+    return this.wait(this.until.urlContains(substrUrl));
+  }
+
+  /**
+   * Wait till URL is url
+   * @param {string} url - The expected page url.
+   * @return {Thenable}
+   */
+  waitForUrlIs(url) {
+    this.log(`  [-] waitForUrlIs()`);
+    return this.wait(this.until.urlIs(url));
+  }
+
+  /**
+   * Wait till URL matches regex
+   * @param {RegExp} regex - The regular expression to test against.
+   * @return {Thenable}
+   */
+  waitForUrlMatches(regex) {
+    this.log(`  [-] waitForUrlMatches()`);
+    return this.wait(this.until.urlMatches(regex));
+  }
+
   /*--- ****************** ---*/
   /*--- WebElement Methods ---*/
   /*--- ****************** ---*/
@@ -577,6 +637,15 @@ class EasyDriver {
   }
 
   /**
+   * Wait till an alert is presented
+   * @return {Thenable<Alert>}
+   */
+  waitForAlertIsPresent() {
+    this.log(`  [-] waitForAlertIsPresent()`);
+    return this.wait(this.until.alertIsPresent());
+  }
+
+  /**
    * Wait till an element is disabled
    * @param {(string|WebElement)} locator - Element locator.
    * @return {Thenable}
@@ -647,6 +716,17 @@ class EasyDriver {
   }
 
   /**
+   * Wait till switching to a frame
+   * @param {(number|string|WebElement)} locator - Element locator.
+   * @return {Thenable}
+   */
+  waitForSwitchToFrame(locator) {
+    this.log(`  [-] waitForSwitchToFrame()`);
+    const frame = (isNaN(locator)) ? this.findElement(locator) : locator;
+    return this.wait(this.until.ableToSwitchToFrame(frame));
+  }
+
+  /**
    * Wait till an element's text contains substring
    * @param {(string|WebElement)} locator - Element locator.
    * @param {string} substr - The substring to search for.
@@ -666,6 +746,17 @@ class EasyDriver {
   waitForTextIs(locator, text) {
     this.log(`  [-] waitForTextIs()`);
     return this.wait(this.until.elementTextIs(this.findElement(locator), text));
+  }
+
+  /**
+   * Wait till an element's innerText matches regex
+   * @param {(string|WebElement)} locator - Element locator.
+   * @param {RegExp} regex - The regular expression to test against.
+   * @return {Thenable}
+   */
+  waitForTextMatches(locator, regex) {
+    this.log(`  [-] waitForTextMatches()`);
+    return this.wait(this.until.elementTextMatches(this.findElement(locator), regex));
   }
 
   /**
