@@ -1069,10 +1069,11 @@ class EasyDriver {
    * Take a screenshot on an element
    * @param {(string|WebElement)} locator - Element locator.
    * @param {string} filename - File name (.png) of the screenshot.
+   * @param {{x: number, y: number}} [offset={x: 0, y: 0}] - An offset from an element
    *
    * References for detecting Retina: http://stackoverflow.com/questions/19689715
    */
-  takeElementShot(locator, filename) {
+  takeElementShot(locator, filename, offset = {x: 0, y: 0}) {
     this.log(`  [-] takeElementShot()`);
 
     const self = this;
@@ -1084,6 +1085,8 @@ class EasyDriver {
       self.wd.executeScript(`
         var element = arguments[0];
         var screenData = arguments[1];
+        var offsetX = arguments[2];
+        var offsetY = arguments[3];
 
         function isRetinaDisplay() {
           if (window.matchMedia) {
@@ -1106,8 +1109,8 @@ class EasyDriver {
         var ctx = canvas.getContext("2d");
         ctx.drawImage(
           image,
-          rect.left * ratio,
-          rect.top * ratio,
+          (rect.left + offsetX) * ratio,
+          (rect.top + offsetY) * ratio,
           rect.width * ratio,
           rect.height * ratio,
           0,
@@ -1117,7 +1120,7 @@ class EasyDriver {
         )
 
         return canvas.toDataURL();
-      `, element, screenData)
+      `, element, screenData, offset.x, offset.y)
       .then(function (elementData) {
         const base64Data = elementData.replace(/^data:image\/png;base64,/, "");
         fs.writeFile(filename, base64Data, 'base64', function (err) {
@@ -1128,11 +1131,12 @@ class EasyDriver {
   }
 
   /**
-   * Take a screenshot on an element
+   * Take a screenshot on a scroll element
    * @param {(string|WebElement)} locator - Element locator.
    * @param {string} filename - File name (.png) of the screenshot.
+   * @param {{x: number, y: number}} [offset={x: 0, y: 0}] - An offset from an element
    */
-  takeScrollShot(locator, filename) {
+  takeScrollShot(locator, filename, offset={x: 0, y: 0}) {
     this.log(`  [-] takeScrollShot()`);
 
     const self = this;
@@ -1144,6 +1148,8 @@ class EasyDriver {
       while ((element.scrollHeight <= element.offsetHeight ) || (parseInt(element.scrollWidth) >= 99000)) {
         element = element.parentElement;
       }
+
+      window.easydriverScrollElement = element;
 
       var old_maxWidth = element.style.maxWidth;
       element.style.maxWidth = 'none';
@@ -1157,18 +1163,17 @@ class EasyDriver {
 
       return {mW: old_maxWidth, mH: old_maxHeight, w: old_width, h: old_height};
     `, element).then(function (scrollData) {
-      self.takeElementShot(element, filename);
+      self.takeElementShot(element, filename, offset);
 
       self.wd.executeScript(`
-        var element = arguments[0];
-        var scrollData = arguments[1];
+        var scrollData = arguments[0];
 
-        element.style.maxWidth = scrollData.mW;
-      	element.style.maxHeight = scrollData.mH;
+        window.easydriverScrollElement.style.maxWidth = scrollData.mW;
+      	window.easydriverScrollElement.style.maxHeight = scrollData.mH;
 
-      	element.style.height = scrollData.h + "px";
-      	element.style.width = scrollData.w + "px";
-      `, element, scrollData);
+      	window.easydriverScrollElement.style.height = scrollData.h + "px";
+      	window.easydriverScrollElement.style.width = scrollData.w + "px";
+      `, scrollData);
     });
   }
 

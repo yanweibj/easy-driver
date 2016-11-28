@@ -101,4 +101,17 @@ test.describe('=== EasyDriver Test Suite ===', function() {
     done();
   });
 
+  test.it('Test Case: takeScrollShot()', function(done) {
+    easyd.open('https://jsfiddle.net/aaronchen/x86j7qo2/show/');
+    easyd.getRect('//iframe').then(function (rect) {
+      easyd.switchToFrame(0);
+      easyd.takeScrollShot('id=c1', `${imgDir}/takeScrollShot_1.png`, {x: rect.x, y: rect.y});
+      easyd.takeScrollShot('id=c2', `${imgDir}/takeScrollShot_2.png`, {x: rect.x, y: rect.y});
+      // Need to find a solution for this scroll element
+      easyd.takeScrollShot('id=c3', `${imgDir}/takeScrollShot_3.png`, {x: rect.x, y: rect.y});
+      easyd.takeScrollShot('id=c4', `${imgDir}/takeScrollShot_4.png`, {x: rect.x, y: rect.y});
+    });
+    done();
+  });
+
 });
