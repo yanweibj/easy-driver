@@ -2,7 +2,7 @@
   "name": "easy-driver",
   "version": "1.0.0",
   "description": "A wrapper on top of selenium-webdriver",
-  "main": "sample.js",
+  "main": "testcase_sample.js",
   "scripts": {
     "start": "node testcase_sample",
     "test": "mocha --no-timeouts"
