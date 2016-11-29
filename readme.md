@@ -180,7 +180,7 @@ const easyd = new EasyDriver('zh-tw');
 
 ## ***until*** Conditions
 
-Almost all ***until*** conditions are integrated in `easy.waitFor`.  However, if you still want to call ***until***, you can use:
+Almost all ***until*** conditions are integrated in `easyd.waitFor`.  However, if you want to use ***until*** conditions on your own, you can use:
 
 `easyd.until`
 
