@@ -64,8 +64,8 @@ languages.forEach(function (lang) {
   easyd.select('//table//select[not(@style)]', `css=[value="${lang.replace('-','_')}" i]`);
   // Save language pref only when changed
   easyd.findElement('.savePrefsButton').then(function (saveButton) {
-    saveButton.isEnabled().then(function (isEnabled) {
-      if (isEnabled) saveButton.click(); // Save
+    easyd.isEnabled(saveButton).then(function (isEnabled) {
+      if (isEnabled) easyd.click(saveButton); // Save
       else easyd.click('.closeButton'); // Or, close Preferences
     });
   });
