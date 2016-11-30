@@ -18,6 +18,8 @@
     * [.quit()](#EasyDriver+quit) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.runScript(script, fn)](#EasyDriver+runScript)
     * [.setTimeout(timeout)](#EasyDriver+setTimeout)
+    * [.setWindowPosition(x, y)](#EasyDriver+setWindowPosition) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.setWindowSize(width, height)](#EasyDriver+setWindowSize) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.sleep(ms)](#EasyDriver+sleep) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.switchToDefaultContent()](#EasyDriver+switchToDefaultContent) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.switchToFrame(locator)](#EasyDriver+switchToFrame) ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -86,7 +88,7 @@
 Create a new action sequence
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
-**Returns**: <code>ActionSequence</code> - - A new action sequence.  
+**Returns**: <code>ActionSequence</code> - A new action sequence.  
 <a name="EasyDriver+close"></a>
 
 ### easyDriver.close() ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -99,7 +101,7 @@ Close the current window
 Find Element
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
-**Returns**: <code>WebElementPromise</code> - - A WebElement that can be used to issue commands against the located element.  
+**Returns**: <code>WebElementPromise</code> - A WebElement that can be used to issue commands against the located element.  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -112,7 +114,7 @@ Find Element
 Find Elements
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
-**Returns**: <code>Thenable.&lt;Array.&lt;WebElement&gt;&gt;</code> - - A promise that will resolve to an array of WebElements.  
+**Returns**: <code>Thenable.&lt;Array.&lt;WebElement&gt;&gt;</code> - A promise that will resolve to an array of WebElements.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -124,7 +126,7 @@ Find Elements
 Get title
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
-**Returns**: <code>Thenable.&lt;string&gt;</code> - - A promise that will be resolved with the current page's title.  
+**Returns**: <code>Thenable.&lt;string&gt;</code> - A promise that will be resolved with the current page's title.  
 <a name="EasyDriver+locateElementBy"></a>
 
 ### easyDriver.locateElementBy(locator) ⇒ <code>By</code>
@@ -199,6 +201,30 @@ Set the default timeout for 'Wait'
 | Param | Type | Description |
 | --- | --- | --- |
 | timeout | <code>number</code> | Default timeout in milliseconds |
+
+<a name="EasyDriver+setWindowPosition"></a>
+
+### easyDriver.setWindowPosition(x, y) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Set window's position
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| x | <code>number</code> | The desired horizontal position, relative to the left side of the screen |
+| y | <code>number</code> | The desired vertical position, relative to the top of the of the screen |
+
+<a name="EasyDriver+setWindowSize"></a>
+
+### easyDriver.setWindowSize(width, height) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Set window's size
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| width | <code>number</code> | The desired window width |
+| height | <code>number</code> | The desired window height |
 
 <a name="EasyDriver+sleep"></a>
 
@@ -530,7 +556,7 @@ Set attribute value for an element
 
 | Param | Type | Description |
 | --- | --- | --- |
-| select_locator | <code>string</code> &#124; <code>WebElement</code> | <select> element locator |
+| select_locator | <code>string</code> &#124; <code>WebElement</code> | SELECT element locator |
 | attribute | <code>string</code> | attribute name |
 | value | <code>string</code> | attribute value |
 
@@ -736,7 +762,7 @@ Draw flyover for an element
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | locator | <code>string</code> &#124; <code>WebElement</code> |  | Element locator |
-| [settings] | <code>Object</code> | <code>{attribute: &#x27;title&#x27;, offsetX: 5, offsetY: 15, fromLastPos: false, drawSymbol: false}</code> | - attribute: draw flyover on element's attribute,               offsetX: offset X from the element,               offsetY: offset Y from the element,               fromLastPos: draw from last Flyover position,               drawSymbol: draw symbol on the flyover. |
+| [settings] | <code>Object</code> | <code>{attribute: &#x27;title&#x27;, offsetX: 5, offsetY: 15, fromLastPos: false, drawSymbol: false}</code> | attribute: draw flyover on element's attribute,             offsetX: offset X from the element,             offsetY: offset Y from the element,             fromLastPos: draw from last Flyover position,             drawSymbol: draw symbol on the flyover. |
 
 <a name="EasyDriver+drawRedMark"></a>
 

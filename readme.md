@@ -98,6 +98,8 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.quit()`
 * `easyd.runScript(script, callback) -> callback(retval)`
 * `easyd.setTimeout(timeout)`
+* `easyd.setWindowPosition(x, y)`
+* `easyd.setWindowSize(width, height)`
 * `easyd.sleep(ms)`
 * `easyd.switchToDefaultContent()`
 * `easyd.switchToFrame(number_or_loc_or_web)`

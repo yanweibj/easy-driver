@@ -40,7 +40,7 @@ class EasyDriver {
 
   /**
    * Create a new action sequence
-   * @return {ActionSequence} - A new action sequence.
+   * @return {ActionSequence} A new action sequence.
    */
   actions() {
     return this.wd.actions();
@@ -57,9 +57,9 @@ class EasyDriver {
 
   /**
    * Find Element
-   * @param {string} locator - Element locator
-   * @param {bool} [isVisible=false] - Wait until WebElement is visible
-   * @return {WebElementPromise} - A WebElement that can be used to issue commands against the located element.
+   * @param {string} locator Element locator
+   * @param {bool} [isVisible=false] Wait until WebElement is visible
+   * @return {WebElementPromise} A WebElement that can be used to issue commands against the located element.
    */
   findElement(locator, isVisible = false) {
     this.log(`      Locating: ${locator}`);
@@ -104,8 +104,8 @@ class EasyDriver {
 
   /**
    * Find Elements
-   * @param {string} locator - Element locator
-   * @return {Thenable<Array<WebElement>>} - A promise that will resolve to an array of WebElements.
+   * @param {string} locator Element locator
+   * @return {Thenable<Array<WebElement>>} A promise that will resolve to an array of WebElements.
    */
   findElements(locator) {
     this.log(`      Locating: ${locator}`);
@@ -119,7 +119,7 @@ class EasyDriver {
 
   /**
    * Get title
-   * @return {Thenable<string>} - A promise that will be resolved with the current page's title.
+   * @return {Thenable<string>} A promise that will be resolved with the current page's title.
    */
   getTitle() {
     return this.wd.getTitle();
@@ -127,7 +127,7 @@ class EasyDriver {
 
   /**
    * Locate element 'By' strategies
-   * @param {string} locator - Element locator with: strategy=search_string
+   * @param {string} locator Element locator with: strategy=search_string
    * @return {By} A new By locator.
    */
   locateElementBy(locator) {
@@ -156,7 +156,7 @@ class EasyDriver {
 
   /**
    * Log messages
-   * @param {string} msg - Messages to log
+   * @param {string} msg Messages to log
    */
   log(msg) {
     const defer = this.promise.defer();
@@ -192,7 +192,7 @@ class EasyDriver {
 
   /**
    * Open URL
-   * @param {string} url - A fully qualified URL to open
+   * @param {string} url A fully qualified URL to open
    * @return {Thenable<undefined>}
    */
   open(url) {
@@ -211,8 +211,8 @@ class EasyDriver {
 
   /**
    * Run script
-   * @param {(string|Function)} script - The script to execute
-   * @param {Function} fn - A callback function aftrer the script is executed
+   * @param {(string|Function)} script The script to execute
+   * @param {Function} fn A callback function aftrer the script is executed
    */
   runScript(script, fn) {
     this.log(`  [-] runScript()`);
@@ -233,7 +233,7 @@ class EasyDriver {
 
   /**
    * Set the default timeout for 'Wait'
-   * @param {number} timeout - Default timeout in milliseconds
+   * @param {number} timeout Default timeout in milliseconds
    */
   setTimeout(timeout) {
     this.log(`  [-] setTimeout(${timeout})`);
@@ -241,8 +241,30 @@ class EasyDriver {
   }
 
   /**
+   * Set window's position
+   * @param {number} x The desired horizontal position, relative to the left side of the screen
+   * @param {number} y The desired vertical position, relative to the top of the of the screen
+   * @return {Thenable<undefined>}
+   */
+  setWindowPosition(x, y) {
+    this.log(`  [-] setWindowPosition(${x}, ${y})`);
+    return this.wd.manage().window().setPosition(x, y);
+  }
+
+  /**
+   * Set window's size
+   * @param {number} width The desired window width
+   * @param {number} height The desired window height
+   * @return {Thenable<undefined>}
+   */
+  setWindowSize(width, height) {
+    this.log(`  [-] setWindowSize(${width}, ${height})`);
+    return this.wd.manage().window().setSize(width, height);
+  }
+
+  /**
    * Sleep
-   * @param {number} ms - The amount of time, in milliseconds, to sleep
+   * @param {number} ms The amount of time, in milliseconds, to sleep
    * @return {Thenable<undefined>}
    */
   sleep(ms) {
@@ -261,7 +283,7 @@ class EasyDriver {
 
   /**
    * Switch to frame
-   * @param {(number|string|WebElement)} locator - The frame locator
+   * @param {(number|string|WebElement)} locator The frame locator
    * @return {Thenable<undefined>}
    */
   switchToFrame(locator) {
@@ -273,7 +295,7 @@ class EasyDriver {
 
   /**
    * Switch to window
-   * @param {string} nameOrHandle - The name or window handle of the window to switch focus to
+   * @param {string} nameOrHandle The name or window handle of the window to switch focus to
    * @return {Thenable<undefined>}
    */
   switchToWindow(nameOrHandle) {
@@ -283,7 +305,7 @@ class EasyDriver {
 
   /**
    * Take a screenshot
-   * @param {string} filename - File name (.png) of the screenshot
+   * @param {string} filename File name (.png) of the screenshot
    */
   takeScreenshot(filename) {
     this.log(`  [-] takeScreenshot(${filename})`);
@@ -301,8 +323,8 @@ class EasyDriver {
 
   /**
    * Wait
-   * @param {Function} condition - A function to evaluate as a condition
-   * @param {number} [timeout] - Wait timeout
+   * @param {Function} condition A function to evaluate as a condition
+   * @param {number} [timeout] Wait timeout
    * @return {Thenable}
    */
   wait(condition, timeout) {
@@ -312,7 +334,7 @@ class EasyDriver {
 
   /**
    * Wait till Title contains substr
-   * @param {string} substr - The substring that should be present in the page title
+   * @param {string} substr The substring that should be present in the page title
    * @return {Thenable}
    */
   waitForTitleContains(substr) {
@@ -322,7 +344,7 @@ class EasyDriver {
 
   /**
    * Wait till Title is title
-   * @param {string} title - The expected page title
+   * @param {string} title The expected page title
    * @return {Thenable}
    */
   waitForTitleIs(title) {
@@ -332,7 +354,7 @@ class EasyDriver {
 
   /**
    * Wait till Title matches regex
-   * @param {RegExp} regex - The regular expression to test against
+   * @param {RegExp} regex The regular expression to test against
    * @return {Thenable}
    */
   waitForTitleMatches(regex) {
@@ -342,7 +364,7 @@ class EasyDriver {
 
   /**
    * Wait till URL contains substrUrl
-   * @param {string} substrUrl - The substring that should be present in the current URL
+   * @param {string} substrUrl The substring that should be present in the current URL
    * @return {Thenable}
    */
   waitForUrlContains(substrUrl) {
@@ -352,7 +374,7 @@ class EasyDriver {
 
   /**
    * Wait till URL is url
-   * @param {string} url - The expected page url
+   * @param {string} url The expected page url
    * @return {Thenable}
    */
   waitForUrlIs(url) {
@@ -362,7 +384,7 @@ class EasyDriver {
 
   /**
    * Wait till URL matches regex
-   * @param {RegExp} regex - The regular expression to test against
+   * @param {RegExp} regex The regular expression to test against
    * @return {Thenable}
    */
   waitForUrlMatches(regex) {
@@ -376,7 +398,7 @@ class EasyDriver {
 
   /**
    * Remove focus from an element
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    */
   blur(locator) {
     this.log(`  [-] blur()`);
@@ -390,7 +412,7 @@ class EasyDriver {
 
   /**
    * Check all checkboxes under an element
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    */
   checkAll(locator) {
     this.log(`  [-] checkAll()`);
@@ -409,7 +431,7 @@ class EasyDriver {
 
   /**
    * Clear the value of an element
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    * @return {Thenable<undefined>}
    */
   clear(locator) {
@@ -419,8 +441,8 @@ class EasyDriver {
 
   /**
    * Click an element
-   * @param {(string|WebElement)} locator - Element locator
-   * @param {number} ms - Sleep in milliseconds after clicking the element
+   * @param {(string|WebElement)} locator Element locator
+   * @param {number} ms Sleep in milliseconds after clicking the element
    */
   click(locator, ms) {
     this.log(`  [-] click()`);
@@ -431,8 +453,8 @@ class EasyDriver {
 
   /**
    * Click an element with an offset
-   * @param {(string|WebElement)} locator - Element locator
-   * @param {{x: number, y: number}} [offset={x: 0, y: 0}] - An offset within the element
+   * @param {(string|WebElement)} locator Element locator
+   * @param {{x: number, y: number}} [offset={x: 0, y: 0}] An offset within the element
    */
   clickAt(locator, offset = {x: 0, y: 0}) {
     this.log(`  [-] clickAt()`);
@@ -445,7 +467,7 @@ class EasyDriver {
 
   /**
    * Give focus to an element
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    */
   focus(locator) {
     this.log(`  [-] focus()`);
@@ -459,8 +481,8 @@ class EasyDriver {
 
   /**
    * Get attribute value of an element
-   * @param {(string|WebElement)} locator - Element locator
-   * @param {string} attributeName - The name of the attribute to query
+   * @param {(string|WebElement)} locator Element locator
+   * @param {string} attributeName The name of the attribute to query
    * @return {Thenable<(string|null)>}
    */
   getAttribute(locator, attributeName) {
@@ -470,7 +492,7 @@ class EasyDriver {
 
   /**
    * Get Position and Size of an element
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    * @return {Thenable<{x: number, y: number, width: number, height: number}>}
    */
   getRect(locator) {
@@ -497,7 +519,7 @@ class EasyDriver {
 
   /**
    * Get Get tag name of an element
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    * @return {Thenable<string>}
    */
   getTagName(locator) {
@@ -507,7 +529,7 @@ class EasyDriver {
 
   /**
    * Get Get the visible innerText of an element
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    * @return {Thenable<string>}
    */
   getText(locator) {
@@ -519,7 +541,7 @@ class EasyDriver {
   // TODO: Need to think how to implement isEnabled/isDisplayed/isSelected
   /**
    * If an element is displayed
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    * @return {Thenable<boolean>}
    */
   isDisplayed(locator) {
@@ -530,7 +552,7 @@ class EasyDriver {
   // TODO: Need to think how to implement isEnabled/isDisplayed/isSelected
   /**
    * If an element is enabled
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    * @return {Thenable<boolean>}
    */
   isEnabled(locator) {
@@ -541,7 +563,7 @@ class EasyDriver {
   // TODO: Need to think how to implement isEnabled/isDisplayed/isSelected
   /**
    * If an element is selected
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    * @return {Thenable<boolean>}
    */
   isSelected(locator) {
@@ -551,8 +573,8 @@ class EasyDriver {
 
   /**
    * Move to an element by offset
-   * @param {(string|WebElement)} locator - Element locator
-   * @param {{x: number, y: number}} [offset={x: 0, y: 0}] - An offset within the element.
+   * @param {(string|WebElement)} locator Element locator
+   * @param {{x: number, y: number}} [offset={x: 0, y: 0}] An offset within the element.
    * @return {Thenable}
    */
   mouseMove(locator, offset = {x: 0, y: 0}) {
@@ -562,7 +584,7 @@ class EasyDriver {
 
   /**
    * Scroll an element into view
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    * @return {Thenable<(T|null)>}
    */
   scrollIntoView(locator) {
@@ -572,8 +594,8 @@ class EasyDriver {
 
   /**
    * Select an option in a drop-down menu
-   * @param {(string|WebElement)} select_locator - SELECT element locator
-   * @param {string} option_locator - OPTION element locator
+   * @param {(string|WebElement)} select_locator SELECT element locator
+   * @param {string} option_locator OPTION element locator
    * @return {Thenable<undefined>}
    */
   select(select_locator, option_locator) {
@@ -588,8 +610,8 @@ class EasyDriver {
 
   /**
    * Send keys to an element
-   * @param {(string|WebElement)} locator - Element locator
-   * @param {string} keys - Keys to send
+   * @param {(string|WebElement)} locator Element locator
+   * @param {string} keys Keys to send
    * @return {Thenable<undefined>}
    */
   sendKeys(locator, keys) {
@@ -599,9 +621,9 @@ class EasyDriver {
 
   /**
    * Set attribute value for an element
-   * @param {(string|WebElement)} select_locator - <select> element locator
-   * @param {string} attribute - attribute name
-   * @param {string} value - attribute value
+   * @param {(string|WebElement)} select_locator SELECT element locator
+   * @param {string} attribute attribute name
+   * @param {string} value attribute value
    */
   setAttribute(locator, attribute, value) {
     this.log(`  [-] setAttribute()`);
@@ -619,7 +641,7 @@ class EasyDriver {
 
   /**
    * Submit the form containing the element
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    * @return {Thenable<undefined>}
    */
   submit(locator) {
@@ -629,7 +651,7 @@ class EasyDriver {
 
   /**
    * Uncheck all checkboxes under an element
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    */
   unCheckAll(locator) {
     this.log(`  [-] unCheckAll()`);
@@ -657,7 +679,7 @@ class EasyDriver {
 
   /**
    * Wait till an element is disabled
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    * @return {Thenable}
    */
   waitForDisabled(locator) {
@@ -667,7 +689,7 @@ class EasyDriver {
 
   /**
    * Wait till an element is enabled
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    * @return {Thenable}
    */
   waitForEnabled(locator) {
@@ -677,7 +699,7 @@ class EasyDriver {
 
   /**
    * Wait till an element is not presented
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    * @return {Thenable}
    */
   waitForNotPresent(locator) {
@@ -687,7 +709,7 @@ class EasyDriver {
 
   /**
    * Wait till an element is not selected
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    * @return {Thenable}
    */
   waitForNotSelected(locator) {
@@ -697,7 +719,7 @@ class EasyDriver {
 
   /**
    * Wait till an element is not visible
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    * @return {Thenable}
    */
   waitForNotVisible(locator) {
@@ -707,7 +729,7 @@ class EasyDriver {
 
   /**
    * Wait till an element is present
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    * @return {Thenable}
    */
   waitForPresent(locator) {
@@ -717,7 +739,7 @@ class EasyDriver {
 
   /**
    * Wait till an element is selected
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    * @return {Thenable}
    */
   waitForSelected(locator) {
@@ -727,7 +749,7 @@ class EasyDriver {
 
   /**
    * Wait till switching to a frame
-   * @param {(number|string|WebElement)} locator - Element locator
+   * @param {(number|string|WebElement)} locator Element locator
    * @return {Thenable}
    */
   waitForSwitchToFrame(locator) {
@@ -738,8 +760,8 @@ class EasyDriver {
 
   /**
    * Wait till an element's text contains substring
-   * @param {(string|WebElement)} locator - Element locator
-   * @param {string} substr - The substring to search for
+   * @param {(string|WebElement)} locator Element locator
+   * @param {string} substr The substring to search for
    * @return {Thenable}
    */
   waitForTextContains(locator, substr) {
@@ -749,8 +771,8 @@ class EasyDriver {
 
   /**
    * Wait till an element's innerText is text
-   * @param {(string|WebElement)} locator - Element locator
-   * @param {string} text - The expected text
+   * @param {(string|WebElement)} locator Element locator
+   * @param {string} text The expected text
    * @return {Thenable}
    */
   waitForTextIs(locator, text) {
@@ -760,8 +782,8 @@ class EasyDriver {
 
   /**
    * Wait till an element's innerText matches regex
-   * @param {(string|WebElement)} locator - Element locator
-   * @param {RegExp} regex - The regular expression to test against
+   * @param {(string|WebElement)} locator Element locator
+   * @param {RegExp} regex The regular expression to test against
    * @return {Thenable}
    */
   waitForTextMatches(locator, regex) {
@@ -771,7 +793,7 @@ class EasyDriver {
 
   /**
    * Wait till an element is visible
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    * @return {Thenable}
    */
   waitForVisible(locator) {
@@ -802,7 +824,7 @@ class EasyDriver {
 
   /**
    * Create directories
-   * @param {string} dirtree - Directories to create
+   * @param {string} dirtree Directories to create
    */
   createDirectories(dirtree) {
     this.log(`  [-] createDirectories(${dirtree})`);
@@ -812,8 +834,8 @@ class EasyDriver {
 
   /**
    * Draw an arrow between 2 element
-   * @param {(string|WebElement)} from_locator - Element locator
-   * @param {(string|WebElement)} to_locator - Element locator
+   * @param {(string|WebElement)} from_locator Element locator
+   * @param {(string|WebElement)} to_locator Element locator
    * @return {WebElementPromise}
    */
   drawArrow(from_locator, to_locator) {
@@ -881,14 +903,14 @@ class EasyDriver {
 
   /**
    * Draw flyover for an element
-   * @param {(string|WebElement)} locator - Element locator
+   * @param {(string|WebElement)} locator Element locator
    * @param {{attribute: string, offsetX: number, offsetY: number, fromLastPos: boolean, drawSymbol: boolean}}
             [settings={attribute: 'title', offsetX: 5, offsetY: 15, fromLastPos: false, drawSymbol: false}]
-            - attribute: draw flyover on element's attribute,
-              offsetX: offset X from the element,
-              offsetY: offset Y from the element,
-              fromLastPos: draw from last Flyover position,
-              drawSymbol: draw symbol on the flyover.
+            attribute: draw flyover on element's attribute,
+            offsetX: offset X from the element,
+            offsetY: offset Y from the element,
+            fromLastPos: draw from last Flyover position,
+            drawSymbol: draw symbol on the flyover.
    * @return {WebElementPromise}
    */
   drawFlyover(locator, settings = {attribute: 'title', offsetX: 5, offsetY: 15, fromLastPos: false, drawSymbol: false}) {
@@ -970,8 +992,9 @@ class EasyDriver {
 
   /**
    * Draw red-mark around an element
-   * @param {(string|WebElement)} locator - Element locator
-   * @param {{top: number, left: number, bottom: number, right: number}} [padding={top: 0, left: 0, bottom: 0, right: 0}] - Remark padding
+   * @param {(string|WebElement)} locator Element locator
+   * @param {{top: number, left: number, bottom: number, right: number}} [padding={top: 0, left: 0, bottom: 0, right: 0}]
+            Remark padding
    * @return {WebElementPromise}
    */
   drawRedMark(locator, padding = {top: 0, left: 0, bottom: 0, right: 0}) {
@@ -1010,8 +1033,8 @@ class EasyDriver {
 
   /**
    * Draw drop-down menu for SELECT element
-   * @param {(string|WebElement)} locator - Element locator
-   * @param {{x: number, y: number}} [offset={x: 5, y: 15}] - Tooltip offset from the element
+   * @param {(string|WebElement)} locator Element locator
+   * @param {{x: number, y: number}} [offset={x: 5, y: 15}] Tooltip offset from the element
    * @return {WebElementPromise}
    */
   drawSelect(locator, offset = {x: 0, y: 0}) {
@@ -1077,9 +1100,9 @@ class EasyDriver {
 
   /**
    * Take a screenshot on an element
-   * @param {(string|WebElement)} locator - Element locator
-   * @param {string} filename - File name (.png) of the screenshot
-   * @param {{x: number, y: number}} [offset={x: 0, y: 0}] - An offset from an element
+   * @param {(string|WebElement)} locator Element locator
+   * @param {string} filename File name (.png) of the screenshot
+   * @param {{x: number, y: number}} [offset={x: 0, y: 0}] An offset from an element
    *
    * References for detecting Retina: http://stackoverflow.com/questions/19689715
    */
@@ -1142,9 +1165,9 @@ class EasyDriver {
 
   /**
    * Take a screenshot on a scroll element
-   * @param {(string|WebElement)} locator - Element locator
-   * @param {string} filename - File name (.png) of the screenshot
-   * @param {{x: number, y: number}} [offset={x: 0, y: 0}] - An offset from an element
+   * @param {(string|WebElement)} locator Element locator
+   * @param {string} filename File name (.png) of the screenshot
+   * @param {{x: number, y: number}} [offset={x: 0, y: 0}] An offset from an element
    */
   takeScrollShot(locator, filename, offset={x: 0, y: 0}) {
     this.log(`  [-] takeScrollShot()`);
