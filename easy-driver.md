@@ -37,6 +37,7 @@
     * [.clear(locator)](#EasyDriver+clear) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.click(locator, ms)](#EasyDriver+click)
     * [.clickAt(locator, [offset])](#EasyDriver+clickAt)
+    * [.doubleClick(locator, ms)](#EasyDriver+doubleClick)
     * [.focus(locator)](#EasyDriver+focus)
     * [.getAttribute(locator, attributeName)](#EasyDriver+getAttribute) ⇒ <code>Thenable.&lt;(string\|null)&gt;</code>
     * [.getRect(locator)](#EasyDriver+getRect) ⇒ <code>Thenable.&lt;{x: number, y: number, width: number, height: number}&gt;</code>
@@ -410,6 +411,18 @@ Click an element with an offset
 | --- | --- | --- | --- |
 | locator | <code>string</code> &#124; <code>WebElement</code> |  | Element locator |
 | [offset] | <code>Object</code> | <code>{x: 0, y: 0}</code> | An offset within the element |
+
+<a name="EasyDriver+doubleClick"></a>
+
+### easyDriver.doubleClick(locator, ms)
+Double-click an element
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
+| ms | <code>number</code> | Sleep in milliseconds after clicking the element |
 
 <a name="EasyDriver+focus"></a>
 
