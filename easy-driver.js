@@ -442,15 +442,13 @@ class EasyDriver {
   /**
    * Click an element
    * @param {(string|WebElement)} locator Element locator
-   * @param {number} ms Sleep in milliseconds after clicking the element
    */
-  click(locator, ms) {
+  click(locator) {
     this.log(`  [-] click()`);
 
     this.findElement(locator, true).then(function (element) {
       element.click();
     });
-    this.sleep(ms);
   }
 
   /**
@@ -470,14 +468,12 @@ class EasyDriver {
   /**
    * Double-click an element
    * @param {(string|WebElement)} locator Element locator
-   * @param {number} ms Sleep in milliseconds after clicking the element
    */
-  doubleClick(locator, ms) {
+  doubleClick(locator) {
     this.log(`  [-] doubleClick()`);
 
     const element = this.findElement(locator, true);
     this.actions().mouseMove(element).doubleClick().perform();
-    this.sleep(ms);
   }
 
   /**

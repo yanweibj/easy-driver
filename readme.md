@@ -118,9 +118,9 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.blur(loc_or_web)`
 * `easyd.checkAll(loc_or_web)`
 * `easyd.clear(loc_or_web)`
-* `easyd.click(loc_or_web, ms)`
+* `easyd.click(loc_or_web)`
 * `easyd.clickAt(loc_or_web, offset = {x: 0, y: 0})`
-* `easyd.doubleClick(locator, ms)`
+* `easyd.doubleClick(locator)`
 * `easyd.focus(loc_or_web)`
 * `easyd.getAttribute(loc_or_web, attributeName) -> Thenable<(string|null)>`
 * `easyd.getRect(loc_or_web) -> Thenable<{x: number, y: number, height: number, width: number}>`
