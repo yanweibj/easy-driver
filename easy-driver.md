@@ -39,7 +39,7 @@
     * [.click(locator)](#EasyDriver+click)
     * [.clickAt(locator, [offset])](#EasyDriver+clickAt)
     * [.doubleClick(locator)](#EasyDriver+doubleClick)
-    * [.dragAndDrop(from_locator, The)](#EasyDriver+dragAndDrop)
+    * [.dragAndDrop(from_locator, to_locator)](#EasyDriver+dragAndDrop)
     * [.focus(locator)](#EasyDriver+focus)
     * [.getAttribute(locator, attributeName)](#EasyDriver+getAttribute) ⇒ <code>Thenable.&lt;(string\|null)&gt;</code>
     * [.getRect(locator)](#EasyDriver+getRect) ⇒ <code>Thenable.&lt;{x: number, y: number, width: number, height: number}&gt;</code>
@@ -431,7 +431,7 @@ Double-click an element
 
 <a name="EasyDriver+dragAndDrop"></a>
 
-### easyDriver.dragAndDrop(from_locator, The)
+### easyDriver.dragAndDrop(from_locator, to_locator)
 Drag and drop
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
@@ -439,7 +439,7 @@ Drag and drop
 | Param | Type | Description |
 | --- | --- | --- |
 | from_locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
-| The | <code>string</code> &#124; <code>WebElement</code> &#124; <code>Object</code> | location to drag to,             either as another locator or an offset in pixels. |
+| to_locator | <code>string</code> &#124; <code>WebElement</code> &#124; <code>Object</code> | The location to drag to,             either as another locator or an offset in pixels. |
 
 <a name="EasyDriver+focus"></a>
 

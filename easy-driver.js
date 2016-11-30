@@ -492,7 +492,7 @@ class EasyDriver {
   /**
    * Drag and drop
    * @param {(string|WebElement)} from_locator Element locator
-   * @param {(string|WebElement|{x: number, y: number})} The location to drag to,
+   * @param {(string|WebElement|{x: number, y: number})} to_locator The location to drag to,
             either as another locator or an offset in pixels.
    */
   dragAndDrop(from_locator, to_locator) {
