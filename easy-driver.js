@@ -906,10 +906,10 @@ class EasyDriver {
    * @param {(string|WebElement)} locator Element locator
    * @param {{attribute: string, offsetX: number, offsetY: number, fromLastPos: boolean, drawSymbol: boolean}}
             [settings={attribute: 'title', offsetX: 5, offsetY: 15, fromLastPos: false, drawSymbol: false}]
-            attribute: draw flyover on element's attribute,<br/>
-            offsetX: offset X from the element,<br/>
-            offsetY: offset Y from the element,<br/>
-            fromLastPos: draw from last Flyover position,<br/>
+            attribute: draw flyover on element's attribute,
+            offsetX: offset X from the element,
+            offsetY: offset Y from the element,
+            fromLastPos: draw from last Flyover position,
             drawSymbol: draw symbol on the flyover.
    * @return {WebElementPromise}
    */
