@@ -93,7 +93,7 @@ class EasyDriver {
     .then(function (elements) {
       if (nth > elements.length) {
         console.error('Maximum index for ${locator} is ${elements.length}.');
-        return elements;
+        return null;
       }
 
       const element = elements[nth];
@@ -447,7 +447,9 @@ class EasyDriver {
   click(locator, ms) {
     this.log(`  [-] click()`);
 
-    this.findElement(locator, true).then(function (el) { el.click(); });
+    this.findElement(locator, true).then(function (element) {
+      element.click();
+    });
     this.sleep(ms);
   }
 
