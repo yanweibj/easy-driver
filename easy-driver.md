@@ -26,6 +26,7 @@
     * [.switchToWindow(nameOrHandle)](#EasyDriver+switchToWindow) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.takeScreenshot(filename)](#EasyDriver+takeScreenshot)
     * [.wait(condition, [timeout])](#EasyDriver+wait) ⇒ <code>Thenable</code>
+    * [.waitForAlertIsPresent()](#EasyDriver+waitForAlertIsPresent) ⇒ <code>Thenable.&lt;Alert&gt;</code>
     * [.waitForTitleContains(substr)](#EasyDriver+waitForTitleContains) ⇒ <code>Thenable</code>
     * [.waitForTitleIs(title)](#EasyDriver+waitForTitleIs) ⇒ <code>Thenable</code>
     * [.waitForTitleMatches(regex)](#EasyDriver+waitForTitleMatches) ⇒ <code>Thenable</code>
@@ -38,6 +39,7 @@
     * [.click(locator)](#EasyDriver+click)
     * [.clickAt(locator, [offset])](#EasyDriver+clickAt)
     * [.doubleClick(locator)](#EasyDriver+doubleClick)
+    * [.dragAndDrop(from_locator, The)](#EasyDriver+dragAndDrop)
     * [.focus(locator)](#EasyDriver+focus)
     * [.getAttribute(locator, attributeName)](#EasyDriver+getAttribute) ⇒ <code>Thenable.&lt;(string\|null)&gt;</code>
     * [.getRect(locator)](#EasyDriver+getRect) ⇒ <code>Thenable.&lt;{x: number, y: number, width: number, height: number}&gt;</code>
@@ -53,7 +55,6 @@
     * [.setAttribute(select_locator, attribute, value)](#EasyDriver+setAttribute)
     * [.submit(locator)](#EasyDriver+submit) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.unCheckAll(locator)](#EasyDriver+unCheckAll)
-    * [.waitForAlertIsPresent()](#EasyDriver+waitForAlertIsPresent) ⇒ <code>Thenable.&lt;Alert&gt;</code>
     * [.waitForDisabled(locator)](#EasyDriver+waitForDisabled) ⇒ <code>Thenable</code>
     * [.waitForEnabled(locator)](#EasyDriver+waitForEnabled) ⇒ <code>Thenable</code>
     * [.waitForNotPresent(locator)](#EasyDriver+waitForNotPresent) ⇒ <code>Thenable</code>
@@ -289,6 +290,12 @@ Wait
 | condition | <code>function</code> | A function to evaluate as a condition |
 | [timeout] | <code>number</code> | Wait timeout |
 
+<a name="EasyDriver+waitForAlertIsPresent"></a>
+
+### easyDriver.waitForAlertIsPresent() ⇒ <code>Thenable.&lt;Alert&gt;</code>
+Wait till an alert is presented
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 <a name="EasyDriver+waitForTitleContains"></a>
 
 ### easyDriver.waitForTitleContains(substr) ⇒ <code>Thenable</code>
@@ -421,6 +428,18 @@ Double-click an element
 | Param | Type | Description |
 | --- | --- | --- |
 | locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
+
+<a name="EasyDriver+dragAndDrop"></a>
+
+### easyDriver.dragAndDrop(from_locator, The)
+Drag and drop
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| from_locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
+| The | <code>string</code> &#124; <code>WebElement</code> &#124; <code>Object</code> | location to drag to,             either as another locator or an offset in pixels. |
 
 <a name="EasyDriver+focus"></a>
 
@@ -593,12 +612,6 @@ Uncheck all checkboxes under an element
 | --- | --- | --- |
 | locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
 
-<a name="EasyDriver+waitForAlertIsPresent"></a>
-
-### easyDriver.waitForAlertIsPresent() ⇒ <code>Thenable.&lt;Alert&gt;</code>
-Wait till an alert is presented
-
-**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 <a name="EasyDriver+waitForDisabled"></a>
 
 ### easyDriver.waitForDisabled(locator) ⇒ <code>Thenable</code>

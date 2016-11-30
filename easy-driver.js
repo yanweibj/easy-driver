@@ -93,12 +93,16 @@ class EasyDriver {
     .then(function (elements) {
       if (nth > elements.length) {
         console.error('Maximum index for ${locator} is ${elements.length}.');
-        return null;
+        process.exit(1);
       }
 
       const element = elements[nth];
       if (isVisible) self.wait(self.until.elementIsVisible(element));
       return element;
+    })
+    .catch(function (err) {
+      console.error(err);
+      process.exit(1);
     });
   }
 
@@ -333,6 +337,15 @@ class EasyDriver {
   }
 
   /**
+   * Wait till an alert is presented
+   * @return {Thenable<Alert>}
+   */
+  waitForAlertIsPresent() {
+    this.log(`  [-] waitForAlertIsPresent()`);
+    return this.wait(this.until.alertIsPresent());
+  }
+
+  /**
    * Wait till Title contains substr
    * @param {string} substr The substring that should be present in the page title
    * @return {Thenable}
@@ -474,6 +487,20 @@ class EasyDriver {
 
     const element = this.findElement(locator, true);
     this.actions().mouseMove(element).doubleClick().perform();
+  }
+
+  /**
+   * Drag and drop
+   * @param {(string|WebElement)} from_locator Element locator
+   * @param {(string|WebElement|{x: number, y: number})} The location to drag to,
+            either as another locator or an offset in pixels.
+   */
+  dragAndDrop(from_locator, to_locator) {
+    this.log(`  [-] dragAndDrop()`);
+
+    const from = this.findElement(from_locator, true);
+    const to = (typeof to_locator === 'object' && 'x' in to) ? to_locator : this.findElement(to_locator);
+    this.actions().mouseMove(from).dragAndDrop(from, to).perform();
   }
 
   /**
@@ -677,15 +704,6 @@ class EasyDriver {
         });
       });
     });
-  }
-
-  /**
-   * Wait till an alert is presented
-   * @return {Thenable<Alert>}
-   */
-  waitForAlertIsPresent() {
-    this.log(`  [-] waitForAlertIsPresent()`);
-    return this.wait(this.until.alertIsPresent());
   }
 
   /**

@@ -107,6 +107,7 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.takeScreenshot(png_filename)`
 * `easyd.until` => See **until Conditions**
 * `easyd.wait(fn, timeout)`
+* `easyd.waitForAlertIsPresent() -> Thenable<Alert>`
 * `easyd.waitForTitleContains(substr)`
 * `easyd.waitForTitleIs(title)`
 * `easyd.waitForTitleMatches(regex)`
@@ -120,7 +121,8 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.clear(loc_or_web)`
 * `easyd.click(loc_or_web)`
 * `easyd.clickAt(loc_or_web, offset = {x: 0, y: 0})`
-* `easyd.doubleClick(locator)`
+* `easyd.doubleClick(loc_or_web)`
+* `easyd.dragAndDrop(from_loc_or_web, to_loc_or_web_or_position)`
 * `easyd.focus(loc_or_web)`
 * `easyd.getAttribute(loc_or_web, attributeName) -> Thenable<(string|null)>`
 * `easyd.getRect(loc_or_web) -> Thenable<{x: number, y: number, height: number, width: number}>`
@@ -134,9 +136,8 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.select(select_loc_or_web, option_locator)`
 * `easyd.sendKeys(loc_or_web, keys)`
 * `easyd.setAttribute(loc_or_web, attribute, value)`
-* `easyd.submit(locator)`
+* `easyd.submit(loc_or_web)`
 * `easyd.unCheckAll(loc_or_web)`
-* `easyd.waitForAlertIsPresent() -> Thenable<Alert>`
 * `easyd.waitForDisabled(loc_or_web)`
 * `easyd.waitForEnabled(loc_or_web)`
 * `easyd.waitForNotPresent(loc_or_web)`
