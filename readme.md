@@ -131,6 +131,7 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.select(select_loc_or_web, option_locator)`
 * `easyd.sendKeys(loc_or_web, keys)`
 * `easyd.setAttribute(loc_or_web, attribute, value)`
+* `easyd.submit(locator)`
 * `easyd.unCheckAll(loc_or_web)`
 * `easyd.waitForAlertIsPresent() -> Thenable<Alert>`
 * `easyd.waitForDisabled(loc_or_web)`

@@ -618,6 +618,16 @@ class EasyDriver {
   }
 
   /**
+   * Submit the form containing the element
+   * @param {(string|WebElement)} locator - Element locator
+   * @return {Thenable<undefined>}
+   */
+  submit(locator) {
+    this.log(`  [-] submit()`);
+    return this.findElement(locator).submit();
+  }
+
+  /**
    * Uncheck all checkboxes under an element
    * @param {(string|WebElement)} locator - Element locator
    */

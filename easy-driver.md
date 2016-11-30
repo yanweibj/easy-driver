@@ -48,6 +48,7 @@
     * [.select(select_locator, option_locator)](#EasyDriver+select) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.sendKeys(locator, keys)](#EasyDriver+sendKeys) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.setAttribute(select_locator, attribute, value)](#EasyDriver+setAttribute)
+    * [.submit(locator)](#EasyDriver+submit) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.unCheckAll(locator)](#EasyDriver+unCheckAll)
     * [.waitForAlertIsPresent()](#EasyDriver+waitForAlertIsPresent) ⇒ <code>Thenable.&lt;Alert&gt;</code>
     * [.waitForDisabled(locator)](#EasyDriver+waitForDisabled) ⇒ <code>Thenable</code>
@@ -532,6 +533,17 @@ Set attribute value for an element
 | select_locator | <code>string</code> &#124; <code>WebElement</code> | <select> element locator |
 | attribute | <code>string</code> | attribute name |
 | value | <code>string</code> | attribute value |
+
+<a name="EasyDriver+submit"></a>
+
+### easyDriver.submit(locator) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Submit the form containing the element
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
 
 <a name="EasyDriver+unCheckAll"></a>
 
