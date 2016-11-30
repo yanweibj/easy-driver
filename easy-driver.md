@@ -7,6 +7,7 @@
     * [new EasyDriver([locale])](#new_EasyDriver_new)
     * [.actions()](#EasyDriver+actions) ⇒ <code>ActionSequence</code>
     * [.close()](#EasyDriver+close) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.deleteAllCookies()](#EasyDriver+deleteAllCookies) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.findElement(locator, [isVisible])](#EasyDriver+findElement) ⇒ <code>WebElementPromise</code>
     * [.findElements(locator)](#EasyDriver+findElements) ⇒ <code>Thenable.&lt;Array.&lt;WebElement&gt;&gt;</code>
     * [.getTitle()](#EasyDriver+getTitle) ⇒ <code>Thenable.&lt;string&gt;</code>
@@ -95,6 +96,12 @@ Create a new action sequence
 
 ### easyDriver.close() ⇒ <code>Thenable.&lt;undefined&gt;</code>
 Close the current window
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+<a name="EasyDriver+deleteAllCookies"></a>
+
+### easyDriver.deleteAllCookies() ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Delete all cookies visible to the current page
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 <a name="EasyDriver+findElement"></a>

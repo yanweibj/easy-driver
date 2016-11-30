@@ -56,6 +56,14 @@ class EasyDriver {
   }
 
   /**
+   * Delete all cookies visible to the current page
+   * @return {Thenable<undefined>}
+   */
+  deleteAllCookies() {
+    return this.wd.manage().deleteAllCookies();
+  }
+
+  /**
    * Find Element
    * @param {string} locator Element locator
    * @param {bool} [isVisible=false] Wait until WebElement is visible
