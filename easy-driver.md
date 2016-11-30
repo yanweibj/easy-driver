@@ -16,6 +16,7 @@
     * [.maximizeWindow()](#EasyDriver+maximizeWindow) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.maximizeToScreenSize()](#EasyDriver+maximizeToScreenSize)
     * [.open(url)](#EasyDriver+open) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.pageLoadTimeout(ms)](#EasyDriver+pageLoadTimeout) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.quit()](#EasyDriver+quit) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.runScript(script, fn)](#EasyDriver+runScript)
     * [.setTimeout(timeout)](#EasyDriver+setTimeout)
@@ -181,6 +182,17 @@ Open URL
 | Param | Type | Description |
 | --- | --- | --- |
 | url | <code>string</code> | A fully qualified URL to open |
+
+<a name="EasyDriver+pageLoadTimeout"></a>
+
+### easyDriver.pageLoadTimeout(ms) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Sets the amount of time to wait for a page load
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ms | <code>number</code> | The amount of time to wait, in milliseconds.  If negative, page loads may be indefinite. |
 
 <a name="EasyDriver+quit"></a>
 

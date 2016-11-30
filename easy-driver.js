@@ -60,6 +60,7 @@ class EasyDriver {
    * @return {Thenable<undefined>}
    */
   deleteAllCookies() {
+    this.log(`  [-] deleteAllCookies()`);
     return this.wd.manage().deleteAllCookies();
   }
 
@@ -99,6 +100,7 @@ class EasyDriver {
 
     return self.findElements(query)
     .then(function (elements) {
+      self.log(`      Locating: ${query} => ${nth}`);
       if (nth > elements.length) {
         console.error('Maximum index for ${locator} is ${elements.length}.');
         process.exit(1);
@@ -134,6 +136,7 @@ class EasyDriver {
    * @return {Thenable<string>} A promise that will be resolved with the current page's title.
    */
   getTitle() {
+    this.log(`  [-] getTitle()`);
     return this.wd.getTitle();
   }
 
@@ -210,6 +213,16 @@ class EasyDriver {
   open(url) {
     this.log(`  [-] open(${url})`);
     return this.wd.get(url);
+  }
+
+  /**
+   * Sets the amount of time to wait for a page load
+   * @param {number} ms The amount of time to wait, in milliseconds.  If negative, page loads may be indefinite.
+   * @return {Thenable<undefined>}
+   */
+  pageLoadTimeout(ms) {
+    this.log(`  [-] pageLoadTimeout()`);
+    return this.wd.manage().timeouts().pageLoadTimeout(parseInt(ms));
   }
 
   /**

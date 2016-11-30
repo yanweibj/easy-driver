@@ -96,6 +96,7 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.maximizeWindow()`
 * `easyd.maximizeToScreenSize()`
 * `easyd.open(url)`
+* `easyd.pageLoadTimeout(ms)`
 * `easyd.quit()`
 * `easyd.runScript(script, callback) -> callback(retval)`
 * `easyd.setTimeout(timeout)`
