@@ -6,10 +6,12 @@
 * [EasyDriver](#EasyDriver)
     * [new EasyDriver([locale])](#new_EasyDriver_new)
     * [.actions()](#EasyDriver+actions) ⇒ <code>ActionSequence</code>
+    * [.back()](#EasyDriver+back) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.close()](#EasyDriver+close) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.deleteAllCookies()](#EasyDriver+deleteAllCookies) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.findElement(locator, [isVisible])](#EasyDriver+findElement) ⇒ <code>WebElementPromise</code>
     * [.findElements(locator)](#EasyDriver+findElements) ⇒ <code>Thenable.&lt;Array.&lt;WebElement&gt;&gt;</code>
+    * [.forward()](#EasyDriver+forward) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.getTitle()](#EasyDriver+getTitle) ⇒ <code>Thenable.&lt;string&gt;</code>
     * [.locateElementBy(locator)](#EasyDriver+locateElementBy) ⇒ <code>By</code>
     * [.log(msg)](#EasyDriver+log)
@@ -18,6 +20,7 @@
     * [.open(url)](#EasyDriver+open) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.pageLoadTimeout(ms)](#EasyDriver+pageLoadTimeout) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.quit()](#EasyDriver+quit) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.refresh()](#EasyDriver+refresh) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.runScript(script, fn)](#EasyDriver+runScript)
     * [.setTimeout(timeout)](#EasyDriver+setTimeout)
     * [.setWindowPosition(x, y)](#EasyDriver+setWindowPosition) ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -94,6 +97,12 @@ Create a new action sequence
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 **Returns**: <code>ActionSequence</code> - A new action sequence.  
+<a name="EasyDriver+back"></a>
+
+### easyDriver.back() ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Move backwards in the browser history
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 <a name="EasyDriver+close"></a>
 
 ### easyDriver.close() ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -131,6 +140,12 @@ Find Elements
 | --- | --- | --- |
 | locator | <code>string</code> | Element locator |
 
+<a name="EasyDriver+forward"></a>
+
+### easyDriver.forward() ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Move forwards in the browser history
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 <a name="EasyDriver+getTitle"></a>
 
 ### easyDriver.getTitle() ⇒ <code>Thenable.&lt;string&gt;</code>
@@ -199,6 +214,12 @@ Sets the amount of time to wait for a page load
 
 ### easyDriver.quit() ⇒ <code>Thenable.&lt;undefined&gt;</code>
 Terminates the browser session
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+<a name="EasyDriver+refresh"></a>
+
+### easyDriver.refresh() ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Refresh the page
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 <a name="EasyDriver+runScript"></a>

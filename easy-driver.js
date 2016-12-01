@@ -19,10 +19,10 @@ class EasyDriver {
   constructor(locale = 'en') {
     // WebDriver
     this.By = webdriver.By;
-    this.Key = webdriver.Key;
-    this.until = webdriver.until;
     this.error = webdriver.error;
+    this.Key = webdriver.Key;
     this.promise = webdriver.promise;
+    this.until = webdriver.until;
 
     this.TIMEOUT = 30000;
 
@@ -45,6 +45,15 @@ class EasyDriver {
    */
   actions() {
     return this.wd.actions();
+  }
+
+  /**
+   * Move backwards in the browser history
+   * @return {Thenable<undefined>}
+   */
+  back() {
+    this.log(`  [-] back()`);
+    return this.wd.navigate().back();
   }
 
   /**
@@ -130,6 +139,15 @@ class EasyDriver {
     this.wait(this.until.elementsLocated(byLocator));
 
     return this.wd.findElements(byLocator);
+  }
+
+  /**
+   * Move forwards in the browser history
+   * @return {Thenable<undefined>}
+   */
+  forward() {
+    this.log(`  [-] forward()`);
+    return this.wd.navigate().forward();
   }
 
   /**
@@ -233,6 +251,15 @@ class EasyDriver {
   quit() {
     this.log(`  [-] quit()`);
     return this.wd.quit();
+  }
+
+  /**
+   * Refresh the page
+   * @return {Thenable<undefined>}
+   */
+  refresh() {
+    this.log(`  [-] refresh()`);
+    return this.wd.navigate().refresh();
   }
 
   /**

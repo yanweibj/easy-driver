@@ -85,10 +85,12 @@ const easyd = new EasyDriver('zh-tw');
 
 ##### easyd (WebDriver methods)
 * `easyd.actions() -> ActionSequence` => See **Class ActionSequence**
+* `easyd.back()`
 * `easyd.close()`
 * `easyd.deleteAllCookies()`
 * `easyd.findElement(locator, isVisible = false) -> WebElementPromise`
 * `easyd.findElements(locator) -> Thenable<Array<WebElement>>`
+* `easyd.forward()`
 * `easyd.getTitle() -> Thenable<string>`
 * `easyd.Key`  => See **Enumeration Key**
 * `easyd.locateElementBy(locator) -> By`
@@ -98,6 +100,7 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.open(url)`
 * `easyd.pageLoadTimeout(ms)`
 * `easyd.quit()`
+* `easyd.refresh()`
 * `easyd.runScript(script, callback) -> callback(retval)`
 * `easyd.setTimeout(timeout)`
 * `easyd.setWindowPosition(x, y)`
