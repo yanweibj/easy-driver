@@ -35,6 +35,7 @@
     * [.waitForUrlContains(substrUrl)](#EasyDriver+waitForUrlContains) ⇒ <code>Thenable</code>
     * [.waitForUrlIs(url)](#EasyDriver+waitForUrlIs) ⇒ <code>Thenable</code>
     * [.waitForUrlMatches(regex)](#EasyDriver+waitForUrlMatches) ⇒ <code>Thenable</code>
+    * [.zoom(percent)](#EasyDriver+zoom)
     * [.blur(locator)](#EasyDriver+blur)
     * [.checkAll(locator)](#EasyDriver+checkAll)
     * [.clear(locator)](#EasyDriver+clear) ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -380,6 +381,17 @@ Wait till URL matches regex
 | Param | Type | Description |
 | --- | --- | --- |
 | regex | <code>RegExp</code> | The regular expression to test against |
+
+<a name="EasyDriver+zoom"></a>
+
+### easyDriver.zoom(percent)
+Zoom in/out of a window
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| percent | <code>number</code> | Zoom percentage |
 
 <a name="EasyDriver+blur"></a>
 

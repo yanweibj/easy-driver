@@ -21,6 +21,7 @@ class EasyDriver {
     this.By = webdriver.By;
     this.Key = webdriver.Key;
     this.until = webdriver.until;
+    this.error = webdriver.error;
     this.promise = webdriver.promise;
 
     this.TIMEOUT = 30000;
@@ -424,6 +425,17 @@ class EasyDriver {
   waitForUrlMatches(regex) {
     this.log(`  [-] waitForUrlMatches()`);
     return this.wait(this.until.urlMatches(regex));
+  }
+
+  /**
+   * Zoom in/out of a window
+   * @param {number} percent Zoom percentage
+   */
+  zoom(percent) {
+    this.log(`  [-] zoom(${percent})`);
+    this.wd.executeScript(`
+      document.body.style.zoom='${percent}%';
+    `);
   }
 
   /*--- ****************** ---*/

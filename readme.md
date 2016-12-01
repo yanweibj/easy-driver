@@ -116,6 +116,7 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.waitForUrlContains(substrUrl)`
 * `easyd.waitForUrlIs(url)`
 * `easyd.waitForUrlMatches(regex)`
+* `easyd.zoom(percent)`
 
 ##### easyd (WebElement methods)
 * `easyd.blur(loc_or_web)`
