@@ -59,7 +59,7 @@
     * [.rightClickAt(locator, [offset])](#EasyDriver+rightClickAt) ⇒ <code>Thenable</code>
     * [.scrollIntoView(locator)](#EasyDriver+scrollIntoView) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.select(select_locator, option_locator)](#EasyDriver+select) ⇒ <code>Thenable.&lt;undefined&gt;</code>
-    * [.sendKeys(locator, keys)](#EasyDriver+sendKeys) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.sendKeys(locator, ...keys)](#EasyDriver+sendKeys) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.setAttribute(select_locator, attribute, value)](#EasyDriver+setAttribute)
     * [.submit(locator)](#EasyDriver+submit) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.unCheckAll(locator)](#EasyDriver+unCheckAll)
@@ -644,7 +644,7 @@ Select an option in a drop-down menu
 
 <a name="EasyDriver+sendKeys"></a>
 
-### easyDriver.sendKeys(locator, keys) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+### easyDriver.sendKeys(locator, ...keys) ⇒ <code>Thenable.&lt;undefined&gt;</code>
 Send keys to an element
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
@@ -652,7 +652,7 @@ Send keys to an element
 | Param | Type | Description |
 | --- | --- | --- |
 | locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
-| keys | <code>string</code> | Keys to send |
+| ...keys | <code>string</code> &#124; <code>Key</code> &#124; <code>Array.&lt;(string\|Key)&gt;</code> | Keys to send |
 
 <a name="EasyDriver+setAttribute"></a>
 

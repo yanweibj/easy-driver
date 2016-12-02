@@ -741,12 +741,12 @@ class EasyDriver {
   /**
    * Send keys to an element
    * @param {(string|WebElement)} locator Element locator
-   * @param {string} keys Keys to send
+   * @param {...(string|Key|Array<(string|Key)>)} keys Keys to send
    * @return {Thenable<undefined>}
    */
-  sendKeys(locator, keys) {
+  sendKeys(locator, ...keys) {
     this.log(`  [-] sendKeys()`);
-    return this.findElement(locator).sendKeys(keys);
+    return this.findElement(locator).sendKeys(...keys);
   }
 
   /**

@@ -142,7 +142,7 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.rightClickAt(loc_or_web, offset = {x: 0, y: 0})`
 * `easyd.scrollIntoView(loc_or_web)`
 * `easyd.select(select_loc_or_web, option_locator)`
-* `easyd.sendKeys(loc_or_web, keys)`
+* `easyd.sendKeys(loc_or_web, ...keys)`
 * `easyd.setAttribute(loc_or_web, attribute, value)`
 * `easyd.submit(loc_or_web)`
 * `easyd.unCheckAll(loc_or_web)`
