@@ -963,8 +963,8 @@ class EasyDriver {
     this.log(`  [-] drawArrow()`);
 
     const self = this;
-    const from = self.findElement(from_locator);
-    const to = self.findElement(to_locator);
+    const from = self.findElement(from_locator, true);
+    const to = self.findElement(to_locator, true);
     const cId = getId();
 
     self.wd.executeScript(`
@@ -1231,7 +1231,7 @@ class EasyDriver {
     this.log(`  [-] takeElementShot()`);
 
     const self = this;
-    const element = self.findElement(locator);
+    const element = self.findElement(locator, true);
 
     if (!filename.endsWith('.png')) filename += '.png';
 
@@ -1294,7 +1294,7 @@ class EasyDriver {
     this.log(`  [-] takeScrollShot()`);
 
     const self = this;
-    const element = self.findElement(locator);
+    const element = self.findElement(locator, true);
 
     self.wd.executeScript(`
       var element = arguments[0];
