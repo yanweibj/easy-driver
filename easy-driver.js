@@ -458,10 +458,11 @@ class EasyDriver {
   /**
    * Zoom in/out of a window
    * @param {number} percent Zoom percentage
+   * @return {Thenable<(T|null)>}
    */
   zoom(percent) {
     this.log(`  [-] zoom(${percent})`);
-    this.wd.executeScript(`
+    return this.wd.executeScript(`
       document.body.style.zoom='${percent}%';
     `);
   }
@@ -473,12 +474,13 @@ class EasyDriver {
   /**
    * Remove focus from an element
    * @param {(string|WebElement)} locator Element locator
+   * @return {Thenable<(T|null)>}
    */
   blur(locator) {
     this.log(`  [-] blur()`);
 
     const element = this.findElement(locator);
-    this.wd.executeScript(`
+    return this.wd.executeScript(`
       var element = arguments[0];
       element.blur();
     `, element);
@@ -516,12 +518,13 @@ class EasyDriver {
   /**
    * Click an element
    * @param {(string|WebElement)} locator Element locator
+   * @return {Thenable<undefined>}
    */
   click(locator) {
     this.log(`  [-] click()`);
 
-    this.findElement(locator, true).then(function (element) {
-      element.click();
+    return this.findElement(locator, true).then(function (element) {
+      return element.click();
     });
   }
 
@@ -529,25 +532,25 @@ class EasyDriver {
    * Click an element with an offset
    * @param {(string|WebElement)} locator Element locator
    * @param {{x: number, y: number}} [offset={x: 0, y: 0}] An offset within the element
+   * @return {Thenable}
    */
   clickAt(locator, offset = {x: 0, y: 0}) {
     this.log(`  [-] clickAt()`);
 
     const self = this;
-    self.findElement(locator, true).then(function (element) {
-      self.actions().mouseMove(element, offset).click().perform();
+    return self.findElement(locator, true).then(function (element) {
+      return self.actions().mouseMove(element, offset).click().perform();
     });
   }
 
   /**
    * Double-click an element
    * @param {(string|WebElement)} locator Element locator
+   * @return {Thenable}
    */
   doubleClick(locator) {
     this.log(`  [-] doubleClick()`);
-
-    const element = this.findElement(locator, true);
-    this.actions().mouseMove(element).doubleClick().perform();
+    return this.actions().mouseMove(this.findElement(locator, true)).doubleClick().perform();
   }
 
   /**
@@ -555,24 +558,26 @@ class EasyDriver {
    * @param {(string|WebElement)} from_locator Element locator
    * @param {(string|WebElement|{x: number, y: number})} to_locator The location to drag to,
             either as another locator or an offset in pixels.
+   * @return {Thenable}
    */
   dragAndDrop(from_locator, to_locator) {
     this.log(`  [-] dragAndDrop()`);
 
     const from = this.findElement(from_locator, true);
     const to = (typeof to_locator === 'object' && 'x' in to) ? to_locator : this.findElement(to_locator);
-    this.actions().mouseMove(from).dragAndDrop(from, to).perform();
+    return this.actions().mouseMove(from).dragAndDrop(from, to).perform();
   }
 
   /**
    * Give focus to an element
    * @param {(string|WebElement)} locator Element locator
+   * @return {Thenable<(T|null)>}
    */
   focus(locator) {
     this.log(`  [-] focus()`);
 
     const element = this.findElement(locator);
-    this.wd.executeScript(`
+    return this.wd.executeScript(`
       var element = arguments[0];
       element.focus();
     `, element);

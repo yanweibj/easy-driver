@@ -38,15 +38,15 @@
     * [.waitForUrlContains(substrUrl)](#EasyDriver+waitForUrlContains) ⇒ <code>Thenable</code>
     * [.waitForUrlIs(url)](#EasyDriver+waitForUrlIs) ⇒ <code>Thenable</code>
     * [.waitForUrlMatches(regex)](#EasyDriver+waitForUrlMatches) ⇒ <code>Thenable</code>
-    * [.zoom(percent)](#EasyDriver+zoom)
-    * [.blur(locator)](#EasyDriver+blur)
+    * [.zoom(percent)](#EasyDriver+zoom) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
+    * [.blur(locator)](#EasyDriver+blur) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.checkAll(locator)](#EasyDriver+checkAll)
     * [.clear(locator)](#EasyDriver+clear) ⇒ <code>Thenable.&lt;undefined&gt;</code>
-    * [.click(locator)](#EasyDriver+click)
-    * [.clickAt(locator, [offset])](#EasyDriver+clickAt)
-    * [.doubleClick(locator)](#EasyDriver+doubleClick)
-    * [.dragAndDrop(from_locator, to_locator)](#EasyDriver+dragAndDrop)
-    * [.focus(locator)](#EasyDriver+focus)
+    * [.click(locator)](#EasyDriver+click) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.clickAt(locator, [offset])](#EasyDriver+clickAt) ⇒ <code>Thenable</code>
+    * [.doubleClick(locator)](#EasyDriver+doubleClick) ⇒ <code>Thenable</code>
+    * [.dragAndDrop(from_locator, to_locator)](#EasyDriver+dragAndDrop) ⇒ <code>Thenable</code>
+    * [.focus(locator)](#EasyDriver+focus) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.getAttribute(locator, attributeName)](#EasyDriver+getAttribute) ⇒ <code>Thenable.&lt;(string\|null)&gt;</code>
     * [.getRect(locator)](#EasyDriver+getRect) ⇒ <code>Thenable.&lt;{x: number, y: number, width: number, height: number}&gt;</code>
     * [.getTagName(locator)](#EasyDriver+getTagName) ⇒ <code>Thenable.&lt;string&gt;</code>
@@ -407,7 +407,7 @@ Wait till URL matches regex
 
 <a name="EasyDriver+zoom"></a>
 
-### easyDriver.zoom(percent)
+### easyDriver.zoom(percent) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
 Zoom in/out of a window
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
@@ -418,7 +418,7 @@ Zoom in/out of a window
 
 <a name="EasyDriver+blur"></a>
 
-### easyDriver.blur(locator)
+### easyDriver.blur(locator) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
 Remove focus from an element
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
@@ -451,7 +451,7 @@ Clear the value of an element
 
 <a name="EasyDriver+click"></a>
 
-### easyDriver.click(locator)
+### easyDriver.click(locator) ⇒ <code>Thenable.&lt;undefined&gt;</code>
 Click an element
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
@@ -462,7 +462,7 @@ Click an element
 
 <a name="EasyDriver+clickAt"></a>
 
-### easyDriver.clickAt(locator, [offset])
+### easyDriver.clickAt(locator, [offset]) ⇒ <code>Thenable</code>
 Click an element with an offset
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
@@ -474,7 +474,7 @@ Click an element with an offset
 
 <a name="EasyDriver+doubleClick"></a>
 
-### easyDriver.doubleClick(locator)
+### easyDriver.doubleClick(locator) ⇒ <code>Thenable</code>
 Double-click an element
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
@@ -485,7 +485,7 @@ Double-click an element
 
 <a name="EasyDriver+dragAndDrop"></a>
 
-### easyDriver.dragAndDrop(from_locator, to_locator)
+### easyDriver.dragAndDrop(from_locator, to_locator) ⇒ <code>Thenable</code>
 Drag and drop
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
@@ -497,7 +497,7 @@ Drag and drop
 
 <a name="EasyDriver+focus"></a>
 
-### easyDriver.focus(locator)
+### easyDriver.focus(locator) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
 Give focus to an element
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
