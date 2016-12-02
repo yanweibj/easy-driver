@@ -55,6 +55,8 @@
     * [.isEnabled(locator)](#EasyDriver+isEnabled) ⇒ <code>Thenable.&lt;boolean&gt;</code>
     * [.isSelected(locator)](#EasyDriver+isSelected) ⇒ <code>Thenable.&lt;boolean&gt;</code>
     * [.mouseMove(locator, [offset])](#EasyDriver+mouseMove) ⇒ <code>Thenable</code>
+    * [.rightClick(locator)](#EasyDriver+rightClick) ⇒ <code>Thenable</code>
+    * [.rightClickAt(locator, [offset])](#EasyDriver+rightClickAt) ⇒ <code>Thenable</code>
     * [.scrollIntoView(locator)](#EasyDriver+scrollIntoView) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.select(select_locator, option_locator)](#EasyDriver+select) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.sendKeys(locator, keys)](#EasyDriver+sendKeys) ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -586,6 +588,29 @@ If an element is selected
 
 ### easyDriver.mouseMove(locator, [offset]) ⇒ <code>Thenable</code>
 Move to an element by offset
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| locator | <code>string</code> &#124; <code>WebElement</code> |  | Element locator |
+| [offset] | <code>Object</code> | <code>{x: 0, y: 0}</code> | An offset within the element. |
+
+<a name="EasyDriver+rightClick"></a>
+
+### easyDriver.rightClick(locator) ⇒ <code>Thenable</code>
+Right-click on an element
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
+
+<a name="EasyDriver+rightClickAt"></a>
+
+### easyDriver.rightClickAt(locator, [offset]) ⇒ <code>Thenable</code>
+Right-click on an element by offset
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 

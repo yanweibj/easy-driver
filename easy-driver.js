@@ -18,6 +18,7 @@ class EasyDriver {
   */
   constructor(locale = 'en') {
     // WebDriver
+    this.Button = webdriver.Button;
     this.By = webdriver.By;
     this.error = webdriver.error;
     this.Key = webdriver.Key;
@@ -678,6 +679,32 @@ class EasyDriver {
   mouseMove(locator, offset = {x: 0, y: 0}) {
     this.log(`  [-] mouseMove()`);
     return this.actions().mouseMove(this.findElement(locator, true), offset).perform();
+  }
+
+  /**
+   * Right-click on an element
+   * @param {(string|WebElement)} locator Element locator
+   * @return {Thenable}
+   */
+  rightClick(locator) {
+    this.log(`  [-] rightClick()`);
+    return this.actions()
+               .click(this.findElement(locator, true), this.Button.RIGHT)
+               .perform();
+  }
+
+  /**
+   * Right-click on an element by offset
+   * @param {(string|WebElement)} locator Element locator
+   * @param {{x: number, y: number}} [offset={x: 0, y: 0}] An offset within the element.
+   * @return {Thenable}
+   */
+  rightClickAt(locator, offset = {x: 0, y: 0}) {
+    this.log(`  [-] rightClickAt()`);
+    return this.actions()
+               .mouseMove(this.findElement(locator, true), offset)
+               .click(this.Button.RIGHT)
+               .perform();
   }
 
   /**
