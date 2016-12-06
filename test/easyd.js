@@ -123,4 +123,13 @@ test.describe('=== EasyDriver Test Suite ===', function() {
     done();
   });
 
+  test.it('Test Case: rightClick()', function(done) {
+    easyd.open('https://jsfiddle.net/aaronchen/6xo7myv2/show/');
+    easyd.switchToFrame(0);
+    easyd.rightClick('id=p1');
+    easyd.mouseMove('css=li:eq(2)');
+    easyd.takeScreenshot(`${imgDir}/rightClick.png`);
+    done();
+  });
+
 });
