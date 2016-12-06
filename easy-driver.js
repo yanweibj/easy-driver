@@ -23,8 +23,16 @@ class EasyDriver {
     this.TIMEOUT = 30000;
 
     // Chrome Options
-    const chormeOptions = new chrome.Options();
-    chormeOptions.addArguments(`--lang=${locale}`);
+    // Chrome Languages:
+    // https://support.google.com/googleplay/android-developer/table/4419860?hl=en
+    // Chrome pref_names.cc:
+    // https://chromium.googlesource.com/chromium/src/+/32352ad08ee673a4d43e8593ce988b224f6482d3/chrome/common/pref_names.cc
+    const chromeOptions = new chrome.Options();
+    chromeOptions.setUserPreferences({
+      // 'settings.language.preferred_languages': locale,
+      'intl.accept_languages': toChromeLanguage(locale)
+    });
+    // chromeOptions.addExtensions(`extensions/Advanced-Font-Settings_v0.67.crx`);
 
     // Firefox Options
     // const profile = new firefox.Profile();
@@ -37,7 +45,7 @@ class EasyDriver {
     // Driver Instance
     this.wd = new webdriver.Builder()
                   .forBrowser('chrome')
-                  .setChromeOptions(chormeOptions)
+                  .setChromeOptions(chromeOptions)
                   // .setFirefoxOptions(firefoxOptions)
                   .build();
   }
@@ -1364,6 +1372,15 @@ function parseLocator (locator) {
     return { type: type, string: actualLocator };
   }
   return { type: 'implicit', string: locator };
+}
+
+function toChromeLanguage(locale) {
+  return locale.replace(
+    /(-\w\w)$/,
+    function (match) {
+      return match.toUpperCase();
+    }
+  );
 }
 
 module.exports = EasyDriver;
