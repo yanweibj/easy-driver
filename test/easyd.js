@@ -63,7 +63,16 @@ test.describe('=== EasyDriver Test Suite ===', function() {
     easyd.sendKeys('name=q', 'webdriver' + easyd.Key.ENTER);
     easyd.waitForVisible('id=rso');
     easyd.scrollIntoView('(//*[@class="_Gs"])[2]');
-    easyd.takeElementShot('id=foot', `${imgDir}/takeElementShot.png`);
+    easyd.takeElementShot('id=foot', `${imgDir}/takeElementShot_1.png`);
+    done();
+  });
+
+  test.it('Test Case: takeElementShot() & Implicit Wait', function(done) {
+    easyd.open('https://jsfiddle.net/aaronchen/w06ehb9v/show/');
+    easyd.getRect('//iframe').then(function (rect) {
+      easyd.switchToFrame(0);
+      easyd.takeElementShot('id=p1', `${imgDir}/takeElementShot_2.png`, {x: rect.x, y: rect.y});
+    });
     done();
   });
 

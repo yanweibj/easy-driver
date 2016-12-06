@@ -1,16 +1,11 @@
 'use strict';
 
+require('chromedriver');
+// require('geckodriver');
 const webdriver = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
-const chromePath = require('chromedriver').path;
+const firefox = require('selenium-webdriver/firefox');
 const fs = require('fs-extra');
-
-// TODO: https://www.npmjs.com/package/css-selector-parser
-// TODO: https://www.npmjs.com/package/firefox-profile
-// TODO: https://www.npmjs.com/package/webdriver-sizzle-promised
-// TODO: https://www.npmjs.com/package/html-dnd
-// TODO: https://www.npmjs.com/package/selenium-query
-// TODO: https://github.com/mcherryleigh/webdriver-marker/blob/master/index.js
 
 class EasyDriver {
   /**
@@ -27,13 +22,24 @@ class EasyDriver {
 
     this.TIMEOUT = 30000;
 
-    // Chrome Driver
-    const options = new chrome.Options();
-    options.addArguments(`--lang=${locale}`);
+    // Chrome Options
+    const chormeOptions = new chrome.Options();
+    chormeOptions.addArguments(`--lang=${locale}`);
 
-    const service = new chrome.ServiceBuilder(chromePath).build();
+    // Firefox Options
+    // const profile = new firefox.Profile();
+    // profile.setPreference('marionette', true);
+    // profile.setPreference('intl.accept_languages', locale);
+    // profile.setAcceptUntrustedCerts(true);
+    // profile.setAssumeUntrustedCertIssuer(true);
+    // const firefoxOptions = new firefox.Options().setProfile(profile);
 
-    this.wd = new chrome.Driver(options, service);
+    // Driver Instance
+    this.wd = new webdriver.Builder()
+                  .forBrowser('chrome')
+                  .setChromeOptions(chormeOptions)
+                  // .setFirefoxOptions(firefoxOptions)
+                  .build();
   }
 
   /*--- ***************** ---*/
@@ -108,23 +114,25 @@ class EasyDriver {
     const query = locator.substring(0, found.index);
     const nth = found[1];
     const self = this;
+    const defer = self.promise.defer();
 
-    return self.findElements(query)
+    self.findElements(query)
     .then(function (elements) {
       self.log(`      Locating: ${query} => ${nth}`);
       if (nth > elements.length) {
-        console.error('Maximum index for ${locator} is ${elements.length}.');
-        process.exit(1);
+        defer.reject('Maximum index for ${locator} is ${elements.length}.');
       }
-
-      const element = elements[nth];
-      if (isVisible) self.wait(self.until.elementIsVisible(element));
-      return element;
+      else {
+        const element = elements[nth];
+        if (isVisible) self.wait(self.until.elementIsVisible(element));
+        defer.fulfill(element);
+      }
     })
-    .catch(function (err) {
-      console.error(err);
-      process.exit(1);
+    .catch(function (reason) {
+      defer.reject(reason);
     });
+
+    return new webdriver.WebElementPromise(self.wd, defer.promise);
   }
 
   /**
@@ -523,9 +531,7 @@ class EasyDriver {
   click(locator) {
     this.log(`  [-] click()`);
 
-    return this.findElement(locator, true).then(function (element) {
-      return element.click();
-    });
+    return this.findElement(locator, true).click();
   }
 
   /**
@@ -1334,6 +1340,13 @@ class EasyDriver {
   /*--- *************************** ---*/
   /*--- Not-yet-implemented Methods ---*/
   /*--- *************************** ---*/
+
+  // TODO: https://www.npmjs.com/package/css-selector-parser
+  // TODO: https://www.npmjs.com/package/firefox-profile
+  // TODO: https://www.npmjs.com/package/webdriver-sizzle-promised
+  // TODO: https://www.npmjs.com/package/html-dnd
+  // TODO: https://www.npmjs.com/package/selenium-query
+  // TODO: https://github.com/mcherryleigh/webdriver-marker/blob/master/index.js
 
 }
 

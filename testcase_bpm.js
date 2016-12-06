@@ -3,7 +3,7 @@ const languages = [
   'en', 'zh', 'zh-tw', 'ja', 'ko', 'it', 'fr', 'de', 'es', 'pt-br', 'pt',
   'nb', 'fi', 'sv', 'da', 'tr', 'nl', 'cs', 'hu', 'ru', 'ro', 'pl', 'el'
 ];
-const pcServer = 'lsc218.tw.ibm.com';
+const pcServer = 'lsc556.tw.ibm.com';
 const testcaseMapping = {
   DOC_OP_ADD_DOCUMENT_TO_FOLDER: "22.200.220",
   FOLDER_OP_ADD_FOLDER_TO_FOLDER: "22.200.221",
