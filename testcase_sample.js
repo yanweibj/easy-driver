@@ -3,7 +3,7 @@ const EasyDriver = require('./easy-driver');
 const lang = 'zh-tw';
 
 // New with locale: lang
-const easyd = new EasyDriver(lang);
+const easyd = new EasyDriver({locale: lang, browser: 'chrome'});
 // Create directory: lang
 easyd.createDirectories(lang);
 // Open Google

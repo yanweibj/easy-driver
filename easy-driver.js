@@ -9,9 +9,10 @@ const fs = require('fs-extra');
 
 class EasyDriver {
   /**
-   * @param {string} [locale=en] - The locale of WebDriver
+   * @param {{browser: string, locale: string}} [options={browser: 'chrome', locale: 'en'}] Driver Options.
+   `browser` is either 'chrome' (default) or 'firefox'.  `locale` is 'en' by default.
   */
-  constructor(locale = 'en') {
+  constructor(options = {locale: 'en', browser: 'chrome'}) {
     // WebDriver
     this.Button = webdriver.Button;
     this.By = webdriver.By;
@@ -22,29 +23,32 @@ class EasyDriver {
 
     this.TIMEOUT = 30000;
 
+    const browser = (options.browser.match(/firefox/i)) ? 'firefox' : 'chrome';
+    const locale = (browser === 'firefox') ? regionToLowerCase(options.locale) : regionToUpperCase(options.locale);
+
     // Chrome Options
-    // Languages:
-    //  https://support.google.com/googleplay/android-developer/table/4419860?hl=en
-    // pref_names.cc:
-    //  https://chromium.googlesource.com/chromium/src/+/32352ad08ee673a4d43e8593ce988b224f6482d3/chrome/common/pref_names.cc
+    // Languages: https://support.google.com/googleplay/android-developer/table/4419860?hl=en
+    // pref_names.cc: https://goo.gl/NXSyLn
     const chromeOptions = new chrome.Options();
-    chromeOptions.setUserPreferences({ 'intl.accept_languages': toChromeLanguage(locale) });
+    chromeOptions.setUserPreferences({ 'intl.accept_languages': locale });
     // chromeOptions.addExtensions(`extensions/Advanced-Font-Settings_v0.67.crx`);
     // chromeOptions.addExtensions('extensions/Full-Page-Screen-Capture_v2.2.crx');
 
     // Firefox Options
-    // const profile = new firefox.Profile();
-    // profile.setPreference('marionette', true);
-    // profile.setPreference('intl.accept_languages', locale);
-    // profile.setAcceptUntrustedCerts(true);
-    // profile.setAssumeUntrustedCertIssuer(true);
-    // const firefoxOptions = new firefox.Options().setProfile(profile);
+    const profile = new firefox.Profile();
+    profile.setPreference('marionette', false);
+    profile.setPreference('intl.accept_languages', regionToLowerCase(locale));
+    profile.setAcceptUntrustedCerts(true);
+    profile.setAssumeUntrustedCertIssuer(true);
+    const firefoxOptions = new firefox.Options();
+    firefoxOptions.useGeckoDriver(false);
+    firefoxOptions.setProfile(profile);
 
     // Driver Instance
     this.wd = new webdriver.Builder()
-                  .forBrowser('chrome')
+                  .forBrowser(browser)
                   .setChromeOptions(chromeOptions)
-                  // .setFirefoxOptions(firefoxOptions)
+                  .setFirefoxOptions(firefoxOptions)
                   .build();
   }
 
@@ -1372,13 +1376,23 @@ function parseLocator (locator) {
   return { type: 'implicit', string: locator };
 }
 
-function toChromeLanguage(locale) {
+function regionToLowerCase(locale) {
   return locale.replace(
-    /(-\w\w)$/,
+    /(-[a-zA-Z]{2})$/,
+    function (match) {
+      return match.toLowerCase();
+    }
+  );
+}
+
+function regionToUpperCase(locale) {
+  return locale.replace(
+    /(-[a-zA-Z]{2})$/,
     function (match) {
       return match.toUpperCase();
     }
   );
 }
+
 
 module.exports = EasyDriver;

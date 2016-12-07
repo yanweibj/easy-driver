@@ -15,7 +15,7 @@ test.describe('=== EasyDriver Test Suite ===', function() {
   // this.timeout(60000);
 
   test.before(function() {
-    easyd = new EasyDriver('en');
+    easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
     easyd.createDirectories(imgDir);
   });
 

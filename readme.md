@@ -72,18 +72,24 @@ npm install
 2. Unzip **easy-driver-master.zip** to a directory of your choice.
 3. In Terminal, change the current directory (`cd`) to the unzipped directory, and run `npm install`.
 
-# Usage
+# EasyDriver
 
-## Instance Methods
+## Supported Browsers
+**EasyDriver** supports 2 browsers: `chrome` and `firefox`.  However, `firefox` support is only limited to **Firefox** *version 47 or earlier*.
 
+## Available Methods
+
+##### easyd - Instance
+
+* `new EasyDriver({locale='en', browser='chrome'})`
 ```javascript
 const EasyDriver = require('./easy-driver');
-const easyd = new EasyDriver('zh-tw');
+const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 ```
+\*\* `{browser: 'firefox'}`: Use **Firefox** as the browser
 
-\*\* **loc_or_web**: Parameter can be either ***locater*** or ***WebElement***.
 
-##### easyd (WebDriver methods)
+##### easyd - WebDriver Methods
 * `easyd.actions() -> ActionSequence` => See **Class ActionSequence**
 * `easyd.back()`
 * `easyd.close()`
@@ -121,7 +127,8 @@ const easyd = new EasyDriver('zh-tw');
 * `easyd.waitForUrlMatches(regex)`
 * `easyd.zoom(percent)`
 
-##### easyd (WebElement methods)
+##### easyd - WebElement Methods
+\*\* **loc_or_web**: Parameter can be either ***locater*** or ***WebElement***.
 * `easyd.blur(loc_or_web)`
 * `easyd.checkAll(loc_or_web)`
 * `easyd.clear(loc_or_web)`

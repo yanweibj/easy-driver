@@ -4,7 +4,7 @@
 **Kind**: global class  
 
 * [EasyDriver](#EasyDriver)
-    * [new EasyDriver([locale])](#new_EasyDriver_new)
+    * [new EasyDriver([options])](#new_EasyDriver_new)
     * [.actions()](#EasyDriver+actions) ⇒ <code>ActionSequence</code>
     * [.back()](#EasyDriver+back) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.close()](#EasyDriver+close) ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -86,11 +86,11 @@
 
 <a name="new_EasyDriver_new"></a>
 
-### new EasyDriver([locale])
+### new EasyDriver([options])
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| [locale] | <code>string</code> | <code>&quot;en&quot;</code> | The locale of WebDriver |
+| [options] | <code>Object</code> | <code>{browser: &#x27;chrome&#x27;, locale: &#x27;en&#x27;}</code> | Driver Options.    `browser` is either 'chrome' (default) or 'firefox'.  `locale` is 'en' by default. |
 
 <a name="EasyDriver+actions"></a>
 

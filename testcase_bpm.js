@@ -39,7 +39,7 @@ const testcaseMapping = {
 
 languages.forEach(function (lang) {
   // New a driver with locale: lang
-  const easyd = new EasyDriver(lang);
+  const easyd = new EasyDriver({locale: lang});
 
   // Screenshot directory
   const screenDir = `bpm_screens/${lang}`;
