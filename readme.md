@@ -82,7 +82,8 @@ npm install
 ##### easyd - Instance
 
 * `new EasyDriver({locale='en', browser='chrome'})`
-  ```javascript
+
+```javascript
 const EasyDriver = require('./easy-driver');
 const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 ```
