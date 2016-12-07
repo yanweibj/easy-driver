@@ -72,7 +72,7 @@ npm install
 2. Unzip **easy-driver-master.zip** to a directory of your choice.
 3. In Terminal, change the current directory (`cd`) to the unzipped directory, and run `npm install`.
 
-# EasyDriver
+# EasyDriver Usage
 
 ## Supported Browsers
 **EasyDriver** supports 2 browsers: `chrome` and `firefox`.  However, `firefox` support is only limited to **Firefox** *version 47 or earlier*.
@@ -165,7 +165,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.waitForTextMatches(loc_or_web, regex)`
 * `easyd.waitForVisible(loc_or_web)`
 
-##### easyd (Custom methods)
+##### easyd - Custom methods
 * `easyd.clearAllDrawings()`
 * `easyd.createDirectories(dirtree)`
 * `easyd.drawArrow(from_loc_or_web, to_loc_or_web)`
