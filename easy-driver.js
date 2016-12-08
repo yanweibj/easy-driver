@@ -20,7 +20,12 @@ class EasyDriver {
     this.Key = webdriver.Key;
     this.promise = webdriver.promise;
     this.until = webdriver.until;
+
+    // Default Timeout
     this.TIMEOUT = 30000;
+
+    // options
+    if (process.env.SELENIUM_BROWSER) options.browser = process.env.SELENIUM_BROWSER;
     this.browser = (options.browser.match(/firefox/i)) ? 'firefox' : 'chrome';
     this.locale = (this.browser === 'firefox') ? regionToLowerCase(options.locale) : regionToUpperCase(options.locale);
 
@@ -49,8 +54,8 @@ class EasyDriver {
                   .setFirefoxOptions(firefoxOptions)
                   .build();
 
-    // Timeouts
-    // this.wd.manage().timeouts().setScriptTimeout(this.TIMEOUT);
+    // AsyncScript/PageLoad Timeouts
+    this.wd.manage().timeouts().setScriptTimeout(this.TIMEOUT);
     // this.wd.manage().timeouts().pageLoadTimeout(this.TIMEOUT);
   }
 
@@ -1273,63 +1278,66 @@ class EasyDriver {
 
     if (!filename.endsWith('.png')) filename += '.png';
 
-    self.wd.takeScreenshot().then(function (screenData) {
-      self.wd.executeScript(`
-        var element = arguments[0];
-        var screenData = arguments[1];
-        var offsetX = arguments[2];
-        var offsetY = arguments[3];
+    const script_firefox = `
+      var element = arguments[0];
+      var screenData = arguments[1];
+      var offsetX = arguments[2];
+      var offsetY = arguments[3];
+      var callback = arguments[4];
 
-        function isRetinaDisplay() {
-          if (window.matchMedia) {
-            var mq = window.matchMedia("only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 1.3dppx)");
-            return (mq && mq.matches || (window.devicePixelRatio > 1));
-          }
-        }
+      var rect = element.getBoundingClientRect();
 
-        var ratio = (isRetinaDisplay()) ? 2 : 1;
-
-        var rect = element.getBoundingClientRect();
-
-        var image = new Image();
-        image.src = 'data:image/png;base64,' + screenData;
-
-        var canvas = document.createElement('canvas');
-        canvas.width = rect.width * ratio;
-        canvas.height = rect.height * ratio;
-        var ctx = canvas.getContext('2d');
-        ctx.drawImage(
-          image,
-          (rect.left + offsetX) * ratio,
-          (rect.top + offsetY) * ratio,
-          rect.width * ratio,
-          rect.height * ratio,
-          0,
-          0,
-          rect.width * ratio,
-          rect.height * ratio
-        );
-        return canvas.toDataURL();
-      `, element, screenData, offset.x, offset.y)
-      .then(function (elementData) {
-        const base64Data = elementData.replace(/^data:image\/png;base64,/, "");
-        fs.writeFile(filename, base64Data, 'base64', function (err) {
-          if(err) console.error(err);
-        });
-      });
-    });
-  }
-
-  takeElementShot2() {
-    this.wd.executeScript(`
       var canvas = document.createElement('canvas');
-      canvas.width = rect.width * ratio;
-      canvas.height = rect.height * ratio;
-      var ctx = canvas.getContext('2d');
 
       var image = new Image();
 
       image.onload = function () {
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+
+        canvas.getContext('2d').drawImage(
+          this,
+          window.scrollX + rect.left + offsetX,
+          window.scrollY + rect.top + offsetY,
+          rect.width,
+          rect.height,
+          0,
+          0,
+          rect.width,
+          rect.height
+        );
+
+        callback(canvas.toDataURL());
+      };
+
+      image.src = 'data:image/png;base64,' + screenData;
+    `;
+
+    const script_chrome = `
+      var element = arguments[0];
+      var screenData = arguments[1];
+      var offsetX = arguments[2];
+      var offsetY = arguments[3];
+      var callback = arguments[4];
+
+      function isRetinaDisplay() {
+        if (window.matchMedia) {
+          var mq = window.matchMedia("only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 1.3dppx)");
+          return (mq && mq.matches || (window.devicePixelRatio > 1));
+        }
+      }
+
+      var ratio = (isRetinaDisplay()) ? 2 : 1;
+
+      var rect = element.getBoundingClientRect();
+
+      var image = new Image();
+      image.src = 'data:image/png;base64,' + screenData;
+
+      var canvas = document.createElement('canvas');
+      canvas.width = rect.width * ratio;
+      canvas.height = rect.height * ratio;
+      var ctx = canvas.getContext('2d');
       ctx.drawImage(
         image,
         (rect.left + offsetX) * ratio,
@@ -1341,12 +1349,22 @@ class EasyDriver {
         rect.width * ratio,
         rect.height * ratio
       );
+       callback(canvas.toDataURL());
+    `;
 
-      callback(canvas.toDataURL());
-      };
+    const script = (self.browser === 'firefox') ? script_firefox : script_chrome;
 
-      image.src = 'data:image/png;base64,' + screenData;
-    `);
+    self.wd.takeScreenshot().then(function (screenData) {
+      self.wd.executeAsyncScript(`
+        ${script}
+      `, element, screenData, offset.x, offset.y)
+      .then(function (elementData) {
+        const base64Data = elementData.replace(/^data:image\/png;base64,/, "");
+        fs.writeFile(filename, base64Data, 'base64', function (err) {
+          if(err) console.error(err);
+        });
+      });
+    });
   }
 
   /**
