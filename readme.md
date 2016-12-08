@@ -239,4 +239,4 @@ easyd.findElements('css=[id*="item"]').then(function (elements) {
 
 ## Limitation
 
-Chrome can only take screenshot of viewport.  It is currently not possible to take a full-page screenshot.
+`chrome` can only take screenshot of viewport.  It is currently not possible to take a full-page screenshot or elements that are not visible in the viewport.
