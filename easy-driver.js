@@ -20,24 +20,22 @@ class EasyDriver {
     this.Key = webdriver.Key;
     this.promise = webdriver.promise;
     this.until = webdriver.until;
-
     this.TIMEOUT = 30000;
-
-    const browser = (options.browser.match(/firefox/i)) ? 'firefox' : 'chrome';
-    const locale = (browser === 'firefox') ? regionToLowerCase(options.locale) : regionToUpperCase(options.locale);
+    this.browser = (options.browser.match(/firefox/i)) ? 'firefox' : 'chrome';
+    this.locale = (this.browser === 'firefox') ? regionToLowerCase(options.locale) : regionToUpperCase(options.locale);
 
     // Chrome Options
     // Languages: https://support.google.com/googleplay/android-developer/table/4419860?hl=en
     // pref_names.cc: https://goo.gl/NXSyLn
     const chromeOptions = new chrome.Options();
-    chromeOptions.setUserPreferences({ 'intl.accept_languages': locale });
+    chromeOptions.setUserPreferences({ 'intl.accept_languages': this.locale });
     // chromeOptions.addExtensions(`extensions/Advanced-Font-Settings_v0.67.crx`);
     // chromeOptions.addExtensions('extensions/Full-Page-Screen-Capture_v2.2.crx');
 
     // Firefox Options
     const profile = new firefox.Profile();
     profile.setPreference('marionette', false);
-    profile.setPreference('intl.accept_languages', regionToLowerCase(locale));
+    profile.setPreference('intl.accept_languages', this.locale);
     profile.setAcceptUntrustedCerts(true);
     profile.setAssumeUntrustedCertIssuer(true);
     const firefoxOptions = new firefox.Options();
@@ -46,10 +44,14 @@ class EasyDriver {
 
     // Driver Instance
     this.wd = new webdriver.Builder()
-                  .forBrowser(browser)
+                  .forBrowser(this.browser)
                   .setChromeOptions(chromeOptions)
                   .setFirefoxOptions(firefoxOptions)
                   .build();
+
+    // Timeouts
+    // this.wd.manage().timeouts().setScriptTimeout(this.TIMEOUT);
+    // this.wd.manage().timeouts().pageLoadTimeout(this.TIMEOUT);
   }
 
   /*--- ***************** ---*/
@@ -304,8 +306,28 @@ class EasyDriver {
   }
 
   /**
-   * Set the default timeout for 'Wait'
-   * @param {number} timeout Default timeout in milliseconds
+   * Set the timeout for 'Page Load'
+   * @param {number} timeout Timeout in milliseconds
+   * @return {Thenable<undefined>}
+   */
+  setPageLoadTimeout(timeout) {
+    this.log(`  [-] setPageLoadTimeout(${timeout})`);
+    return this.wd.manage().timeouts().pageLoadTimeout(timeout);
+  }
+
+  /**
+   * Set the timeout for asynchronous scripts
+   * @param {number} timeout Timeout in milliseconds
+   * @return {Thenable<undefined>}
+   */
+  setScriptTimeout(timeout) {
+    this.log(`  [-] setScriptTimeout(${timeout})`);
+    return this.wd.manage().timeouts().setScriptTimeout(timeout);
+  }
+
+  /**
+   * Set the timeout for 'Wait'
+   * @param {number} timeout Timeout in milliseconds
    */
   setTimeout(timeout) {
     this.log(`  [-] setTimeout(${timeout})`);
@@ -1275,8 +1297,7 @@ class EasyDriver {
         var canvas = document.createElement('canvas');
         canvas.width = rect.width * ratio;
         canvas.height = rect.height * ratio;
-
-        var ctx = canvas.getContext("2d");
+        var ctx = canvas.getContext('2d');
         ctx.drawImage(
           image,
           (rect.left + offsetX) * ratio,
@@ -1287,8 +1308,7 @@ class EasyDriver {
           0,
           rect.width * ratio,
           rect.height * ratio
-        )
-
+        );
         return canvas.toDataURL();
       `, element, screenData, offset.x, offset.y)
       .then(function (elementData) {
@@ -1298,6 +1318,35 @@ class EasyDriver {
         });
       });
     });
+  }
+
+  takeElementShot2() {
+    this.wd.executeScript(`
+      var canvas = document.createElement('canvas');
+      canvas.width = rect.width * ratio;
+      canvas.height = rect.height * ratio;
+      var ctx = canvas.getContext('2d');
+
+      var image = new Image();
+
+      image.onload = function () {
+      ctx.drawImage(
+        image,
+        (rect.left + offsetX) * ratio,
+        (rect.top + offsetY) * ratio,
+        rect.width * ratio,
+        rect.height * ratio,
+        0,
+        0,
+        rect.width * ratio,
+        rect.height * ratio
+      );
+
+      callback(canvas.toDataURL());
+      };
+
+      image.src = 'data:image/png;base64,' + screenData;
+    `);
   }
 
   /**
@@ -1393,6 +1442,5 @@ function regionToUpperCase(locale) {
     }
   );
 }
-
 
 module.exports = EasyDriver;

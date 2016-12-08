@@ -22,6 +22,8 @@
     * [.quit()](#EasyDriver+quit) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.refresh()](#EasyDriver+refresh) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.runScript(script, fn)](#EasyDriver+runScript)
+    * [.setPageLoadTimeout(timeout)](#EasyDriver+setPageLoadTimeout) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.setScriptTimeout(timeout)](#EasyDriver+setScriptTimeout) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.setTimeout(timeout)](#EasyDriver+setTimeout)
     * [.setWindowPosition(x, y)](#EasyDriver+setWindowPosition) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.setWindowSize(width, height)](#EasyDriver+setWindowSize) ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -236,16 +238,38 @@ Run script
 | script | <code>string</code> &#124; <code>function</code> | The script to execute |
 | fn | <code>function</code> | A callback function aftrer the script is executed |
 
-<a name="EasyDriver+setTimeout"></a>
+<a name="EasyDriver+setPageLoadTimeout"></a>
 
-### easyDriver.setTimeout(timeout)
-Set the default timeout for 'Wait'
+### easyDriver.setPageLoadTimeout(timeout) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Set the timeout for 'Page Load'
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| timeout | <code>number</code> | Default timeout in milliseconds |
+| timeout | <code>number</code> | Timeout in milliseconds |
+
+<a name="EasyDriver+setScriptTimeout"></a>
+
+### easyDriver.setScriptTimeout(timeout) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Set the timeout for asynchronous scripts
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| timeout | <code>number</code> | Timeout in milliseconds |
+
+<a name="EasyDriver+setTimeout"></a>
+
+### easyDriver.setTimeout(timeout)
+Set the timeout for 'Wait'
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| timeout | <code>number</code> | Timeout in milliseconds |
 
 <a name="EasyDriver+setWindowPosition"></a>
 

@@ -107,6 +107,8 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.quit()`
 * `easyd.refresh()`
 * `easyd.runScript(script, callback) -> callback(retval)`
+* `easyd.setPageLoadTimeout(timeout)`
+* `easyd.setScriptTimeout(timeout)`
 * `easyd.setTimeout(timeout)`
 * `easyd.setWindowPosition(x, y)`
 * `easyd.setWindowSize(width, height)`
