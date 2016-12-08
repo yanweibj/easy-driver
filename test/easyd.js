@@ -10,13 +10,14 @@ const assert = require('selenium-webdriver/testing/assert');
 
 test.describe('=== EasyDriver Test Suite ===', function() {
   let easyd;
-  const imgDir = 'test_img';
+  let imgPrefix = 'test_img';
 
   // this.timeout(60000);
 
   test.before(function() {
     easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
-    easyd.createDirectories(imgDir);
+    easyd.createDirectories(imgPrefix);
+    imgPrefix += `/${easyd.browser}`;
   });
 
   test.after(function() {
@@ -46,7 +47,7 @@ test.describe('=== EasyDriver Test Suite ===', function() {
   test.it('Test Case: drawFlyover()', function(done) {
     easyd.setAttribute('id=p3', 'title', "fake flyover here");
     easyd.drawFlyover('id=p3');
-    easyd.takeScreenshot(`${imgDir}/drawFlyover.png`);
+    easyd.takeScreenshot(`${imgPrefix}_drawFlyover.png`);
     easyd.clearAllDrawings();
     done();
   });
@@ -54,7 +55,7 @@ test.describe('=== EasyDriver Test Suite ===', function() {
   test.it('Test Case: drawArrow()', function(done) {
     easyd.drawArrow('id=p1', 'id=desc');
     easyd.focus('id=p1');
-    easyd.takeScreenshot(`${imgDir}/drawArrow.png`);
+    easyd.takeScreenshot(`${imgPrefix}_drawArrow.png`);
     done();
   });
 
@@ -63,7 +64,7 @@ test.describe('=== EasyDriver Test Suite ===', function() {
     easyd.sendKeys('name=q', 'webdriver' + easyd.Key.ENTER);
     easyd.waitForVisible('id=rso');
     easyd.scrollIntoView('(//*[@class="_Gs"])[2]');
-    easyd.takeElementShot('id=foot', `${imgDir}/takeElementShot_1.png`);
+    easyd.takeElementShot('id=foot', `${imgPrefix}_takeElementShot_1.png`);
     done();
   });
 
@@ -71,7 +72,7 @@ test.describe('=== EasyDriver Test Suite ===', function() {
     easyd.open('https://jsfiddle.net/aaronchen/w06ehb9v/show/');
     easyd.getRect('//iframe').then(function (rect) {
       easyd.switchToFrame(0);
-      easyd.takeElementShot('id=p1', `${imgDir}/takeElementShot_2.png`, {x: rect.x, y: rect.y});
+      easyd.takeElementShot('id=p1', `${imgPrefix}_takeElementShot_2.png`, {x: rect.x, y: rect.y});
     });
     done();
   });
@@ -106,7 +107,7 @@ test.describe('=== EasyDriver Test Suite ===', function() {
   test.it('Test Case: drawSelect()', function(done) {
     easyd.drawSelect('#dropdown');
     easyd.drawRedMark('[id*="easydriver_"]');
-    easyd.takeScreenshot(`${imgDir}/drawSelect.png`);
+    easyd.takeScreenshot(`${imgPrefix}_drawSelect.png`);
     done();
   });
 
@@ -114,11 +115,11 @@ test.describe('=== EasyDriver Test Suite ===', function() {
     easyd.open('https://jsfiddle.net/aaronchen/x86j7qo2/show/');
     easyd.getRect('//iframe').then(function (rect) {
       easyd.switchToFrame(0);
-      easyd.takeScrollShot('id=c1', `${imgDir}/takeScrollShot_1.png`, {x: rect.x, y: rect.y});
-      easyd.takeScrollShot('id=c2', `${imgDir}/takeScrollShot_2.png`, {x: rect.x, y: rect.y});
+      easyd.takeScrollShot('id=c1', `${imgPrefix}_takeScrollShot_1.png`, {x: rect.x, y: rect.y});
+      easyd.takeScrollShot('id=c2', `${imgPrefix}_takeScrollShot_2.png`, {x: rect.x, y: rect.y});
       // Need to find a solution for this scroll element
-      easyd.takeScrollShot('id=c3', `${imgDir}/takeScrollShot_3.png`, {x: rect.x, y: rect.y});
-      easyd.takeScrollShot('id=c4', `${imgDir}/takeScrollShot_4.png`, {x: rect.x, y: rect.y});
+      easyd.takeScrollShot('id=c3', `${imgPrefix}_takeScrollShot_3.png`, {x: rect.x, y: rect.y});
+      easyd.takeScrollShot('id=c4', `${imgPrefix}_takeScrollShot_4.png`, {x: rect.x, y: rect.y});
     });
     done();
   });
@@ -128,7 +129,7 @@ test.describe('=== EasyDriver Test Suite ===', function() {
     easyd.switchToFrame(0);
     easyd.rightClick('id=p1');
     easyd.mouseMove('css=li:eq(2)');
-    easyd.takeScreenshot(`${imgDir}/rightClick.png`);
+    easyd.takeScreenshot(`${imgPrefix}_rightClick.png`);
     done();
   });
 

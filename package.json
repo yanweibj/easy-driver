@@ -5,7 +5,7 @@
   "main": "testcase_sample.js",
   "scripts": {
     "start": "node testcase_sample",
-    "test": "mocha --no-timeouts"
+    "test": "mocha --no-timeouts; SELENIUM_BROWSER=firefox mocha --no-timeouts"
   },
   "repository": {
     "type": "git",
