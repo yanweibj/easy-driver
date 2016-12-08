@@ -56,7 +56,7 @@ class EasyDriver {
 
     // AsyncScript/PageLoad Timeouts
     this.wd.manage().timeouts().setScriptTimeout(this.TIMEOUT);
-    // this.wd.manage().timeouts().pageLoadTimeout(this.TIMEOUT);
+    this.wd.manage().timeouts().pageLoadTimeout(this.TIMEOUT);
   }
 
   /*--- ***************** ---*/
@@ -105,49 +105,55 @@ class EasyDriver {
    * @return {WebElementPromise} A WebElement that can be used to issue commands against the located element.
    */
   findElement(locator, isVisible = false) {
-    this.log(`      Locating: ${locator}`);
-
-    if (locator instanceof webdriver.WebElement) {
-      if (isVisible) this.wait(this.until.elementIsVisible(locator));
-      return locator;
-    }
-
-    // Add ':eq()' support to css selector
-    const re = /:eq\((\d+)\)/;
-    const found = locator.match(re);
-
-    if(!found) {
-      const byLocator = this.locateElementBy(locator);
-
-      this.wait(this.until.elementsLocated(byLocator));
-
-      const element = this.wd.findElement(byLocator);
-
-      if (isVisible) this.wait(this.until.elementIsVisible(element));
-
-      return element;
-    }
-
-    const query = locator.substring(0, found.index);
-    const nth = found[1];
     const self = this;
     const defer = self.promise.defer();
 
-    self.findElements(query)
-    .then(function (elements) {
-      self.log(`      Locating: ${query} => ${nth}`);
-      if (nth > elements.length) {
-        defer.reject('Maximum index for ${locator} is ${elements.length}.');
+    if (locator instanceof webdriver.WebElement) {
+      self.log(`      Locating: WebElement`);
+      if (isVisible) self.wait(self.until.elementIsVisible(locator));
+      defer.fulfill(locator);
+    }
+    else {
+      self.log(`      Locating: ${locator}`);
+      // Add ':eq()' support to css selector
+      const re = /:eq\((\d+)\)/;
+      const found = locator.match(re);
+
+      if(!found) {
+        const byLocator = self.locateElementBy(locator);
+
+        self.wait(self.until.elementsLocated(byLocator));
+
+        self.wd.findElement(byLocator)
+        .then(function (element) {
+          if (isVisible) self.wait(self.until.elementIsVisible(element));
+          defer.fulfill(element);
+        })
+        .catch(function (reason) {
+          defer.reject(reason);
+        });
       }
       else {
-        const element = elements[nth];
-        if (isVisible) self.wait(self.until.elementIsVisible(element));
-        defer.fulfill(element);
+        const query = locator.substring(0, found.index);
+        const nth = found[1];
+
+        self.findElements(query)
+        .then(function (elements) {
+          self.log(`      Locating: ${query} => ${nth}`);
+          if (nth > elements.length) {
+            defer.reject('Maximum index for ${locator} is ${elements.length}.');
+          }
+          else {
+            const element = elements[nth];
+            if (isVisible) self.wait(self.until.elementIsVisible(element));
+            defer.fulfill(element);
+          }
+        })
+        .catch(function (reason) {
+          defer.reject(reason);
+        });
       }
-    })
-    .catch(function (reason) {
-      defer.reject(reason);
-    });
+    }
 
     return new webdriver.WebElementPromise(self.wd, defer.promise);
   }
@@ -1436,7 +1442,7 @@ function parseLocator (locator) {
 }
 
 function regionToLowerCase(locale) {
-  return locale.replace(
+  return locale.replace("_","-").replace(
     /(-[a-zA-Z]{2})$/,
     function (match) {
       return match.toLowerCase();
@@ -1445,7 +1451,7 @@ function regionToLowerCase(locale) {
 }
 
 function regionToUpperCase(locale) {
-  return locale.replace(
+  return locale.replace("_","-").replace(
     /(-[a-zA-Z]{2})$/,
     function (match) {
       return match.toUpperCase();

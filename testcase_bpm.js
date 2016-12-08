@@ -3,6 +3,7 @@ const languages = [
   'en', 'zh', 'zh-tw', 'ja', 'ko', 'it', 'fr', 'de', 'es', 'pt-br', 'pt',
   'nb', 'fi', 'sv', 'da', 'tr', 'nl', 'cs', 'hu', 'ru', 'ro', 'pl', 'el'
 ];
+// const languages = ['en'];
 const pcServer = 'lsc556.tw.ibm.com';
 const testcaseMapping = {
   DOC_OP_ADD_DOCUMENT_TO_FOLDER: "22.200.220",
@@ -39,7 +40,7 @@ const testcaseMapping = {
 
 languages.forEach(function (lang) {
   // New a driver with locale: lang
-  const easyd = new EasyDriver({locale: lang});
+  const easyd = new EasyDriver({locale: lang, browser: 'chrome'});
 
   // Screenshot directory
   const screenDir = `bpm_screens/${lang}`;
