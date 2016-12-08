@@ -35,3 +35,16 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# Mac
+.DS_Store
+
+# PNG files
+*.png
+
+# Test Files
+test0*.js
+
+# Extensions
+*.crx
+*.xpi
