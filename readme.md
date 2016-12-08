@@ -103,13 +103,12 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.maximizeWindow()`
 * `easyd.maximizeToScreenSize()`
 * `easyd.open(url)`
-* `easyd.pageLoadTimeout(ms)`
 * `easyd.quit()`
 * `easyd.refresh()`
 * `easyd.runScript(script, callback) -> callback(retval)`
-* `easyd.setPageLoadTimeout(timeout)`
-* `easyd.setScriptTimeout(timeout)`
-* `easyd.setTimeout(timeout)`
+* `easyd.setPageLoadTimeout(ms)`
+* `easyd.setScriptTimeout(ms)`
+* `easyd.setTimeout(ms)`
 * `easyd.setWindowPosition(x, y)`
 * `easyd.setWindowSize(width, height)`
 * `easyd.sleep(ms)`
@@ -126,7 +125,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.waitForUrlContains(substrUrl)`
 * `easyd.waitForUrlIs(url)`
 * `easyd.waitForUrlMatches(regex)`
-* `easyd.zoom(percent)`
+* `easyd.zoom(scale)`
 
 ##### easyd - WebElement Methods
 \*\* **loc_or_web**: Parameter can be either ***locater*** or ***WebElement***.

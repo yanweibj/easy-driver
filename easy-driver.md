@@ -18,13 +18,12 @@
     * [.maximizeWindow()](#EasyDriver+maximizeWindow) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.maximizeToScreenSize()](#EasyDriver+maximizeToScreenSize)
     * [.open(url)](#EasyDriver+open) ⇒ <code>Thenable.&lt;undefined&gt;</code>
-    * [.pageLoadTimeout(ms)](#EasyDriver+pageLoadTimeout) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.quit()](#EasyDriver+quit) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.refresh()](#EasyDriver+refresh) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.runScript(script, fn)](#EasyDriver+runScript)
-    * [.setPageLoadTimeout(timeout)](#EasyDriver+setPageLoadTimeout) ⇒ <code>Thenable.&lt;undefined&gt;</code>
-    * [.setScriptTimeout(timeout)](#EasyDriver+setScriptTimeout) ⇒ <code>Thenable.&lt;undefined&gt;</code>
-    * [.setTimeout(timeout)](#EasyDriver+setTimeout)
+    * [.setPageLoadTimeout(ms)](#EasyDriver+setPageLoadTimeout) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.setScriptTimeout(ms)](#EasyDriver+setScriptTimeout) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.setTimeout(ms)](#EasyDriver+setTimeout)
     * [.setWindowPosition(x, y)](#EasyDriver+setWindowPosition) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.setWindowSize(width, height)](#EasyDriver+setWindowSize) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.sleep(ms)](#EasyDriver+sleep) ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -40,7 +39,7 @@
     * [.waitForUrlContains(substrUrl)](#EasyDriver+waitForUrlContains) ⇒ <code>Thenable</code>
     * [.waitForUrlIs(url)](#EasyDriver+waitForUrlIs) ⇒ <code>Thenable</code>
     * [.waitForUrlMatches(regex)](#EasyDriver+waitForUrlMatches) ⇒ <code>Thenable</code>
-    * [.zoom(percent)](#EasyDriver+zoom) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
+    * [.zoom(scale)](#EasyDriver+zoom) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.blur(locator)](#EasyDriver+blur) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.checkAll(locator)](#EasyDriver+checkAll)
     * [.clear(locator)](#EasyDriver+clear) ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -203,17 +202,6 @@ Open URL
 | --- | --- | --- |
 | url | <code>string</code> | A fully qualified URL to open |
 
-<a name="EasyDriver+pageLoadTimeout"></a>
-
-### easyDriver.pageLoadTimeout(ms) ⇒ <code>Thenable.&lt;undefined&gt;</code>
-Sets the amount of time to wait for a page load
-
-**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| ms | <code>number</code> | The amount of time to wait, in milliseconds.  If negative, page loads may be indefinite. |
-
 <a name="EasyDriver+quit"></a>
 
 ### easyDriver.quit() ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -240,36 +228,36 @@ Run script
 
 <a name="EasyDriver+setPageLoadTimeout"></a>
 
-### easyDriver.setPageLoadTimeout(timeout) ⇒ <code>Thenable.&lt;undefined&gt;</code>
-Set the timeout for 'Page Load'
+### easyDriver.setPageLoadTimeout(ms) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Sets the amount of time to wait for a page load
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| timeout | <code>number</code> | Timeout in milliseconds |
+| ms | <code>number</code> | The amount of time to wait, in milliseconds.  If negative, page loads may be indefinite. |
 
 <a name="EasyDriver+setScriptTimeout"></a>
 
-### easyDriver.setScriptTimeout(timeout) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+### easyDriver.setScriptTimeout(ms) ⇒ <code>Thenable.&lt;undefined&gt;</code>
 Set the timeout for asynchronous scripts
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| timeout | <code>number</code> | Timeout in milliseconds |
+| ms | <code>number</code> | Timeout in milliseconds |
 
 <a name="EasyDriver+setTimeout"></a>
 
-### easyDriver.setTimeout(timeout)
+### easyDriver.setTimeout(ms)
 Set the timeout for 'Wait'
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| timeout | <code>number</code> | Timeout in milliseconds |
+| ms | <code>number</code> | Timeout in milliseconds |
 
 <a name="EasyDriver+setWindowPosition"></a>
 
@@ -431,14 +419,14 @@ Wait till URL matches regex
 
 <a name="EasyDriver+zoom"></a>
 
-### easyDriver.zoom(percent) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
+### easyDriver.zoom(scale) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
 Zoom in/out of a window
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| percent | <code>number</code> | Zoom percentage |
+| scale | <code>number</code> | Scale of zoom |
 
 <a name="EasyDriver+blur"></a>
 

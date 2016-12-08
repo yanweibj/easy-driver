@@ -261,16 +261,6 @@ class EasyDriver {
   }
 
   /**
-   * Sets the amount of time to wait for a page load
-   * @param {number} ms The amount of time to wait, in milliseconds.  If negative, page loads may be indefinite.
-   * @return {Thenable<undefined>}
-   */
-  pageLoadTimeout(ms) {
-    this.log(`  [-] pageLoadTimeout()`);
-    return this.wd.manage().timeouts().pageLoadTimeout(parseInt(ms));
-  }
-
-  /**
    * Terminates the browser session
    * @return {Thenable<undefined>}
    */
@@ -311,32 +301,32 @@ class EasyDriver {
   }
 
   /**
-   * Set the timeout for 'Page Load'
-   * @param {number} timeout Timeout in milliseconds
+   * Sets the amount of time to wait for a page load
+   * @param {number} ms The amount of time to wait, in milliseconds.  If negative, page loads may be indefinite.
    * @return {Thenable<undefined>}
    */
-  setPageLoadTimeout(timeout) {
-    this.log(`  [-] setPageLoadTimeout(${timeout})`);
-    return this.wd.manage().timeouts().pageLoadTimeout(timeout);
+  setPageLoadTimeout(ms) {
+    this.log(`  [-] setPageLoadTimeout(${ms})`);
+    return this.wd.manage().timeouts().pageLoadTimeout(ms);
   }
 
   /**
    * Set the timeout for asynchronous scripts
-   * @param {number} timeout Timeout in milliseconds
+   * @param {number} ms Timeout in milliseconds
    * @return {Thenable<undefined>}
    */
-  setScriptTimeout(timeout) {
-    this.log(`  [-] setScriptTimeout(${timeout})`);
-    return this.wd.manage().timeouts().setScriptTimeout(timeout);
+  setScriptTimeout(ms) {
+    this.log(`  [-] setScriptTimeout(${ms})`);
+    return this.wd.manage().timeouts().setScriptTimeout(ms);
   }
 
   /**
    * Set the timeout for 'Wait'
-   * @param {number} timeout Timeout in milliseconds
+   * @param {number} ms Timeout in milliseconds
    */
-  setTimeout(timeout) {
-    this.log(`  [-] setTimeout(${timeout})`);
-    this.TIMEOUT = parseInt(timeout) || this.TIMEOUT;
+  setTimeout(ms) {
+    this.log(`  [-] setTimeout(${ms})`);
+    this.TIMEOUT = parseInt(ms) || this.TIMEOUT;
   }
 
   /**
@@ -502,13 +492,15 @@ class EasyDriver {
 
   /**
    * Zoom in/out of a window
-   * @param {number} percent Zoom percentage
+   * @param {number} scale Scale of zoom
    * @return {Thenable<(T|null)>}
    */
-  zoom(percent) {
-    this.log(`  [-] zoom(${percent})`);
+  zoom(scale) {
+    this.log(`  [-] zoom(${scale})`);
+    scale = Number(scale);
     return this.wd.executeScript(`
-      document.body.style.zoom='${percent}%';
+      document.body.style.webkitTransform = 'scale(${scale})';
+      document.body.style.transform = 'scale(${scale})';
     `);
   }
 
