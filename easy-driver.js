@@ -216,7 +216,7 @@ class EasyDriver {
     }
 
     console.log(`Supported locator types are: css=, xpath=, class=, id=, name=.`);
-    
+
     throw new this.error.InvalidSelectorError();
   }
 
@@ -243,16 +243,17 @@ class EasyDriver {
 
   /**
    * Maximize the window to the screen size
+   * @return {Thenable<undefined>}
    */
   maximizeToScreenSize() {
     this.log(`  [-] maximizeToScreenSize()`);
 
     const self = this;
-    self.wd.executeScript(`
+    return self.wd.executeScript(`
       return {width: window.screen.width, height: window.screen.height};
     `).then (function (size) {
       self.wd.manage().window().setPosition(0, 0);
-      self.wd.manage().window().setSize(size.width, size.height);
+      return self.wd.manage().window().setSize(size.width, size.height);
     });
   }
 
@@ -991,7 +992,11 @@ class EasyDriver {
   createDirectories(dirtree) {
     this.log(`  [-] createDirectories(${dirtree})`);
 
-    if (! fs.existsSync(dirtree)){ fs.mkdirsSync(dirtree); }
+    const defer = this.promise.defer();
+    defer.fulfill(dirtree);
+    defer.promise.then(function (dirtree) {
+      if (! fs.existsSync(dirtree)){ fs.mkdirsSync(dirtree); }
+    });
   }
 
   /**
