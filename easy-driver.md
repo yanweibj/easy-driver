@@ -16,7 +16,7 @@
     * [.locateElementBy(locator)](#EasyDriver+locateElementBy) ⇒ <code>By</code>
     * [.log(msg)](#EasyDriver+log)
     * [.maximizeWindow()](#EasyDriver+maximizeWindow) ⇒ <code>Thenable.&lt;undefined&gt;</code>
-    * [.maximizeToScreenSize()](#EasyDriver+maximizeToScreenSize)
+    * [.maximizeToScreenSize()](#EasyDriver+maximizeToScreenSize) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.open(url)](#EasyDriver+open) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.quit()](#EasyDriver+quit) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.refresh()](#EasyDriver+refresh) ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -187,7 +187,7 @@ Maximize the window
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 <a name="EasyDriver+maximizeToScreenSize"></a>
 
-### easyDriver.maximizeToScreenSize()
+### easyDriver.maximizeToScreenSize() ⇒ <code>Thenable.&lt;undefined&gt;</code>
 Maximize the window to the screen size
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  

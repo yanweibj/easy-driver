@@ -43,6 +43,7 @@ class EasyDriver {
     profile.setPreference('intl.accept_languages', this.locale);
     profile.setAcceptUntrustedCerts(true);
     profile.setAssumeUntrustedCertIssuer(true);
+    // profile.addExtension('extensions/selenium_ide-2.9.1-fx.xpi');
     const firefoxOptions = new firefox.Options().useGeckoDriver(false).setProfile(profile);
 
     // Driver Instance
