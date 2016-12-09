@@ -43,9 +43,7 @@ class EasyDriver {
     profile.setPreference('intl.accept_languages', this.locale);
     profile.setAcceptUntrustedCerts(true);
     profile.setAssumeUntrustedCertIssuer(true);
-    const firefoxOptions = new firefox.Options();
-    firefoxOptions.useGeckoDriver(false);
-    firefoxOptions.setProfile(profile);
+    const firefoxOptions = new firefox.Options().useGeckoDriver(false).setProfile(profile);
 
     // Driver Instance
     this.wd = new webdriver.Builder()
@@ -57,6 +55,7 @@ class EasyDriver {
     // AsyncScript/PageLoad Timeouts
     this.wd.manage().timeouts().setScriptTimeout(this.TIMEOUT);
     this.wd.manage().timeouts().pageLoadTimeout(this.TIMEOUT);
+    // this.wd.manage().timeouts().implicitlyWait(this.TIMEOUT);
   }
 
   /*--- ***************** ---*/
@@ -141,7 +140,7 @@ class EasyDriver {
         .then(function (elements) {
           self.log(`      Locating: ${query} => ${nth}`);
           if (nth > elements.length) {
-            defer.reject('Maximum index for ${locator} is ${elements.length}.');
+            defer.reject(new self.error.NoSuchElementError(`Maximum index for ${locator} is ${elements.length}.`));
           }
           else {
             const element = elements[nth];
@@ -217,7 +216,8 @@ class EasyDriver {
     }
 
     console.log(`Supported locator types are: css=, xpath=, class=, id=, name=.`);
-    process.exit(1);
+    
+    throw new this.error.InvalidSelectorError();
   }
 
   /**
