@@ -75,7 +75,7 @@ npm install
 # EasyDriver Usage
 
 ## Supported Browsers
-**EasyDriver** supports 2 browsers: `chrome` and `firefox`.  However, `firefox` support is only limited to **Firefox** *version 47 or earlier*.
+The preferred/default browser for **EasyDriver** is `chrome`.  `firefox` is supported but limited to *version 47 or earlier*.  There are strange issues between `selenium-webdriver` and `firefox`, and **EasyDriver** is not fully-tested to address such issues. 
 
 ## Available Methods
 

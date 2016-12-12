@@ -44,7 +44,9 @@ class EasyDriver {
     profile.setAcceptUntrustedCerts(true);
     profile.setAssumeUntrustedCertIssuer(true);
     // profile.addExtension('extensions/selenium_ide-2.9.1-fx.xpi');
-    const firefoxOptions = new firefox.Options().useGeckoDriver(false).setProfile(profile);
+    const firefoxOptions = new firefox.Options()
+                               .useGeckoDriver(false)
+                               .setProfile(profile);
 
     // Driver Instance
     this.wd = new webdriver.Builder()
