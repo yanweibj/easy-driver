@@ -1272,7 +1272,7 @@ class EasyDriver {
    * @param {{x: number, y: number}} [offset={x: 5, y: 15}] Flyover offset from the element
    * @return {WebElementPromise}
    */
-  drawValidation(locator, offset = {x: 15, y: 15}) {
+  drawValidation(locator, offset = {x: 5, y: 15}) {
     this.log(`  [-] drawValidation()`);
 
     const self = this;
