@@ -1171,7 +1171,7 @@ class EasyDriver {
     this.log(`  [-] drawRedMark()`);
 
     const self = this;
-    const element = this.findElement(locator, true);
+    const element = self.findElement(locator, true);
     const id = getId();
 
     return element.getLocation().then(function (location) {
@@ -1204,7 +1204,7 @@ class EasyDriver {
   /**
    * Draw drop-down menu for SELECT element
    * @param {(string|WebElement)} locator Element locator
-   * @param {{x: number, y: number}} [offset={x: 5, y: 15}] Tooltip offset from the element
+   * @param {{x: number, y: number}} [offset={x: 5, y: 15}] Menu offset from the element
    * @return {WebElementPromise}
    */
   drawSelect(locator, offset = {x: 0, y: 0}) {
@@ -1217,8 +1217,6 @@ class EasyDriver {
     self.getTagName(element).then(function (tagname) {
       if (tagname !== 'select') console.error('Element is not a select element: ${tagname}.');
     });
-
-    self.waitForVisible(element);
 
     return self.wd.executeScript(`
       var element = arguments[0];
@@ -1265,6 +1263,57 @@ class EasyDriver {
     `, element, offset.x, offset.y)
     .then(function () {
       return self.findElement(`[id="${sId}"]`);
+    });
+  }
+
+  /**
+   * Draw validationMessage of an form element as a flyover
+   * @param {(string|WebElement)} locator Element locator
+   * @param {{x: number, y: number}} [offset={x: 5, y: 15}] Flyover offset from the element
+   * @return {WebElementPromise}
+   */
+  drawValidation(locator, offset = {x: 15, y: 15}) {
+    this.log(`  [-] drawValidation()`);
+
+    const self = this;
+    const element = self.findElement(locator, true);
+    const vId = getId();
+
+    return self.wd.executeScript(`
+      var element = arguments[0];
+      var offsetX = arguments[1];
+      var offsetY = arguments[2];
+      var message = (element.validity.customError) ? element.validationMessage : 'NO CUSTOM VALIDATION MESSAGE';
+
+      var rect = element.getBoundingClientRect();
+
+      var left = rect.left;
+      var top = rect.top;
+
+      var validation = document.createElement('div');
+      validation.id = "${vId}";
+      validation.textContent = message;
+      validation.style.position = 'absolute';
+      validation.style.color = '#000';
+      validation.style.backgroundColor = '#F5FCDE';
+      validation.style.border = '3px solid #ff0000';
+      validation.style.fontSize = '12px';
+      validation.style.zIndex = '99999';
+      validation.style.display = 'block';
+      validation.style.height = '16px';
+      validation.style.padding = '2px';
+      validation.style.verticalAlign = 'middle';
+      validation.style.top = (top + offsetY) + 'px';
+      validation.style.left = (left + offsetX) + 'px';
+      document.body.appendChild(validation);
+      if (validation.scrollHeight > validation.offsetHeight) {
+      	validation.style.height = (validation.scrollHeight + 3) + 'px';
+      }
+
+      return;
+    `, element, offset.x, offset.y)
+    .then(function () {
+      return self.findElement(`[id="${vId}"]`);
     });
   }
 

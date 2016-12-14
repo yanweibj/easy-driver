@@ -75,7 +75,7 @@ npm install
 # EasyDriver Usage
 
 ## Supported Browsers
-The preferred/default browser for **EasyDriver** is `chrome`.  `firefox` is supported but limited to *version 47 or earlier*.  There are strange issues between `selenium-webdriver` and `firefox`, and **EasyDriver** is not fully-tested to address such issues. 
+The preferred/default browser for **EasyDriver** is `chrome`.  `firefox` is supported but limited to *version 47 or earlier*.  There are strange issues between `selenium-webdriver` and `firefox`, and **EasyDriver** is not fully-tested to address such issues.
 
 ## Available Methods
 
@@ -173,6 +173,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.drawFlyover(loc_or_web, settings = {attribute: 'title', offsetX: 5, offsetY: 15, fromLastPos: false, drawSymbol: false})`
 * `easyd.drawRedMark(loc_or_web, padding = {top: 0, left: 0, bottom: 0, right: 0})`
 * `easyd.drawSelect(loc_or_web, offset = {x: 0, y: 0})`
+* `easyd.drawValidation(loc_or_web, offset = {x: 15, y: 15})`
 * `easyd.takeElementShot(loc_or_web, png_filename, offset = {x: 0, y: 0})`
 * `easyd.takeScrollShot(loc_or_web, png_filename, offset = {x: 0, y: 0})`
 

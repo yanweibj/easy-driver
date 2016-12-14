@@ -82,6 +82,7 @@
     * [.drawFlyover(locator, [settings])](#EasyDriver+drawFlyover) ⇒ <code>WebElementPromise</code>
     * [.drawRedMark(locator, [padding])](#EasyDriver+drawRedMark) ⇒ <code>WebElementPromise</code>
     * [.drawSelect(locator, [offset])](#EasyDriver+drawSelect) ⇒ <code>WebElementPromise</code>
+    * [.drawValidation(locator, [offset])](#EasyDriver+drawValidation) ⇒ <code>WebElementPromise</code>
     * [.takeElementShot(locator, filename, [offset])](#EasyDriver+takeElementShot)
     * [.takeScrollShot(locator, filename, [offset])](#EasyDriver+takeScrollShot)
 
@@ -899,7 +900,19 @@ Draw drop-down menu for SELECT element
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | locator | <code>string</code> &#124; <code>WebElement</code> |  | Element locator |
-| [offset] | <code>Object</code> | <code>{x: 5, y: 15}</code> | Tooltip offset from the element |
+| [offset] | <code>Object</code> | <code>{x: 5, y: 15}</code> | Menu offset from the element |
+
+<a name="EasyDriver+drawValidation"></a>
+
+### easyDriver.drawValidation(locator, [offset]) ⇒ <code>WebElementPromise</code>
+Draw validationMessage of an form element as a flyover
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| locator | <code>string</code> &#124; <code>WebElement</code> |  | Element locator |
+| [offset] | <code>Object</code> | <code>{x: 5, y: 15}</code> | Flyover offset from the element |
 
 <a name="EasyDriver+takeElementShot"></a>
 
