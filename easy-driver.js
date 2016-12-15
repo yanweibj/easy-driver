@@ -1283,12 +1283,9 @@ class EasyDriver {
       var element = arguments[0];
       var offsetX = arguments[1];
       var offsetY = arguments[2];
-      var message = (element.validity.customError) ? element.validationMessage : 'NO CUSTOM VALIDATION MESSAGE';
 
+      var message = (element.validity.customError) ? element.validationMessage : 'NO_CUSTOM_VALIDATION_MESSAGE';
       var rect = element.getBoundingClientRect();
-
-      var left = rect.left;
-      var top = rect.top;
 
       var validation = document.createElement('div');
       validation.id = "${vId}";
@@ -1303,8 +1300,8 @@ class EasyDriver {
       validation.style.height = '16px';
       validation.style.padding = '2px';
       validation.style.verticalAlign = 'middle';
-      validation.style.top = (top + offsetY) + 'px';
-      validation.style.left = (left + offsetX) + 'px';
+      validation.style.top = (rect.top + offsetY) + 'px';
+      validation.style.left = (rect.left + offsetX) + 'px';
       document.body.appendChild(validation);
       if (validation.scrollHeight > validation.offsetHeight) {
       	validation.style.height = (validation.scrollHeight + 3) + 'px';

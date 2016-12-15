@@ -133,4 +133,14 @@ test.describe('=== EasyDriver Test Suite ===', function() {
     done();
   });
 
+  test.it('Test Case: drawValidation()', function(done) {
+    easyd.open('https://jsfiddle.net/aaronchen/p4rtyh6f/show/');
+    easyd.switchToFrame(0);
+    easyd.sendKeys('id=password1', 'aaaaaaa');
+    easyd.click('css=[type="submit"]');
+    easyd.drawValidation('id=password1');
+    easyd.takeScreenshot(`${imgPrefix}_drawValidation.png`);
+    done();
+  });
+
 });
