@@ -912,7 +912,7 @@ Draw validationMessage of an form element as a flyover
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | locator | <code>string</code> &#124; <code>WebElement</code> |  | Element locator |
-| [offset] | <code>Object</code> | <code>{x: 5, y: 15}</code> | Flyover offset from the element |
+| [offset] | <code>Object</code> | <code>{x: 0, y: 0}</code> | Flyover offset from the element |
 
 <a name="EasyDriver+takeElementShot"></a>
 

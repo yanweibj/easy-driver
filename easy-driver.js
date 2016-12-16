@@ -1269,10 +1269,10 @@ class EasyDriver {
   /**
    * Draw validationMessage of an form element as a flyover
    * @param {(string|WebElement)} locator Element locator
-   * @param {{x: number, y: number}} [offset={x: 5, y: 15}] Flyover offset from the element
+   * @param {{x: number, y: number}} [offset={x: 0, y: 0}] Flyover offset from the element
    * @return {WebElementPromise}
    */
-  drawValidation(locator, offset = {x: 5, y: 15}) {
+  drawValidation(locator, offset = {x: 0, y: 0}) {
     this.log(`  [-] drawValidation()`);
 
     const self = this;
@@ -1292,20 +1292,21 @@ class EasyDriver {
       validation.textContent = message;
       validation.style.position = 'absolute';
       validation.style.color = '#000';
-      validation.style.backgroundColor = '#F5FCDE';
-      validation.style.border = '3px solid #ff0000';
+      validation.style.backgroundColor = '#fff';
+      validation.style.boxShadow = '-3px 3px 10px #ccc';
+      validation.style.borderRadius = '5px';
+      validation.style.border = '1px solid #ff0000';
       validation.style.fontSize = '12px';
       validation.style.zIndex = '99999';
       validation.style.display = 'block';
-      validation.style.height = '16px';
-      validation.style.padding = '2px';
+      validation.style.padding = '15px';
       validation.style.verticalAlign = 'middle';
-      validation.style.top = (rect.top + offsetY) + 'px';
-      validation.style.left = (rect.left + offsetX) + 'px';
+      validation.style.top = (rect.top + 26 + offsetY) + 'px';
+      validation.style.left = (rect.left - 26 + offsetX) + 'px';
       document.body.appendChild(validation);
-      if (validation.scrollHeight > validation.offsetHeight) {
-      	validation.style.height = (validation.scrollHeight + 3) + 'px';
-      }
+      validation.insertAdjacentHTML(
+        'afterbegin', '<div style="position: absolute; left: 15px; bottom: 45px; border-width: 0px 9px 9px 9px; border-style: solid; border-color: #ff0000 transparent; display: block; width: 0;"></div> <div style="position: absolute; left: 15px; bottom: 44px; border-width: 0px 9px 9px 9px; border-style: solid; border-color: #fff transparent; display: block; width: 0;"></div>'
+      );
 
       return;
     `, element, offset.x, offset.y)
