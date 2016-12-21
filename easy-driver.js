@@ -26,8 +26,9 @@ class EasyDriver {
 
     // options
     if (process.env.SELENIUM_BROWSER) options.browser = process.env.SELENIUM_BROWSER;
-    this.browser = (options.browser.match(/firefox/i)) ? 'firefox' : 'chrome';
-    this.locale = (this.browser === 'firefox') ? regionToLowerCase(options.locale) : regionToUpperCase(options.locale);
+    this.browser = (options.browser && options.browser.match(/firefox/i)) ? 'firefox' : 'chrome';
+    this.locale = options.locale || 'en';
+    this.locale = (this.browser === 'firefox') ? regionToLowerCase(this.locale) : regionToUpperCase(this.locale);
 
     // Chrome Options
     // Languages: https://support.google.com/googleplay/android-developer/table/4419860?hl=en
