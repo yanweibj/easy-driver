@@ -609,7 +609,7 @@ class EasyDriver {
     this.log(`  [-] dragAndDrop()`);
 
     const from = this.findElement(from_locator, true);
-    const to = (typeof to_locator === 'object' && 'x' in to) ? to_locator : this.findElement(to_locator);
+    const to = (typeof to_locator === 'object' && 'x' in to_locator) ? to_locator : this.findElement(to_locator);
     return this.actions().mouseMove(from).dragAndDrop(from, to).perform();
   }
 
