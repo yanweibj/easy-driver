@@ -35,6 +35,7 @@ class EasyDriver {
     // pref_names.cc: https://goo.gl/NXSyLn
     const chromeOptions = new chrome.Options();
     chromeOptions.setUserPreferences({ 'intl.accept_languages': this.locale });
+    // chromeOptions.addArguments(`lang=${this.locale}`);
     // chromeOptions.addExtensions(`extensions/Advanced-Font-Settings_v0.67.crx`);
     // chromeOptions.addExtensions('extensions/Full-Page-Screen-Capture_v2.2.crx');
 
