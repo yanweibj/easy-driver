@@ -29,10 +29,9 @@ brew install node
 
 1. Download [easy-driver-master.zip](https://github.ibm.com/aaronhc/easy-driver/archive/master.zip).
 2. Unzip **easy-driver-master.zip** to a directory of your choice.
-3. In Terminal, change the current directory (`cd`) to the unzipped directory, and run `npm install`. \*1
+3. In Terminal, change the current directory (`cd`) to the unzipped directory, and run `npm install`. \*\*
 
-> \*1 If `npm install` fails to install `chromedriver`, you can try to use CDN like:
->
+> \*\* If `npm install` fails to install `chromedriver`, you can try to use CDN like:
 > `npm install --chromedriver_cdnurl=http://npm.taobao.org/mirrors/chromedriver`
 
 ##### Method 2: Use Git
@@ -65,10 +64,9 @@ Or, you can create your own test case (mytest01.js), and run it like: `node myte
 ##### Methodd 1: Use easy-driver-master.zip
 1. Download the latest [easy-driver-master.zip](https://github.ibm.com/aaronhc/easy-driver/archive/master.zip).
 2. Unzip **easy-driver-master.zip** to a directory of your choice.
-3. In Terminal, change the current directory (`cd`) to the unzipped directory, and run `npm install` \*1.
+3. In Terminal, change the current directory (`cd`) to the unzipped directory, and run `npm install`. \*\*
 
-> \*1 If `npm install` fails to install `chromedriver`, you can try to use CDN like:
-> 
+> \*\* If `npm install` fails to install `chromedriver`, you can try to use CDN like:
 > `npm install --chromedriver_cdnurl=http://npm.taobao.org/mirrors/chromedriver`
 
 ##### Method 2: Use Git
