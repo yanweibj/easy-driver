@@ -7,6 +7,7 @@
     * [new EasyDriver([options])](#new_EasyDriver_new)
     * [.actions()](#EasyDriver+actions) ⇒ <code>ActionSequence</code>
     * [.back()](#EasyDriver+back) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.blank()](#EasyDriver+blank) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.close()](#EasyDriver+close) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.deleteAllCookies()](#EasyDriver+deleteAllCookies) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.findElement(locator, [isVisible])](#EasyDriver+findElement) ⇒ <code>WebElementPromise</code>
@@ -105,6 +106,12 @@ Create a new action sequence
 
 ### easyDriver.back() ⇒ <code>Thenable.&lt;undefined&gt;</code>
 Move backwards in the browser history
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+<a name="EasyDriver+blank"></a>
+
+### easyDriver.blank() ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Open a blank page
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 <a name="EasyDriver+close"></a>

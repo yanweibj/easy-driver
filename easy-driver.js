@@ -57,10 +57,10 @@ class EasyDriver {
                   .setFirefoxOptions(firefoxOptions)
                   .build();
 
-    // AsyncScript/PageLoad Timeouts
+    // AsyncScript/PageLoad/ImplictWait Timeouts
     this.wd.manage().timeouts().setScriptTimeout(this.TIMEOUT);
     this.wd.manage().timeouts().pageLoadTimeout(this.TIMEOUT);
-    // this.wd.manage().timeouts().implicitlyWait(this.TIMEOUT);
+    this.wd.manage().timeouts().implicitlyWait(this.TIMEOUT);
   }
 
   /*--- ***************** ---*/
@@ -82,6 +82,15 @@ class EasyDriver {
   back() {
     this.log(`  [-] back()`);
     return this.wd.navigate().back();
+  }
+
+  /**
+   * Open a blank page
+   * @return {Thenable<undefined>}
+   */
+  blank() {
+    this.log(`  [-] blank()`);
+    return this.wd.get('about:blank');
   }
 
   /**
@@ -339,6 +348,7 @@ class EasyDriver {
   setTimeout(ms) {
     this.log(`  [-] setTimeout(${ms})`);
     this.TIMEOUT = parseInt(ms) || this.TIMEOUT;
+    this.wd.manage().timeouts().implicitlyWait(this.TIMEOUT);
   }
 
   /**

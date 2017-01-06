@@ -100,6 +100,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 ##### easyd - WebDriver Methods
 * `easyd.actions() -> ActionSequence` => See **Class ActionSequence**
 * `easyd.back()`
+* `easyd.blank()`
 * `easyd.close()`
 * `easyd.deleteAllCookies()`
 * `easyd.findElement(locator, isVisible = false) -> WebElementPromise`
