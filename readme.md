@@ -4,7 +4,7 @@
 
 > (For Windows) Please skip this.
 
-> (For Mac) Please make sure you have **Xcode Command Line Tools** installed first by running `xcode-select -p` in Terminal.
+> (For Mac) Please make sure you have **Xcode Command Line Tools** installed first by running `xcode-select --install` in Terminal.
 
 (For Mac) In Terminal, run:
 
