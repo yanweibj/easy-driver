@@ -104,7 +104,17 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.close()`
 * `easyd.deleteAllCookies()`
 * `easyd.findElement(locator, isVisible = false) -> WebElementPromise`
+  ```
+  easyd.findElement('id=btn1', true).then(function (element) {
+    // code to handle element
+  });
+  ```
 * `easyd.findElements(locator) -> Thenable<Array<WebElement>>`
+  ```
+  easyd.findElements('//option').then(function (elements) {
+    // code to handle elements
+  });
+  ```
 * `easyd.forward()`
 * `easyd.getTitle() -> Thenable<string>`
 * `easyd.Key`  => See **Enumeration Key**
