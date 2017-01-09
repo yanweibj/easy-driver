@@ -105,15 +105,15 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.deleteAllCookies()`
 * `easyd.findElement(locator, isVisible = false) -> WebElementPromise`
 ```javascript
-  easyd.findElement('id=btn1', true).then(function (element) {
-    // code to handle element
-  });
+    easyd.findElement('id=btn1', true).then(function (element) {
+      // code to handle element
+    });
 ```
 * `easyd.findElements(locator) -> Thenable<Array<WebElement>>`
 ```javascript
-  easyd.findElements('//option').then(function (elements) {
-    // code to handle elements
-  });
+    easyd.findElements('//option').then(function (elements) {
+      // code to handle elements
+    });
 ```
 * `easyd.forward()`
 * `easyd.getTitle() -> Thenable<string>`
