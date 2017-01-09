@@ -104,10 +104,10 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.close()`
 * `easyd.deleteAllCookies()`
 * `easyd.findElement(locator, isVisible = false) -> WebElementPromise`
-    ```javascript
-easyd.findElement('id=btn1', true).then(function (element) {
-  // code to handle element
-});
+```javascript
+  easyd.findElement('id=btn1', true).then(function (element) {
+    // code to handle element
+  });
 ```
 * `easyd.findElements(locator) -> Thenable<Array<WebElement>>`
 ```javascript
