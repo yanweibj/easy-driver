@@ -1,7 +1,7 @@
-// Languages
+// Test Languages
 const languages = ['zh_Hant', 'ja'];
 
-// Loop the languages
+// Loop Test Languages
 languages.forEach(function (lang) {
   /* --- Pre: Environment --- */
   // New a driver
@@ -41,7 +41,7 @@ languages.forEach(function (lang) {
   // Case 3
 
   /* --- Post: Cleanup --- */
-  // Delete generated data that will affect TVT loop
+  // Delete generated data that will affect looping of Test Case Execution
 
   // Quit the driver
   easyd.quit();

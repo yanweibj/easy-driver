@@ -61,6 +61,10 @@ node testcase_sample
 
 Or, you can create your own test case (mytest01.js), and run it like: `node mytest01`
 
+## How To Use EasyDriver to Loop Test Cases
+
+Please use `testcase_Loop.js` as an example.
+
 ## Update EasyDriver
 
 ##### Methodd 1: Use easy-driver-master.zip
