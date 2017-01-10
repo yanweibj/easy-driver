@@ -13,10 +13,10 @@ languages.forEach(function (lang) {
   const langFolder = `blueworks_1stRun/${lang}`;
   easyd.createDirectories(langFolder);
 
-  // Login
+  // Login Blueworks Live
   easyd.open('https://bwlux-web.canlab.ibm.com/sLogin.html');
-  easyd.sendKeys('name=txtLogin', 'bwl_ide2@mailinator.com');
-  easyd.sendKeys('name=txtPassword', 'tvt2test', easyd.Key.ENTER);
+  easyd.sendKeys('name=txtLogin', 'email_here'); // Username
+  easyd.sendKeys('name=txtPassword', 'password_here', easyd.Key.ENTER); // Password
 
   // Switch Blueworks Live to ${lang}
   easyd.click('#pageHeaderOtherControls * li:eq(0)'); // User
@@ -24,7 +24,7 @@ languages.forEach(function (lang) {
   easyd.select('.timezone:eq(1)', `[value="${lang}"]`); // Language <select>
   easyd.click('.bpDialogButtons > button'); // Update button
 
-  /* --- TVT Execution: Test Cases --- */
+  /* --- Execution: Test Cases --- */
   // Case 1
   easyd.blank();
   easyd.open('https://bwlux-web.canlab.ibm.com/scr/processes/5f60058220082#bpmn');
@@ -41,7 +41,7 @@ languages.forEach(function (lang) {
   // Case 3
 
   /* --- Post: Cleanup --- */
-  // Delete generated data that will affect looping of Test Case Execution
+  // Delete generated data that will break the looping of Execution
 
   // Quit the driver
   easyd.quit();
