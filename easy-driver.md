@@ -53,6 +53,7 @@
     * [.getRect(locator)](#EasyDriver+getRect) ⇒ <code>Thenable.&lt;{x: number, y: number, width: number, height: number}&gt;</code>
     * [.getTagName(locator)](#EasyDriver+getTagName) ⇒ <code>Thenable.&lt;string&gt;</code>
     * [.getText(locator)](#EasyDriver+getText) ⇒ <code>Thenable.&lt;string&gt;</code>
+    * [.hide(locator)](#EasyDriver+hide) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.isDisplayed(locator)](#EasyDriver+isDisplayed) ⇒ <code>Thenable.&lt;boolean&gt;</code>
     * [.isEnabled(locator)](#EasyDriver+isEnabled) ⇒ <code>Thenable.&lt;boolean&gt;</code>
     * [.isSelected(locator)](#EasyDriver+isSelected) ⇒ <code>Thenable.&lt;boolean&gt;</code>
@@ -63,8 +64,10 @@
     * [.select(select_locator, option_locator)](#EasyDriver+select) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.sendKeys(locator, ...keys)](#EasyDriver+sendKeys) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.setAttribute(select_locator, attribute, value)](#EasyDriver+setAttribute)
+    * [.show(locator)](#EasyDriver+show) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.submit(locator)](#EasyDriver+submit) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.unCheckAll(locator)](#EasyDriver+unCheckAll)
+    * [.visible(locator)](#EasyDriver+visible) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.waitForDisabled(locator)](#EasyDriver+waitForDisabled) ⇒ <code>Thenable</code>
     * [.waitForEnabled(locator)](#EasyDriver+waitForEnabled) ⇒ <code>Thenable</code>
     * [.waitForNotPresent(locator)](#EasyDriver+waitForNotPresent) ⇒ <code>Thenable</code>
@@ -571,6 +574,17 @@ Get Get the visible innerText of an element
 | --- | --- | --- |
 | locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
 
+<a name="EasyDriver+hide"></a>
+
+### easyDriver.hide(locator) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
+Hide an element
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
+
 <a name="EasyDriver+isDisplayed"></a>
 
 ### easyDriver.isDisplayed(locator) ⇒ <code>Thenable.&lt;boolean&gt;</code>
@@ -687,6 +701,17 @@ Set attribute value for an element
 | attribute | <code>string</code> | attribute name |
 | value | <code>string</code> | attribute value |
 
+<a name="EasyDriver+show"></a>
+
+### easyDriver.show(locator) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
+Show an element
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
+
 <a name="EasyDriver+submit"></a>
 
 ### easyDriver.submit(locator) ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -708,6 +733,17 @@ Uncheck all checkboxes under an element
 | Param | Type | Description |
 | --- | --- | --- |
 | locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
+
+<a name="EasyDriver+visible"></a>
+
+### easyDriver.visible(locator) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
+Set visibility of an element
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| locator | <code>string</code> &#124; <code>WebElement</code> | Element locator    & @param {bool} [isVisible=true] visibility of the element |
 
 <a name="EasyDriver+waitForDisabled"></a>
 

@@ -698,6 +698,19 @@ class EasyDriver {
     return this.findElement(locator).getText();
   }
 
+  /**
+   * Hide an element
+   * @param {(string|WebElement)} locator Element locator
+   * @return {Thenable<(T|null)>}
+   */
+  hide(locator) {
+    this.log(`  [-] hide()`);
+
+    const element = this.findElement(locator);
+    return this.wd.executeScript(`
+      arguments[0].style.display = 'none';
+    `, element);
+  }
 
   // TODO: Need to think how to implement isEnabled/isDisplayed/isSelected
   /**
@@ -827,6 +840,20 @@ class EasyDriver {
   }
 
   /**
+   * Show an element
+   * @param {(string|WebElement)} locator Element locator
+   * @return {Thenable<(T|null)>}
+   */
+  show(locator) {
+    this.log(`  [-] show()`);
+
+    const element = this.findElement(locator);
+    return this.wd.executeScript(`
+      arguments[0].style.display = '';
+    `, element);
+  }
+
+  /**
    * Submit the form containing the element
    * @param {(string|WebElement)} locator Element locator
    * @return {Thenable<undefined>}
@@ -853,6 +880,21 @@ class EasyDriver {
         });
       });
     });
+  }
+
+  /**
+   * Set visibility of an element
+   * @param {(string|WebElement)} locator Element locator
+   & @param {bool} [isVisible=true] visibility of the element
+   * @return {Thenable<(T|null)>}
+   */
+  visible(locator, isVisible = true) {
+    this.log(`  [-] visible()`);
+
+    const element = this.findElement(locator);
+    return this.wd.executeScript(`
+      arguments[0].style.visibility = arguments[1];
+    `, element, isVisible ? 'visible' : 'hidden');
   }
 
   /**

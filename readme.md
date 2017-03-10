@@ -165,6 +165,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.getRect(loc_or_web) -> Thenable<{x: number, y: number, height: number, width: number}>`
 * `easyd.getTagName(loc_or_web) -> Thenable<string>`
 * `easyd.getText(loc_or_web) -> Thenable<string>`
+* `easyd.hide(loc_or_web)`
 * `easyd.isDisplayed(loc_or_web) -> Thenable<boolean>`
 * `easyd.isEnabled(loc_or_web) -> Thenable<boolean>`
 * `easyd.isSelected(loc_or_web) -> Thenable<boolean>`
@@ -175,8 +176,10 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.select(select_loc_or_web, option_locator)`
 * `easyd.sendKeys(loc_or_web, ...keys)`
 * `easyd.setAttribute(loc_or_web, attribute, value)`
+* `easyd.show(loc_or_web)`
 * `easyd.submit(loc_or_web)`
 * `easyd.unCheckAll(loc_or_web)`
+* `easyd.visible(loc_or_web, isVisible = true)`
 * `easyd.waitForDisabled(loc_or_web)`
 * `easyd.waitForEnabled(loc_or_web)`
 * `easyd.waitForNotPresent(loc_or_web)`
