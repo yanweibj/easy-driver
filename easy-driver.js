@@ -603,11 +603,15 @@ class EasyDriver {
   /**
    * Double-click an element
    * @param {(string|WebElement)} locator Element locator
+   * @param {{x: number, y: number}} [offset={x: 0, y: 0}] An offset within the element
    * @return {Thenable}
    */
-  doubleClick(locator) {
+  doubleClick(locator, offset = {x: 0, y: 0}) {
     this.log(`  [-] doubleClick()`);
-    return this.actions().mouseMove(this.findElement(locator, true)).doubleClick().perform();
+    return this.actions()
+      .mouseMove(this.findElement(locator, true), offset)
+      .doubleClick()
+      .perform();
   }
 
   /**

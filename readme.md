@@ -158,7 +158,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.clear(loc_or_web)`
 * `easyd.click(loc_or_web)`
 * `easyd.clickAt(loc_or_web, offset = {x: 0, y: 0})`
-* `easyd.doubleClick(loc_or_web)`
+* `easyd.doubleClick(loc_or_web, offset = {x: 0, y: 0})`
 * `easyd.dragAndDrop(from_loc_or_web, to_loc_or_web_or_position)`
 * `easyd.focus(loc_or_web)`
 * `easyd.getAttribute(loc_or_web, attributeName) -> Thenable<(string|null)>`

@@ -46,7 +46,7 @@
     * [.clear(locator)](#EasyDriver+clear) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.click(locator)](#EasyDriver+click) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.clickAt(locator, [offset])](#EasyDriver+clickAt) ⇒ <code>Thenable</code>
-    * [.doubleClick(locator)](#EasyDriver+doubleClick) ⇒ <code>Thenable</code>
+    * [.doubleClick(locator, [offset])](#EasyDriver+doubleClick) ⇒ <code>Thenable</code>
     * [.dragAndDrop(from_locator, to_locator)](#EasyDriver+dragAndDrop) ⇒ <code>Thenable</code>
     * [.focus(locator)](#EasyDriver+focus) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.getAttribute(locator, attributeName)](#EasyDriver+getAttribute) ⇒ <code>Thenable.&lt;(string\|null)&gt;</code>
@@ -497,14 +497,15 @@ Click an element with an offset
 
 <a name="EasyDriver+doubleClick"></a>
 
-### easyDriver.doubleClick(locator) ⇒ <code>Thenable</code>
+### easyDriver.doubleClick(locator, [offset]) ⇒ <code>Thenable</code>
 Double-click an element
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| locator | <code>string</code> &#124; <code>WebElement</code> |  | Element locator |
+| [offset] | <code>Object</code> | <code>{x: 0, y: 0}</code> | An offset within the element |
 
 <a name="EasyDriver+dragAndDrop"></a>
 
