@@ -20,6 +20,7 @@
     * [.maximizeWindow()](#EasyDriver+maximizeWindow) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.maximizeToScreenSize()](#EasyDriver+maximizeToScreenSize) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.open(url)](#EasyDriver+open) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.openNewWindow(name)](#EasyDriver+openNewWindow) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.quit()](#EasyDriver+quit) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.refresh()](#EasyDriver+refresh) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.runScript(script, fn)](#EasyDriver+runScript)
@@ -220,6 +221,17 @@ Open URL
 | Param | Type | Description |
 | --- | --- | --- |
 | url | <code>string</code> | A fully qualified URL to open |
+
+<a name="EasyDriver+openNewWindow"></a>
+
+### easyDriver.openNewWindow(name) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Open a new window
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | Name of the new window |
 
 <a name="EasyDriver+quit"></a>
 

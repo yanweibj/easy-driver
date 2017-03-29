@@ -290,6 +290,19 @@ class EasyDriver {
   }
 
   /**
+   * Open a new window
+   * @param {string} name Name of the new window
+   * @return {Thenable<undefined>}
+   */
+  openNewWindow(name) {
+    this.log(`  [-] openNewWindow(${name})`);
+
+    return this.wd.executeScript(`
+      window.open("about:blank", arguments[0]);
+    `, name);
+  }
+
+  /**
    * Terminates the browser session
    * @return {Thenable<undefined>}
    */

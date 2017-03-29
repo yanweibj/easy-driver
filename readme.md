@@ -128,6 +128,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.maximizeWindow()`
 * `easyd.maximizeToScreenSize()`
 * `easyd.open(url)`
+* `easyd.openNewWindow(name)`
 * `easyd.quit()`
 * `easyd.refresh()`
 * `easyd.runScript(script, callback) -> callback(retval)`
