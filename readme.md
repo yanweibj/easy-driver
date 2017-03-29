@@ -103,6 +103,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 
 ##### easyd - WebDriver Methods
 * `easyd.actions() -> ActionSequence` => See **Class ActionSequence**
+* `easyd.activeElement() -> WebElementPromise`
 * `easyd.back()`
 * `easyd.blank()`
 * `easyd.close()`
@@ -170,6 +171,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.isEnabled(loc_or_web) -> Thenable<boolean>`
 * `easyd.isSelected(loc_or_web) -> Thenable<boolean>`
 * `easyd.mouseMove(loc_or_web, offset = {x: 0, y: 0})`
+* `easyd.removeAttribute(locator, attributeName)`
 * `easyd.rightClick(loc_or_web)`
 * `easyd.rightClickAt(loc_or_web, offset = {x: 0, y: 0})`
 * `easyd.scrollIntoView(loc_or_web)`

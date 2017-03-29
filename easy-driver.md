@@ -6,6 +6,7 @@
 * [EasyDriver](#EasyDriver)
     * [new EasyDriver([options])](#new_EasyDriver_new)
     * [.actions()](#EasyDriver+actions) ⇒ <code>ActionSequence</code>
+    * [.activeElement()](#EasyDriver+activeElement) ⇒ <code>WebElementPromise</code>
     * [.back()](#EasyDriver+back) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.blank()](#EasyDriver+blank) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.close()](#EasyDriver+close) ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -58,6 +59,7 @@
     * [.isEnabled(locator)](#EasyDriver+isEnabled) ⇒ <code>Thenable.&lt;boolean&gt;</code>
     * [.isSelected(locator)](#EasyDriver+isSelected) ⇒ <code>Thenable.&lt;boolean&gt;</code>
     * [.mouseMove(locator, [offset])](#EasyDriver+mouseMove) ⇒ <code>Thenable</code>
+    * [.removeAttribute(locator, attributeName)](#EasyDriver+removeAttribute) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.rightClick(locator)](#EasyDriver+rightClick) ⇒ <code>Thenable</code>
     * [.rightClickAt(locator, [offset])](#EasyDriver+rightClickAt) ⇒ <code>Thenable</code>
     * [.scrollIntoView(locator)](#EasyDriver+scrollIntoView) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
@@ -105,6 +107,12 @@ Create a new action sequence
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 **Returns**: <code>ActionSequence</code> - A new action sequence.  
+<a name="EasyDriver+activeElement"></a>
+
+### easyDriver.activeElement() ⇒ <code>WebElementPromise</code>
+Retrieve the document.activeElement element
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 <a name="EasyDriver+back"></a>
 
 ### easyDriver.back() ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -630,6 +638,18 @@ Move to an element by offset
 | --- | --- | --- | --- |
 | locator | <code>string</code> &#124; <code>WebElement</code> |  | Element locator |
 | [offset] | <code>Object</code> | <code>{x: 0, y: 0}</code> | An offset within the element. |
+
+<a name="EasyDriver+removeAttribute"></a>
+
+### easyDriver.removeAttribute(locator, attributeName) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
+Remove an attribute from an element
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
+| attributeName | <code>string</code> | The name of the attribute to remove |
 
 <a name="EasyDriver+rightClick"></a>
 

@@ -76,6 +76,14 @@ class EasyDriver {
   }
 
   /**
+   * Retrieve the document.activeElement element
+   * @return {WebElementPromise}
+   */
+  activeElement() {
+    return this.wd.switchTo().activeElement();
+  }
+
+  /**
    * Move backwards in the browser history
    * @return {Thenable<undefined>}
    */
@@ -758,6 +766,26 @@ class EasyDriver {
   mouseMove(locator, offset = {x: 0, y: 0}) {
     this.log(`  [-] mouseMove()`);
     return this.actions().mouseMove(this.findElement(locator, true), offset).perform();
+  }
+
+  /**
+   * Remove an attribute from an element
+   * @param {(string|WebElement)} locator Element locator
+   * @param {string} attributeName The name of the attribute to remove
+   * @return {Thenable<(T|null)>}
+   */
+  removeAttribute(locator, attributeName) {
+    this.log(`  [-] removeAttribute()`);
+
+    const element = this.findElement(locator);
+
+    return this.wd.executeScript(`
+      var element = arguments[0];
+      var attributeName = arguments[1];
+      if (element.hasAttribute(attributeName)) {
+        element.removeAttribute(attributeName);
+      }
+    `, element, attributeName);
   }
 
   /**
