@@ -66,6 +66,7 @@
     * [.scrollIntoView(locator)](#EasyDriver+scrollIntoView) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.select(select_locator, option_locator)](#EasyDriver+select) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.sendKeys(locator, ...keys)](#EasyDriver+sendKeys) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.sendKeysForFile(input_file_locator, abs_file_path)](#EasyDriver+sendKeysForFile) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.setAttribute(select_locator, attribute, value)](#EasyDriver+setAttribute)
     * [.show(locator)](#EasyDriver+show) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.submit(locator)](#EasyDriver+submit) ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -720,6 +721,18 @@ Send keys to an element
 | --- | --- | --- |
 | locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
 | ...keys | <code>string</code> &#124; <code>Key</code> &#124; <code>Array.&lt;(string\|Key)&gt;</code> | Keys to send |
+
+<a name="EasyDriver+sendKeysForFile"></a>
+
+### easyDriver.sendKeysForFile(input_file_locator, abs_file_path) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Send keys to Input Type "File"
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| input_file_locator | <code>string</code> &#124; <code>WebElement</code> | locator for <input type="file"> |
+| abs_file_path | <code>string</code> | Absolute file path |
 
 <a name="EasyDriver+setAttribute"></a>
 

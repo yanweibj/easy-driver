@@ -865,6 +865,38 @@ class EasyDriver {
   }
 
   /**
+   * Send keys to Input Type "File"
+   * @param {(string|WebElement)} input_file_locator locator for <input type="file">
+   * @param {string} abs_file_path Absolute file path
+   * @return {Thenable<undefined>}
+   */
+  sendKeysForFile(input_file_locator, abs_file_path) {
+    this.log(`  [-] fileUpload(${input_file_locator}, ${abs_file_path})`);
+
+    const self = this;
+    const element = self.findElement(input_file_locator, true);
+
+    self.getAttribute(element, 'type').then(function (val) {
+      if (val.toLowerCase() != 'file') {
+        console.error(`Element ${input_file_locator} is not type="file".`);
+        throw new this.error.NoSuchElementError();
+      }
+    });
+
+    self.sleep(1000);
+
+    return self.wd.executeScript(`
+      var el = arguments[0];
+      el.onclick = function(event) {
+        event.preventDefault();
+      };
+    `, element).then(function () {
+      self.click(element);
+      return self.sendKeys(element, abs_file_path);
+    });
+  }
+
+  /**
    * Set attribute value for an element
    * @param {(string|WebElement)} select_locator SELECT element locator
    * @param {string} attribute attribute name

@@ -178,6 +178,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.scrollIntoView(loc_or_web)`
 * `easyd.select(select_loc_or_web, option_locator)`
 * `easyd.sendKeys(loc_or_web, ...keys)`
+* `easyd.sendKeysForFile(input_file_locator, abs_file_path)`
 * `easyd.setAttribute(loc_or_web, attribute, value)`
 * `easyd.show(loc_or_web)`
 * `easyd.submit(loc_or_web)`
