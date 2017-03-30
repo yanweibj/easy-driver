@@ -724,6 +724,24 @@ class EasyDriver {
   }
 
   /**
+   * Check if an element has the specified attribute
+   * @param {(string|WebElement)} locator Element locator
+   * @param {string} attributeName The name of the attribute to check
+   * @return {Thenable<boolean>}
+   */
+  hasAttribute(locator, attributeName) {
+    this.log(`  [-] hasAttribute()`);
+
+    const element = this.findElement(locator, true);
+
+    return this.wd.executeScript(`
+      return arguments[0].hasAttribute(arguments[1]);
+    `, element, attributeName).then(function (reseult) {
+      return reseult;
+    });
+  }
+
+  /**
    * Hide an element
    * @param {(string|WebElement)} locator Element locator
    * @return {Thenable<(T|null)>}
@@ -790,7 +808,7 @@ class EasyDriver {
   removeAttribute(locator, attributeName) {
     this.log(`  [-] removeAttribute()`);
 
-    const element = this.findElement(locator);
+    const element = this.findElement(locator, true);
 
     return this.wd.executeScript(`
       var element = arguments[0];
@@ -864,37 +882,37 @@ class EasyDriver {
     return this.findElement(locator).sendKeys(...keys);
   }
 
-  /**
-   * Send keys to Input Type "File"
-   * @param {(string|WebElement)} input_file_locator locator for <input type="file">
-   * @param {string} abs_file_path Absolute file path
-   * @return {Thenable<undefined>}
-   */
-  sendKeysForFile(input_file_locator, abs_file_path) {
-    this.log(`  [-] fileUpload(${input_file_locator}, ${abs_file_path})`);
-
-    const self = this;
-    const element = self.findElement(input_file_locator, true);
-
-    self.getAttribute(element, 'type').then(function (val) {
-      if (val.toLowerCase() != 'file') {
-        console.error(`Element ${input_file_locator} is not type="file".`);
-        throw new this.error.NoSuchElementError();
-      }
-    });
-
-    self.sleep(1000);
-
-    return self.wd.executeScript(`
-      var el = arguments[0];
-      el.onclick = function(event) {
-        event.preventDefault();
-      };
-    `, element).then(function () {
-      self.click(element);
-      return self.sendKeys(element, abs_file_path);
-    });
-  }
+  // /**
+  //  * Send keys to Input Type "File"
+  //  * @param {(string|WebElement)} input_file_locator locator for <input type="file">
+  //  * @param {string} abs_file_path Absolute file path
+  //  * @return {Thenable<undefined>}
+  //  */
+  // sendKeysForFile(input_file_locator, abs_file_path) {
+  //   this.log(`  [-] fileUpload(${input_file_locator}, ${abs_file_path})`);
+  //
+  //   const self = this;
+  //   const element = self.findElement(input_file_locator, true);
+  //
+  //   self.getAttribute(element, 'type').then(function (val) {
+  //     if (val.toLowerCase() != 'file') {
+  //       console.error(`Element ${input_file_locator} is not type="file".`);
+  //       throw new this.error.NoSuchElementError();
+  //     }
+  //   });
+  //
+  //   self.sleep(1000);
+  //
+  //   return self.wd.executeScript(`
+  //     var el = arguments[0];
+  //     el.onclick = function(event) {
+  //       event.preventDefault();
+  //     };
+  //   `, element).then(function () {
+  //     self.click(element);
+  //     return self.sendKeys(element, abs_file_path);
+  //   });
+  // }
 
   /**
    * Set attribute value for an element
@@ -938,6 +956,29 @@ class EasyDriver {
   submit(locator) {
     this.log(`  [-] submit()`);
     return this.findElement(locator).submit();
+  }
+
+  /**
+   * Trigger an event on an element
+   * @param {(string|WebElement)} locator Element locator
+   * @param {string} eventName Event Name
+   * @return {Thenable<(T|null)>}
+   */
+  trigger(locator, eventName) {
+    this.log(`  [-] trigger()`);
+
+    const element = this.findElement(locator, true);
+
+    return this.wd.executeScript(`
+      var element = arguments[0];
+      var eventName = arguments[1];
+
+      var event = document.createEvent('Event');
+      event.initEvent(eventName, true, true);
+
+      element.addEventListener(eventName, function (e) {}, false);
+      element.dispatchEvent(event);
+    `, element, eventName);
   }
 
   /**

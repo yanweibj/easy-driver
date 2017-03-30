@@ -55,6 +55,7 @@
     * [.getRect(locator)](#EasyDriver+getRect) ⇒ <code>Thenable.&lt;{x: number, y: number, width: number, height: number}&gt;</code>
     * [.getTagName(locator)](#EasyDriver+getTagName) ⇒ <code>Thenable.&lt;string&gt;</code>
     * [.getText(locator)](#EasyDriver+getText) ⇒ <code>Thenable.&lt;string&gt;</code>
+    * [.hasAttribute(locator, attributeName)](#EasyDriver+hasAttribute) ⇒ <code>Thenable.&lt;boolean&gt;</code>
     * [.hide(locator)](#EasyDriver+hide) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.isDisplayed(locator)](#EasyDriver+isDisplayed) ⇒ <code>Thenable.&lt;boolean&gt;</code>
     * [.isEnabled(locator)](#EasyDriver+isEnabled) ⇒ <code>Thenable.&lt;boolean&gt;</code>
@@ -66,10 +67,10 @@
     * [.scrollIntoView(locator)](#EasyDriver+scrollIntoView) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.select(select_locator, option_locator)](#EasyDriver+select) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.sendKeys(locator, ...keys)](#EasyDriver+sendKeys) ⇒ <code>Thenable.&lt;undefined&gt;</code>
-    * [.sendKeysForFile(input_file_locator, abs_file_path)](#EasyDriver+sendKeysForFile) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.setAttribute(select_locator, attribute, value)](#EasyDriver+setAttribute)
     * [.show(locator)](#EasyDriver+show) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.submit(locator)](#EasyDriver+submit) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.trigger(locator, eventName)](#EasyDriver+trigger) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.unCheckAll(locator)](#EasyDriver+unCheckAll)
     * [.visible(locator)](#EasyDriver+visible) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.waitForDisabled(locator)](#EasyDriver+waitForDisabled) ⇒ <code>Thenable</code>
@@ -596,6 +597,18 @@ Get Get the visible innerText of an element
 | --- | --- | --- |
 | locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
 
+<a name="EasyDriver+hasAttribute"></a>
+
+### easyDriver.hasAttribute(locator, attributeName) ⇒ <code>Thenable.&lt;boolean&gt;</code>
+Check if an element has the specified attribute
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
+| attributeName | <code>string</code> | The name of the attribute to check |
+
 <a name="EasyDriver+hide"></a>
 
 ### easyDriver.hide(locator) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
@@ -722,18 +735,6 @@ Send keys to an element
 | locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
 | ...keys | <code>string</code> &#124; <code>Key</code> &#124; <code>Array.&lt;(string\|Key)&gt;</code> | Keys to send |
 
-<a name="EasyDriver+sendKeysForFile"></a>
-
-### easyDriver.sendKeysForFile(input_file_locator, abs_file_path) ⇒ <code>Thenable.&lt;undefined&gt;</code>
-Send keys to Input Type "File"
-
-**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| input_file_locator | <code>string</code> &#124; <code>WebElement</code> | locator for <input type="file"> |
-| abs_file_path | <code>string</code> | Absolute file path |
-
 <a name="EasyDriver+setAttribute"></a>
 
 ### easyDriver.setAttribute(select_locator, attribute, value)
@@ -768,6 +769,18 @@ Submit the form containing the element
 | Param | Type | Description |
 | --- | --- | --- |
 | locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
+
+<a name="EasyDriver+trigger"></a>
+
+### easyDriver.trigger(locator, eventName) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
+Trigger an event on an element
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
+| eventName | <code>string</code> | Event Name |
 
 <a name="EasyDriver+unCheckAll"></a>
 

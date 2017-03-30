@@ -167,21 +167,23 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.getRect(loc_or_web) -> Thenable<{x: number, y: number, height: number, width: number}>`
 * `easyd.getTagName(loc_or_web) -> Thenable<string>`
 * `easyd.getText(loc_or_web) -> Thenable<string>`
+* `easyd.hasAttribute(loc_or_web, attributeName) -> Thenable<boolean>`
 * `easyd.hide(loc_or_web)`
 * `easyd.isDisplayed(loc_or_web) -> Thenable<boolean>`
 * `easyd.isEnabled(loc_or_web) -> Thenable<boolean>`
 * `easyd.isSelected(loc_or_web) -> Thenable<boolean>`
 * `easyd.mouseMove(loc_or_web, offset = {x: 0, y: 0})`
-* `easyd.removeAttribute(locator, attributeName)`
+* `easyd.removeAttribute(loc_or_web, attributeName)`
 * `easyd.rightClick(loc_or_web)`
 * `easyd.rightClickAt(loc_or_web, offset = {x: 0, y: 0})`
 * `easyd.scrollIntoView(loc_or_web)`
 * `easyd.select(select_loc_or_web, option_locator)`
 * `easyd.sendKeys(loc_or_web, ...keys)`
-* `easyd.sendKeysForFile(input_file_locator, abs_file_path)`
+<!-- * `easyd.sendKeysForFile(input_file_locator, abs_file_path)` -->
 * `easyd.setAttribute(loc_or_web, attribute, value)`
 * `easyd.show(loc_or_web)`
 * `easyd.submit(loc_or_web)`
+* `easyd.trigger(loc_or_web, eventName)`
 * `easyd.unCheckAll(loc_or_web)`
 * `easyd.visible(loc_or_web, isVisible = true)`
 * `easyd.waitForDisabled(loc_or_web)`
