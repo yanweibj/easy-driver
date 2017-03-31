@@ -23,6 +23,8 @@ class EasyDriver {
 
     // Default Timeout
     this.TIMEOUT = 30000;
+    // Verbose on
+    this.VERBOSE = true;
 
     // options
     if (process.env.SELENIUM_BROWSER) options.browser = process.env.SELENIUM_BROWSER;
@@ -247,11 +249,13 @@ class EasyDriver {
    * @param {string} msg Messages to log
    */
   log(msg) {
-    const defer = this.promise.defer();
-    defer.fulfill(msg);
-    defer.promise.then(function (message) {
-      console.log(message);
-    });
+    if (this.VERBOSE) {
+      const defer = this.promise.defer();
+      defer.fulfill(msg);
+      defer.promise.then(function (message) {
+        console.log(message);
+      });
+    }
   }
 
   /**
@@ -973,10 +977,7 @@ class EasyDriver {
       var element = arguments[0];
       var eventName = arguments[1];
 
-      var event = document.createEvent('Event');
-      event.initEvent(eventName, true, true);
-
-      element.addEventListener(eventName, function (e) {}, false);
+      var event = new Event(eventName, {"bubbles": false, "cancelable": false});
       element.dispatchEvent(event);
     `, element, eventName);
   }

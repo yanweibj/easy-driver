@@ -143,4 +143,17 @@ test.describe('=== EasyDriver Test Suite ===', function() {
     done();
   });
 
+  test.it('Test Case: trigger()', function(done) {
+    easyd.open('https://jsfiddle.net/aaronchen/audbkq31/show/');
+    easyd.switchToFrame(0);
+    easyd.trigger('id=btn1', 'click');
+    easyd.trigger('id=btn1', 'customEvent1');
+    easyd.getText('id=result').then(function (text) {
+      assert(text).contains('click1');
+      assert(text).contains('click2');
+      assert(text).contains('customEvent1');
+    });
+    done();
+  });
+
 });
