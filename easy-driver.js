@@ -122,6 +122,7 @@ class EasyDriver {
 
   /**
    * Send Keys to window.prompt() and accept the dialog
+   * @param {string} text Text to send into prompt dialog
    * @return {Thenable<undefined>}
    */
   alertSendKeys(text) {
@@ -130,7 +131,7 @@ class EasyDriver {
     const self = this;
     return self.waitForAlertIsPresent().then(function () {
       return self.switchToAlert().then(function (alert) {
-        alert.sendKeys("dfdfadsfasfas");
+        alert.sendKeys(text);
         return alert.accept();
       });
     });
