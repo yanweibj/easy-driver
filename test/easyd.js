@@ -156,4 +156,27 @@ test.describe('=== EasyDriver Test Suite ===', function() {
     done();
   });
 
+  test.it('Test Case: alertAccept(), alertDismiss(), switchToAlert()', function(done) {
+    easyd.open('https://jsfiddle.net/aaronchen/7na34jne/show/');
+    easyd.switchToFrame(0);
+    easyd.click('#bAlert');
+    easyd.alertAccept();
+    easyd.click('#bConfirm');
+    easyd.alertDismiss();
+    easyd.getText('id=result').then(function (text) {
+      assert(text).contains('No');
+    });
+    easyd.click('#bPrompt');
+    easyd.waitForAlertIsPresent().then(function () {
+      easyd.switchToAlert().then(function (alert) {
+        alert.sendKeys("dfdfadsfasfas");
+        alert.accept();
+      });
+    });
+    easyd.getText('id=result').then(function (text) {
+      assert(text).contains('dfdfadsfasfas');
+    });
+    done();
+  });
+
 });
