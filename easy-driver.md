@@ -9,6 +9,7 @@
     * [.activeElement()](#EasyDriver+activeElement) ⇒ <code>WebElementPromise</code>
     * [.alertAccept()](#EasyDriver+alertAccept) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.alertDismiss()](#EasyDriver+alertDismiss) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.alertSendKeys()](#EasyDriver+alertSendKeys) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.back()](#EasyDriver+back) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.blank()](#EasyDriver+blank) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.close()](#EasyDriver+close) ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -130,6 +131,12 @@ Accept an alert/confirm/prompt dialog
 
 ### easyDriver.alertDismiss() ⇒ <code>Thenable.&lt;undefined&gt;</code>
 Dismiss a confirm/prompt dialog
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+<a name="EasyDriver+alertSendKeys"></a>
+
+### easyDriver.alertSendKeys() ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Send Keys to window.prompt() and accept the dialog
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 <a name="EasyDriver+back"></a>

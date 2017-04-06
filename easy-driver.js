@@ -121,6 +121,22 @@ class EasyDriver {
   }
 
   /**
+   * Send Keys to window.prompt() and accept the dialog
+   * @return {Thenable<undefined>}
+   */
+  alertSendKeys(text) {
+    this.log(`  [-] alertSendKeyss()`);
+
+    const self = this;
+    return self.waitForAlertIsPresent().then(function () {
+      return self.switchToAlert().then(function (alert) {
+        alert.sendKeys("dfdfadsfasfas");
+        return alert.accept();
+      });
+    });
+  }
+
+  /**
    * Move backwards in the browser history
    * @return {Thenable<undefined>}
    */

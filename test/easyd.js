@@ -156,7 +156,7 @@ test.describe('=== EasyDriver Test Suite ===', function() {
     done();
   });
 
-  test.it('Test Case: alertAccept(), alertDismiss(), switchToAlert()', function(done) {
+  test.it('Test Case: alertAccept(), alertDismiss(), alertSendKeys()', function(done) {
     easyd.open('https://jsfiddle.net/aaronchen/7na34jne/show/');
     easyd.switchToFrame(0);
     easyd.click('#bAlert');
@@ -167,14 +167,9 @@ test.describe('=== EasyDriver Test Suite ===', function() {
       assert(text).contains('No');
     });
     easyd.click('#bPrompt');
-    easyd.waitForAlertIsPresent().then(function () {
-      easyd.switchToAlert().then(function (alert) {
-        alert.sendKeys("dfdfadsfasfas");
-        alert.accept();
-      });
-    });
+    easyd.alertSendKeys('fdafds');
     easyd.getText('id=result').then(function (text) {
-      assert(text).contains('dfdfadsfasfas');
+      assert(text).contains('fdafds');
     });
     done();
   });

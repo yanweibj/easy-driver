@@ -63,7 +63,7 @@ Or, you can create your own test case (mytest01.js), and run it like: `node myte
 
 ## How To Use EasyDriver to Loop Test Cases
 
-Please use `testcase_Loop.js` as an example.
+Please use `testcase_loop.js` as an example.
 
 ## Update EasyDriver
 
@@ -106,6 +106,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.activeElement() -> WebElementPromise`
 * `easyd.alertAccept()`
 * `easyd.alertDismiss()`
+* `easyd.alertSendKeys(text)`
 * `easyd.back()`
 * `easyd.blank()`
 * `easyd.close()`
