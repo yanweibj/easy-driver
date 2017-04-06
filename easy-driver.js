@@ -77,6 +77,7 @@ class EasyDriver {
    * @return {ActionSequence} A new action sequence.
    */
   actions() {
+    this.log(`  [-] actions()`);
     return this.wd.actions();
   }
 
@@ -85,7 +86,38 @@ class EasyDriver {
    * @return {WebElementPromise}
    */
   activeElement() {
+    this.log(`  [-] activeElement()`);
     return this.wd.switchTo().activeElement();
+  }
+
+  /**
+   * Accept an alert/confirm/prompt dialog
+   * @return {Thenable<undefined>}
+   */
+  alertAccept() {
+    this.log(`  [-] alertAccept()`);
+
+    const self = this;
+    return self.waitForAlertIsPresent().then(function () {
+      return self.switchToAlert().then(function (alert) {
+        return alert.accept();
+      });
+    });
+  }
+
+  /**
+   * Dismiss a confirm/prompt dialog
+   * @return {Thenable<undefined>}
+   */
+  alertDismiss() {
+    this.log(`  [-] alertDismiss()`);
+
+    const self = this;
+    return self.waitForAlertIsPresent().then(function () {
+      return self.switchToAlert().then(function (alert) {
+        return alert.dismiss();
+      });
+    });
   }
 
   /**
@@ -411,6 +443,15 @@ class EasyDriver {
   sleep(ms) {
     ms = parseInt(ms) || 0;
     return this.wd.sleep(ms);
+  }
+
+  /**
+   * Switch to window.alert(), window.confirm(), or window.prompt()
+   * @return {AlertPromise}
+   */
+  switchToAlert() {
+    this.log(`  [-] switchToAlert()`);
+    return this.wd.switchTo().alert();
   }
 
   /**

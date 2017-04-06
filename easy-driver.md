@@ -7,6 +7,8 @@
     * [new EasyDriver([options])](#new_EasyDriver_new)
     * [.actions()](#EasyDriver+actions) ⇒ <code>ActionSequence</code>
     * [.activeElement()](#EasyDriver+activeElement) ⇒ <code>WebElementPromise</code>
+    * [.alertAccept()](#EasyDriver+alertAccept) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.alertDismiss()](#EasyDriver+alertDismiss) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.back()](#EasyDriver+back) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.blank()](#EasyDriver+blank) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.close()](#EasyDriver+close) ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -20,7 +22,7 @@
     * [.maximizeWindow()](#EasyDriver+maximizeWindow) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.maximizeToScreenSize()](#EasyDriver+maximizeToScreenSize) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.open(url)](#EasyDriver+open) ⇒ <code>Thenable.&lt;undefined&gt;</code>
-    * [.openNewWindow(name)](#EasyDriver+openNewWindow) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.openWindow(name)](#EasyDriver+openWindow) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.quit()](#EasyDriver+quit) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.refresh()](#EasyDriver+refresh) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.runScript(script, fn)](#EasyDriver+runScript)
@@ -30,6 +32,7 @@
     * [.setWindowPosition(x, y)](#EasyDriver+setWindowPosition) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.setWindowSize(width, height)](#EasyDriver+setWindowSize) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.sleep(ms)](#EasyDriver+sleep) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.switchToAlert()](#EasyDriver+switchToAlert) ⇒ <code>AlertPromise</code>
     * [.switchToDefaultContent()](#EasyDriver+switchToDefaultContent) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.switchToFrame(locator)](#EasyDriver+switchToFrame) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.switchToWindow(nameOrHandle)](#EasyDriver+switchToWindow) ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -57,6 +60,7 @@
     * [.getText(locator)](#EasyDriver+getText) ⇒ <code>Thenable.&lt;string&gt;</code>
     * [.hasAttribute(locator, attributeName)](#EasyDriver+hasAttribute) ⇒ <code>Thenable.&lt;boolean&gt;</code>
     * [.hide(locator)](#EasyDriver+hide) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
+    * [.highlight(locator)](#EasyDriver+highlight) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.isDisplayed(locator)](#EasyDriver+isDisplayed) ⇒ <code>Thenable.&lt;boolean&gt;</code>
     * [.isEnabled(locator)](#EasyDriver+isEnabled) ⇒ <code>Thenable.&lt;boolean&gt;</code>
     * [.isSelected(locator)](#EasyDriver+isSelected) ⇒ <code>Thenable.&lt;boolean&gt;</code>
@@ -114,6 +118,18 @@ Create a new action sequence
 
 ### easyDriver.activeElement() ⇒ <code>WebElementPromise</code>
 Retrieve the document.activeElement element
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+<a name="EasyDriver+alertAccept"></a>
+
+### easyDriver.alertAccept() ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Accept an alert/confirm/prompt dialog
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+<a name="EasyDriver+alertDismiss"></a>
+
+### easyDriver.alertDismiss() ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Dismiss a confirm/prompt dialog
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 <a name="EasyDriver+back"></a>
@@ -224,10 +240,10 @@ Open URL
 | --- | --- | --- |
 | url | <code>string</code> | A fully qualified URL to open |
 
-<a name="EasyDriver+openNewWindow"></a>
+<a name="EasyDriver+openWindow"></a>
 
-### easyDriver.openNewWindow(name) ⇒ <code>Thenable.&lt;undefined&gt;</code>
-Open a new window
+### easyDriver.openWindow(name) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Open a new blank window
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 
@@ -327,6 +343,12 @@ Sleep
 | --- | --- | --- |
 | ms | <code>number</code> | The amount of time, in milliseconds, to sleep |
 
+<a name="EasyDriver+switchToAlert"></a>
+
+### easyDriver.switchToAlert() ⇒ <code>AlertPromise</code>
+Switch to window.alert(), window.confirm(), or window.prompt()
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 <a name="EasyDriver+switchToDefaultContent"></a>
 
 ### easyDriver.switchToDefaultContent() ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -613,6 +635,17 @@ Check if an element has the specified attribute
 
 ### easyDriver.hide(locator) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
 Hide an element
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
+
+<a name="EasyDriver+highlight"></a>
+
+### easyDriver.highlight(locator) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
+Highlight an element
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 

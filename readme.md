@@ -104,6 +104,8 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 ##### easyd - WebDriver Methods
 * `easyd.actions() -> ActionSequence` => See **Class ActionSequence**
 * `easyd.activeElement() -> WebElementPromise`
+* `easyd.alertAccept()`
+* `easyd.alertDismiss()`
 * `easyd.back()`
 * `easyd.blank()`
 * `easyd.close()`
@@ -138,6 +140,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.setWindowPosition(x, y)`
 * `easyd.setWindowSize(width, height)`
 * `easyd.sleep(ms)`
+* `easyd.switchToAlert() -> AlertPromise` => See  [AlertPromise](http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/webdriver_exports_AlertPromise.html)
 * `easyd.switchToDefaultContent()`
 * `easyd.switchToFrame(number_or_loc_or_web)`
 * `easyd.switchToWindow(nameOrHandle)`
