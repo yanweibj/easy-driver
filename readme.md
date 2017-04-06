@@ -128,7 +128,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.maximizeWindow()`
 * `easyd.maximizeToScreenSize()`
 * `easyd.open(url)`
-* `easyd.openNewWindow(name)`
+* `easyd.openWindow(name)`
 * `easyd.quit()`
 * `easyd.refresh()`
 * `easyd.runScript(script, callback) -> callback(retval)`
@@ -169,6 +169,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.getText(loc_or_web) -> Thenable<string>`
 * `easyd.hasAttribute(loc_or_web, attributeName) -> Thenable<boolean>`
 * `easyd.hide(loc_or_web)`
+* `easyd.highlight(loc_or_web)`
 * `easyd.isDisplayed(loc_or_web) -> Thenable<boolean>`
 * `easyd.isEnabled(loc_or_web) -> Thenable<boolean>`
 * `easyd.isSelected(loc_or_web) -> Thenable<boolean>`

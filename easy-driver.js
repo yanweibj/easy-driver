@@ -37,6 +37,9 @@ class EasyDriver {
     // pref_names.cc: https://goo.gl/NXSyLn
     const chromeOptions = new chrome.Options();
     chromeOptions.setUserPreferences({ 'intl.accept_languages': this.locale });
+    // get rid of "Chrome is being controlled by automated test software"
+    chromeOptions.excludeSwitches("enable-automation");
+    // chromeOptions.addArguments("disable-infobars");
     // chromeOptions.addArguments(`lang=${this.locale}`);
     // chromeOptions.addExtensions(`extensions/Advanced-Font-Settings_v0.67.crx`);
     // chromeOptions.addExtensions('extensions/Full-Page-Screen-Capture_v2.2.crx');
@@ -294,15 +297,17 @@ class EasyDriver {
   }
 
   /**
-   * Open a new window
+   * Open a new blank window
    * @param {string} name Name of the new window
    * @return {Thenable<undefined>}
    */
-  openNewWindow(name) {
-    this.log(`  [-] openNewWindow(${name})`);
+  openWindow(name) {
+    this.log(`  [-] openWindow(${name})`);
 
     return this.wd.executeScript(`
-      window.open("about:blank", arguments[0]);
+      var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+      var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+      window.open("about:blank", arguments[0], "width=" + w + ",height=" + h);
     `, name);
   }
 
@@ -756,6 +761,20 @@ class EasyDriver {
     const element = this.findElement(locator);
     return this.wd.executeScript(`
       arguments[0].style.display = 'none';
+    `, element);
+  }
+
+  /**
+   * Highlight an element
+   * @param {(string|WebElement)} locator Element locator
+   * @return {Thenable<(T|null)>}
+   */
+  highlight(locator) {
+    this.log(`  [-] highlight()`);
+
+    const element = this.findElement(locator);
+    return this.wd.executeScript(`
+      arguments[0].style.backgroundColor = '#FFFF33';
     `, element);
   }
 
