@@ -38,8 +38,8 @@ class EasyDriver {
     const chromeOptions = new chrome.Options();
     chromeOptions.setUserPreferences({ 'intl.accept_languages': this.locale });
     // get rid of "Chrome is being controlled by automated test software"
-    chromeOptions.excludeSwitches("enable-automation");
-    // chromeOptions.addArguments("disable-infobars");
+    // chromeOptions.excludeSwitches("enable-automation");
+    chromeOptions.addArguments("disable-infobars");
     // chromeOptions.addArguments(`lang=${this.locale}`);
     // chromeOptions.addExtensions(`extensions/Advanced-Font-Settings_v0.67.crx`);
     // chromeOptions.addExtensions('extensions/Full-Page-Screen-Capture_v2.2.crx');
