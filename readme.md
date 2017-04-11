@@ -279,3 +279,42 @@ easyd.findElements('css=[id*="item"]').then(function (elements) {
 ## Limitation
 
 `chrome` can only take screenshot of viewport.  It is currently not possible to take a full-page screenshot or elements that are not visible in the viewport.
+
+## EasySuite
+
+EasySuite is a preliminary Test Suite support for EasyDriver.  It is based upon [selenium-webdriver/testing](http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/testing/index.html) and [Mocha](https://mochajs.org).  
+
+To run sample test suite, please execute: `node_modules/.bin/mocha testsuite_sample.js`
+
+```javascript
+const EasyDriver = require('./easy-driver');
+const EasySuite = require('./easy-suite');
+
+const easyd = new EasyDriver({locale: 'en'});
+const suite = new EasySuite('EasyDriver Test Suite');
+
+suite.before(function() {
+  // Steps for Environment Setup
+});
+
+suite.after(function() {
+  // Steps for Environment Cleanup
+});
+
+suite.testcase("010.010.010", function() {
+  // Steps for test case 010.010.010
+});
+
+suite.testcase("010.010.020", function() {
+  // Steps for test case 010.010.020
+});
+
+suite.testcase("010.020.010", function() {
+  // Steps for test case 010.020.010
+});
+
+// Only run certain test cases
+// suite.only(['010.010.010', "010.020.010"]);
+
+suite.run();
+```

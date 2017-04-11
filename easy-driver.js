@@ -1081,7 +1081,7 @@ class EasyDriver {
   /**
    * Set visibility of an element
    * @param {(string|WebElement)} locator Element locator
-   & @param {bool} [isVisible=true] visibility of the element
+   * @param {bool} [isVisible=true] visibility of the element
    * @return {Thenable<(T|null)>}
    */
   visible(locator, isVisible = true) {

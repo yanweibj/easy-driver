@@ -77,7 +77,7 @@
     * [.submit(locator)](#EasyDriver+submit) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.trigger(locator, eventName)](#EasyDriver+trigger) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.unCheckAll(locator)](#EasyDriver+unCheckAll)
-    * [.visible(locator)](#EasyDriver+visible) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
+    * [.visible(locator, [isVisible])](#EasyDriver+visible) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.waitForDisabled(locator)](#EasyDriver+waitForDisabled) ⇒ <code>Thenable</code>
     * [.waitForEnabled(locator)](#EasyDriver+waitForEnabled) ⇒ <code>Thenable</code>
     * [.waitForNotPresent(locator)](#EasyDriver+waitForNotPresent) ⇒ <code>Thenable</code>
@@ -840,14 +840,15 @@ Uncheck all checkboxes under an element
 
 <a name="EasyDriver+visible"></a>
 
-### easyDriver.visible(locator) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
+### easyDriver.visible(locator, [isVisible]) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
 Set visibility of an element
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| locator | <code>string</code> &#124; <code>WebElement</code> | Element locator    & @param {bool} [isVisible=true] visibility of the element |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| locator | <code>string</code> &#124; <code>WebElement</code> |  | Element locator |
+| [isVisible] | <code>bool</code> | <code>true</code> | visibility of the element |
 
 <a name="EasyDriver+waitForDisabled"></a>
 
