@@ -36,7 +36,7 @@ class EasySuite {
   }
 
   /**
-   * Only Test cases identified can be run
+   * Only test cases identified can be run
    * @param {Object[]} testcases Array of testcases to run
    */
   only(testcases) {
@@ -44,7 +44,7 @@ class EasySuite {
   }
 
   /**
-   * Only Test cases identified can be run
+   * Add test case to the test suite
    * @param {string} name Name of the test case
    * @param {Function} fn Function to run for the test case
    */

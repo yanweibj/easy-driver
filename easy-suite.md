@@ -44,7 +44,7 @@ Environment Cleanup for the test suite
 <a name="EasySuite+only"></a>
 
 ### easySuite.only(testcases)
-Only Test cases identified can be run
+Only test cases identified can be run
 
 **Kind**: instance method of <code>[EasySuite](#EasySuite)</code>  
 
@@ -55,7 +55,7 @@ Only Test cases identified can be run
 <a name="EasySuite+testcase"></a>
 
 ### easySuite.testcase(name, fn)
-Only Test cases identified can be run
+Add test case to the test suite
 
 **Kind**: instance method of <code>[EasySuite](#EasySuite)</code>  
 
