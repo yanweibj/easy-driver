@@ -1,7 +1,8 @@
 const EasyDriver = require('./easy-driver');
 const EasySuite = require('./easy-suite');
 
-const easyd = new EasyDriver({locale: 'en'});
+const locale = process.env.EASYD_LOCALE || 'en';
+const easyd = new EasyDriver({locale: locale});
 const suite = new EasySuite('EasyDriver Test Suite');
 easyd.VERBOSE = false;
 
