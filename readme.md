@@ -286,6 +286,8 @@ EasySuite is a preliminary Test Suite support for EasyDriver.  It is based upon 
 
 To run sample test suite, please execute: `node_modules/.bin/mocha testsuite_sample.js`
 
+Or, use the template below to write your own test suite.  EasySuite Javascript file needs to be executed with `mocha`.
+
 ```javascript
 const EasyDriver = require('./easy-driver');
 const EasySuite = require('./easy-suite');
@@ -294,11 +296,11 @@ const easyd = new EasyDriver({locale: 'en'});
 const suite = new EasySuite('EasyDriver Test Suite');
 
 suite.before(function() {
-  // Steps for Environment Setup
+  // Steps before any test cases are run
 });
 
 suite.after(function() {
-  // Steps for Environment Cleanup
+  // Steps after all test cases are run
 });
 
 suite.testcase("010.010.010", function() {
@@ -315,6 +317,7 @@ suite.testcase("010.020.010", function() {
 
 // Only run certain test cases
 // suite.only(['010.010.010', "010.020.010"]);
+// suite.onlyJSON('testcases.json', 'en');
 
 suite.run();
 ```

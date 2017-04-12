@@ -1,5 +1,6 @@
 'use strict';
 
+const fs = require('fs-extra');
 const test = require('selenium-webdriver/testing');
 
 /*--- ****************************** ---*/
@@ -41,6 +42,16 @@ class EasySuite {
    */
   only(testcases) {
     if (Array.isArray(testcases)) this.executables = testcases;
+  }
+
+  /**
+   * Only test cases (by locale) identified in JSON file can be run
+   * @param {string} filename JSON filename
+   * @param {string} [locale = 'en'] Test cases of a certain locale in JSON
+   */
+  onlyJSON(filename, locale = 'en') {
+    const data = fs.readJSONSync(filename);
+    if (Array.isArray(data[locale])) this.executables = data[locale];
   }
 
   /**

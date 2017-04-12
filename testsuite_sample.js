@@ -34,5 +34,6 @@ suite.testcase("010.020.010", function() {
 
 // Only run certain test cases
 // suite.only(['010.010.010', "010.020.010"]);
+// suite.onlyJSON('testsuite_sample.json', locale);
 
 suite.run();

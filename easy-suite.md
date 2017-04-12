@@ -8,6 +8,7 @@
     * [.before(fn)](#EasySuite+before)
     * [.after(fn)](#EasySuite+after)
     * [.only(testcases)](#EasySuite+only)
+    * [.onlyJSON(filename, [locale])](#EasySuite+onlyJSON)
     * [.testcase(name, fn)](#EasySuite+testcase)
     * [.run()](#EasySuite+run)
 
@@ -51,6 +52,18 @@ Only test cases identified can be run
 | Param | Type | Description |
 | --- | --- | --- |
 | testcases | <code>Array.&lt;Object&gt;</code> | Array of testcases to run |
+
+<a name="EasySuite+onlyJSON"></a>
+
+### easySuite.onlyJSON(filename, [locale])
+Only test cases (by locale) identified in JSON file can be run
+
+**Kind**: instance method of <code>[EasySuite](#EasySuite)</code>  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| filename | <code>string</code> |  | JSON filename |
+| [locale] | <code>string</code> | <code>&quot;&#x27;en&#x27;&quot;</code> | Test cases of a certain locale in JSON |
 
 <a name="EasySuite+testcase"></a>
 
