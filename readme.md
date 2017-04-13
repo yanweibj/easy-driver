@@ -292,7 +292,8 @@ Or, use the template below to write your own test suite.  EasySuite Javascript f
 const EasyDriver = require('./easy-driver');
 const EasySuite = require('./easy-suite');
 
-const easyd = new EasyDriver({locale: 'en'});
+const locale = process.env.EASYD_LOCALE || 'en';
+const easyd = new EasyDriver({locale: locale});
 const suite = new EasySuite('EasyDriver Test Suite');
 
 suite.before(function() {
@@ -317,7 +318,8 @@ suite.testcase("010.020.010", function() {
 
 // Only run certain test cases
 // suite.only(['010.010.010', "010.020.010"]);
-// suite.onlyJSON('testcases.json', 'en');
+// Or, only run test cases specified in JSON file
+// suite.onlyJSON('testcases.json', locale);
 
 suite.run();
 ```

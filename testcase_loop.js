@@ -19,7 +19,7 @@ languages.forEach(function (lang) {
   easyd.sendKeys('name=txtPassword', 'password_here', easyd.Key.ENTER); // Password
 
   // Switch Blueworks Live to ${lang}
-  easyd.click('#pageHeaderOtherControls * li:eq(0)'); // User
+  easyd.click('#pageHeaderOtherControls li:eq(0)'); // User
   easyd.click('.selectListButton:eq(2)'); // Location tab
   easyd.select('.timezone:eq(1)', `[value="${lang}"]`); // Language <select>
   easyd.click('.bpDialogButtons > button'); // Update button
@@ -28,9 +28,9 @@ languages.forEach(function (lang) {
   // Case 1
   easyd.blank();
   easyd.open('https://bwlux-web.canlab.ibm.com/scr/processes/5f60058220082#bpmn');
-  easyd.doubleClick('.bpmn_activity_table * span'); // Activity
+  easyd.doubleClick('.bpmn_activity_table span'); // Activity
   easyd.click('.detailsTabContainer > li:eq(3)'); // Documentation
-  easyd.click('.detailContent * em'); // Click to Edit Description
+  easyd.click('.detailContent em'); // Click to Edit Description
   easyd.click('.rteButton > img:eq(14)'); // Insert Image icon
   easyd.drawRedMark('.bpPaddedDialogContent');
   easyd.takeScreenshot(`${langFolder}/01.010.010.png`);
