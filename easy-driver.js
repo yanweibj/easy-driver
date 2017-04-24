@@ -1313,6 +1313,8 @@ class EasyDriver {
         return alert.getText().then(function(text) {
           alert.accept();
 
+          // self.switchToDefaultContent();
+
           return self.wd.executeScript(`
             var alertBackground = document.createElement('div');
             alertBackground.id = "${cId}";
@@ -1451,6 +1453,8 @@ class EasyDriver {
           } else {
             alert.accept();
           }
+
+          // self.switchToDefaultContent();
 
           return self.wd.executeScript(`
             var alertBackground = document.createElement('div');

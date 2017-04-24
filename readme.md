@@ -329,3 +329,7 @@ suite.testcase("010.020.010", function() {
 
 suite.run();
 ```
+
+## selenium-webdriver CHANGES
+
+Current version: [3.4.0](https://github.com/SeleniumHQ/selenium/blob/master/javascript/node/selenium-webdriver/CHANGES.md)
