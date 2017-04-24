@@ -96,7 +96,9 @@
     * [.waitForVisible(locator)](#EasyDriver+waitForVisible) ⇒ <code>Thenable</code>
     * [.clearAllDrawings()](#EasyDriver+clearAllDrawings) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.createDirectories(dirtree)](#EasyDriver+createDirectories)
+    * [.drawAlert()](#EasyDriver+drawAlert) ⇒ <code>WebElementPromise</code>
     * [.drawArrow(from_locator, to_locator)](#EasyDriver+drawArrow) ⇒ <code>WebElementPromise</code>
+    * [.drawConfirmation([dismiss])](#EasyDriver+drawConfirmation) ⇒ <code>WebElementPromise</code>
     * [.drawFlyover(locator, [settings])](#EasyDriver+drawFlyover) ⇒ <code>WebElementPromise</code>
     * [.drawRedMark(locator, [padding])](#EasyDriver+drawRedMark) ⇒ <code>WebElementPromise</code>
     * [.drawSelect(locator, [offset])](#EasyDriver+drawSelect) ⇒ <code>WebElementPromise</code>
@@ -1047,6 +1049,12 @@ Create directories
 | --- | --- | --- |
 | dirtree | <code>string</code> | Directories to create |
 
+<a name="EasyDriver+drawAlert"></a>
+
+### easyDriver.drawAlert() ⇒ <code>WebElementPromise</code>
+Draw Alert
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 <a name="EasyDriver+drawArrow"></a>
 
 ### easyDriver.drawArrow(from_locator, to_locator) ⇒ <code>WebElementPromise</code>
@@ -1058,6 +1066,17 @@ Draw an arrow between 2 element
 | --- | --- | --- |
 | from_locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
 | to_locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
+
+<a name="EasyDriver+drawConfirmation"></a>
+
+### easyDriver.drawConfirmation([dismiss]) ⇒ <code>WebElementPromise</code>
+Draw Confirmation
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [dismiss] | <code>bool</code> | <code>false</code> | Dismiss confirmation (false means Accept) |
 
 <a name="EasyDriver+drawFlyover"></a>
 

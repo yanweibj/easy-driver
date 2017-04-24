@@ -1299,6 +1299,71 @@ class EasyDriver {
   }
 
   /**
+   * Draw Alert
+   * @return {WebElementPromise}
+   */
+  drawAlert() {
+    this.log(`  [-] drawAlert()`);
+
+    const self = this;
+    const cId = getId();
+
+    return self.waitForAlertIsPresent().then(function () {
+      return self.switchToAlert().then(function (alert) {
+        return alert.getText().then(function(text) {
+          alert.accept();
+
+          return self.wd.executeScript(`
+            var alertBackground = document.createElement('div');
+            alertBackground.id = "${cId}";
+            alertBackground.style.backgroundColor = 'rgba(0,0,0,0.15)';
+            alertBackground.style.color = "#000";
+            alertBackground.style.display = 'block';
+            alertBackground.style.height = "100%";
+            alertBackground.style.position = 'fixed';
+            alertBackground.style.right = '0px';
+            alertBackground.style.top = '0px';
+            alertBackground.style.width = "100%";
+            alertBackground.style.zIndex = '99999';
+
+            var alertDialog = document.createElement('div');
+            alertDialog.id = "${cId}_dialog";
+            alertDialog.style.backgroundColor = '#fff';
+            alertDialog.style.border = 'solid 1px #000';
+            alertDialog.style.font = "12px Verdana";
+            alertDialog.style.margin = "20% auto";
+            alertDialog.style.maxWidth = "800px";
+            alertDialog.style.width = "50%";
+
+            var alertTextDiv = document.createElement('div');
+            alertTextDiv.id = "${cId}_text";
+            alertTextDiv.innerText = "${text}";
+            alertTextDiv.style.padding = "15px";
+
+            var alertButtonDiv = document.createElement('div');
+            alertButtonDiv.id = "${cId}_button";
+            alertButtonDiv.innerHTML = "<button style='width: 70px; box-shadow: 1px 1px 1px #ccc;' onclick='document.getElementById(\\"${cId}\\").remove();'>OK</button>";
+            alertButtonDiv.style.backgroundColor = '#eee';
+            alertButtonDiv.style.margin = "0";
+            alertButtonDiv.style.padding = "10px";
+            alertButtonDiv.style.textAlign = "right";
+
+            alertDialog.appendChild(alertTextDiv);
+            alertDialog.appendChild(alertButtonDiv);
+            alertBackground.appendChild(alertDialog);
+
+            document.body.appendChild(alertBackground);
+
+            return;
+          `).then(function () {
+            return self.findElement(`[id="${cId}"]`);
+          });
+        });
+      });
+    });
+  }
+
+  /**
    * Draw an arrow between 2 element
    * @param {(string|WebElement)} from_locator Element locator
    * @param {(string|WebElement)} to_locator Element locator
@@ -1364,6 +1429,76 @@ class EasyDriver {
     `, from, to)
     .then(function () {
       return self.findElement(`[id="${cId}"]`);
+    });
+  }
+
+  /**
+   * Draw Confirmation
+   * @param {bool} [dismiss=false] Dismiss confirmation (false means Accept)
+   * @return {WebElementPromise}
+   */
+  drawConfirmation(dismiss = false) {
+    this.log(`  [-] drawConfirmation()`);
+
+    const self = this;
+    const cId = getId();
+
+    return self.waitForAlertIsPresent().then(function () {
+      return self.switchToAlert().then(function (alert) {
+        return alert.getText().then(function(text) {
+          if (dismiss) {
+            alert.dismiss();
+          } else {
+            alert.accept();
+          }
+
+          return self.wd.executeScript(`
+            var alertBackground = document.createElement('div');
+            alertBackground.id = "${cId}";
+            alertBackground.style.backgroundColor = 'rgba(0,0,0,0.15)';
+            alertBackground.style.color = "#000";
+            alertBackground.style.display = 'block';
+            alertBackground.style.height = "100%";
+            alertBackground.style.position = 'fixed';
+            alertBackground.style.right = '0px';
+            alertBackground.style.top = '0px';
+            alertBackground.style.width = "100%";
+            alertBackground.style.zIndex = '99999';
+
+            var alertDialog = document.createElement('div');
+            alertDialog.id = "${cId}_dialog";
+            alertDialog.style.backgroundColor = '#fff';
+            alertDialog.style.border = 'solid 1px #000';
+            alertDialog.style.font = "12px Verdana";
+            alertDialog.style.margin = "20% auto";
+            alertDialog.style.maxWidth = "800px";
+            alertDialog.style.width = "50%";
+
+            var alertTextDiv = document.createElement('div');
+            alertTextDiv.id = "${cId}_text";
+            alertTextDiv.innerText = "${text}";
+            alertTextDiv.style.padding = "15px";
+
+            var alertButtonDiv = document.createElement('div');
+            alertButtonDiv.id = "${cId}_buttons";
+            alertButtonDiv.innerHTML = "<button style='width: 70px; box-shadow: 1px 1px 1px #ccc;' onclick='document.getElementById(\\"${cId}\\").remove();'>Cancel</button><button style='width: 70px; box-shadow: 1px 1px 1px #ccc;' onclick='document.getElementById(\\"${cId}\\").remove();'>OK</button>";
+            alertButtonDiv.style.backgroundColor = '#eee';
+            alertButtonDiv.style.margin = "0";
+            alertButtonDiv.style.padding = "10px";
+            alertButtonDiv.style.textAlign = "right";
+
+            alertDialog.appendChild(alertTextDiv);
+            alertDialog.appendChild(alertButtonDiv);
+            alertBackground.appendChild(alertDialog);
+
+            document.body.appendChild(alertBackground);
+
+            return;
+          `).then(function () {
+            return self.findElement(`[id="${cId}"]`);
+          });
+        });
+      });
     });
   }
 
