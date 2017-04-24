@@ -103,6 +103,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 
 ##### easyd - WebDriver Methods
 * `easyd.actions() -> ActionSequence` => See **Class ActionSequence**
+* `easyd.addCookie(name, value, minutes)`
 * `easyd.activeElement() -> WebElementPromise`
 * `easyd.alertAccept()`
 * `easyd.alertDismiss()`
@@ -111,6 +112,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.blank()`
 * `easyd.close()`
 * `easyd.deleteAllCookies()`
+* `easyd.deleteCookie(name)`
 * `easyd.findElement(locator, isVisible = false) -> WebElementPromise`
 ```javascript
     easyd.findElement('id=btn1', true).then(function (element) {
@@ -124,6 +126,8 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
     });
 ```
 * `easyd.forward()`
+* `easyd.getCookie(name) -> Thenable<(Options.Cookie|null)>` See  **[Options.Cookie](http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/webdriver_exports_Options.Cookie.html)**
+* `easyd.getCookies() -> Thenable<Array<Options.Cookie>>`
 * `easyd.getTitle() -> Thenable<string>`
 * `easyd.Key`  => See **Enumeration Key**
 * `easyd.locateElementBy(locator) -> By`
@@ -141,7 +145,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.setWindowPosition(x, y)`
 * `easyd.setWindowSize(width, height)`
 * `easyd.sleep(ms)`
-* `easyd.switchToAlert() -> AlertPromise` => See  [AlertPromise](http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/webdriver_exports_AlertPromise.html)
+* `easyd.switchToAlert() -> AlertPromise` => See  **[AlertPromise](http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/webdriver_exports_AlertPromise.html)**
 * `easyd.switchToDefaultContent()`
 * `easyd.switchToFrame(number_or_loc_or_web)`
 * `easyd.switchToWindow(nameOrHandle)`

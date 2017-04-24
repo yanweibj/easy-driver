@@ -42,6 +42,7 @@ class EasyDriver {
     chromeOptions.addArguments(["disable-infobars", "disable-notifications"]);
     // chromeOptions.addArguments(`lang=${this.locale}`);
     // chromeOptions.addExtensions(`extensions/Advanced-Font-Settings_v0.67.crx`);
+    // chromeOptions.addExtensions('extensions/Chrome-extension-source-viewer_v1.5.crx');
     // chromeOptions.addExtensions('extensions/Full-Page-Screen-Capture_v2.2.crx');
 
     // Firefox Options
@@ -79,6 +80,22 @@ class EasyDriver {
   actions() {
     this.log(`  [-] actions()`);
     return this.wd.actions();
+  }
+
+  /**
+   * Add a cookie
+   * @param {string} name Name of the cookie
+   * @param {string} value Value of the cookie
+   * @param {number} minutes Minutes after the cookie expires
+   * @return {Thenable<undefined>}
+   */
+  addCookie(name, value, minutes) {
+    this.log(`  [-] addCookie()`);
+    return this.wd.manage().addCookie({
+      name: name,
+      value: value,
+      expiry: new Date(Date.now() + (minutes * 60 * 1000))
+    });
   }
 
   /**
@@ -174,6 +191,16 @@ class EasyDriver {
   }
 
   /**
+   * Delete a cookie
+   * @param {string} name Name of the cookie
+   * @return {Thenable<undefined>}
+   */
+  deleteCookie(name) {
+    this.log(`  [-] deleteCookie()`);
+    return this.wd.manage().deleteCookie(name);
+  }
+
+  /**
    * Find Element
    * @param {string} locator Element locator
    * @param {bool} [isVisible=false] Wait until WebElement is visible
@@ -255,6 +282,25 @@ class EasyDriver {
   forward() {
     this.log(`  [-] forward()`);
     return this.wd.navigate().forward();
+  }
+
+  /**
+   * Get a cookie
+   * @param {string} name Name of the cookie
+   * @return {Thenable<(Options.Cookie|null)>}
+   */
+  getCookie(name) {
+    this.log(`  [-] getCookie()`);
+    return this.wd.manage().getCookie(name);
+  }
+
+  /**
+   * Get all cookies
+   * @return {Thenable<Array<Options.Cookie>>}
+   */
+  getCookies() {
+    this.log(`  [-] getCookies()`);
+    return this.wd.manage().getCookies();
   }
 
   /**

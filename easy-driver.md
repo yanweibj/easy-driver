@@ -6,6 +6,7 @@
 * [EasyDriver](#EasyDriver)
     * [new EasyDriver([options])](#new_EasyDriver_new)
     * [.actions()](#EasyDriver+actions) ⇒ <code>ActionSequence</code>
+    * [.addCookie(name, value, minutes)](#EasyDriver+addCookie) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.activeElement()](#EasyDriver+activeElement) ⇒ <code>WebElementPromise</code>
     * [.alertAccept()](#EasyDriver+alertAccept) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.alertDismiss()](#EasyDriver+alertDismiss) ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -14,9 +15,12 @@
     * [.blank()](#EasyDriver+blank) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.close()](#EasyDriver+close) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.deleteAllCookies()](#EasyDriver+deleteAllCookies) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.deleteCookie(name)](#EasyDriver+deleteCookie) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.findElement(locator, [isVisible])](#EasyDriver+findElement) ⇒ <code>WebElementPromise</code>
     * [.findElements(locator)](#EasyDriver+findElements) ⇒ <code>Thenable.&lt;Array.&lt;WebElement&gt;&gt;</code>
     * [.forward()](#EasyDriver+forward) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.getCookie(name)](#EasyDriver+getCookie) ⇒ <code>Thenable.&lt;(Options.Cookie\|null)&gt;</code>
+    * [.getCookies()](#EasyDriver+getCookies) ⇒ <code>Thenable.&lt;Array.&lt;Options.Cookie&gt;&gt;</code>
     * [.getTitle()](#EasyDriver+getTitle) ⇒ <code>Thenable.&lt;string&gt;</code>
     * [.locateElementBy(locator)](#EasyDriver+locateElementBy) ⇒ <code>By</code>
     * [.log(msg)](#EasyDriver+log)
@@ -115,6 +119,19 @@ Create a new action sequence
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 **Returns**: <code>ActionSequence</code> - A new action sequence.  
+<a name="EasyDriver+addCookie"></a>
+
+### easyDriver.addCookie(name, value, minutes) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Add a cookie
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | Name of the cookie |
+| value | <code>string</code> | Value of the cookie |
+| minutes | <code>number</code> | Minutes after the cookie expires |
+
 <a name="EasyDriver+activeElement"></a>
 
 ### easyDriver.activeElement() ⇒ <code>WebElementPromise</code>
@@ -168,6 +185,17 @@ Close the current window
 Delete all cookies visible to the current page
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+<a name="EasyDriver+deleteCookie"></a>
+
+### easyDriver.deleteCookie(name) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Delete a cookie
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | Name of the cookie |
+
 <a name="EasyDriver+findElement"></a>
 
 ### easyDriver.findElement(locator, [isVisible]) ⇒ <code>WebElementPromise</code>
@@ -197,6 +225,23 @@ Find Elements
 
 ### easyDriver.forward() ⇒ <code>Thenable.&lt;undefined&gt;</code>
 Move forwards in the browser history
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+<a name="EasyDriver+getCookie"></a>
+
+### easyDriver.getCookie(name) ⇒ <code>Thenable.&lt;(Options.Cookie\|null)&gt;</code>
+Get a cookie
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | Name of the cookie |
+
+<a name="EasyDriver+getCookies"></a>
+
+### easyDriver.getCookies() ⇒ <code>Thenable.&lt;Array.&lt;Options.Cookie&gt;&gt;</code>
+Get all cookies
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 <a name="EasyDriver+getTitle"></a>
