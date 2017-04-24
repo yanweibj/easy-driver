@@ -19,9 +19,11 @@
     * [.findElement(locator, [isVisible])](#EasyDriver+findElement) ⇒ <code>WebElementPromise</code>
     * [.findElements(locator)](#EasyDriver+findElements) ⇒ <code>Thenable.&lt;Array.&lt;WebElement&gt;&gt;</code>
     * [.forward()](#EasyDriver+forward) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.getAllWindowHandles()](#EasyDriver+getAllWindowHandles) ⇒ <code>Thenable.&lt;Array.&lt;string&gt;&gt;</code>
     * [.getCookie(name)](#EasyDriver+getCookie) ⇒ <code>Thenable.&lt;(Options.Cookie\|null)&gt;</code>
     * [.getCookies()](#EasyDriver+getCookies) ⇒ <code>Thenable.&lt;Array.&lt;Options.Cookie&gt;&gt;</code>
     * [.getTitle()](#EasyDriver+getTitle) ⇒ <code>Thenable.&lt;string&gt;</code>
+    * [.getWindowHandle()](#EasyDriver+getWindowHandle) ⇒ <code>Thenable.&lt;string&gt;</code>
     * [.locateElementBy(locator)](#EasyDriver+locateElementBy) ⇒ <code>By</code>
     * [.log(msg)](#EasyDriver+log)
     * [.maximizeWindow()](#EasyDriver+maximizeWindow) ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -229,6 +231,13 @@ Find Elements
 Move forwards in the browser history
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+<a name="EasyDriver+getAllWindowHandles"></a>
+
+### easyDriver.getAllWindowHandles() ⇒ <code>Thenable.&lt;Array.&lt;string&gt;&gt;</code>
+Get All Window Handles
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+**Returns**: <code>Thenable.&lt;Array.&lt;string&gt;&gt;</code> - A promise that will be resolved with an array of window handles.  
 <a name="EasyDriver+getCookie"></a>
 
 ### easyDriver.getCookie(name) ⇒ <code>Thenable.&lt;(Options.Cookie\|null)&gt;</code>
@@ -253,6 +262,13 @@ Get title
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 **Returns**: <code>Thenable.&lt;string&gt;</code> - A promise that will be resolved with the current page's title.  
+<a name="EasyDriver+getWindowHandle"></a>
+
+### easyDriver.getWindowHandle() ⇒ <code>Thenable.&lt;string&gt;</code>
+Get Window Handle
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+**Returns**: <code>Thenable.&lt;string&gt;</code> - A promise that will be resolved with the current window's handle.  
 <a name="EasyDriver+locateElementBy"></a>
 
 ### easyDriver.locateElementBy(locator) ⇒ <code>By</code>

@@ -126,9 +126,11 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
     });
 ```
 * `easyd.forward()`
+* `easyd.getAllWindowHandles() -> Thenable<Array<string>>`
 * `easyd.getCookie(name) -> Thenable<(Options.Cookie|null)>` See  **[Options.Cookie](http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/webdriver_exports_Options.Cookie.html)**
 * `easyd.getCookies() -> Thenable<Array<Options.Cookie>>`
 * `easyd.getTitle() -> Thenable<string>`
+* `easyd.getWindowHandle() -> Thenable<string>`
 * `easyd.Key`  => See **Enumeration Key**
 * `easyd.locateElementBy(locator) -> By`
 * `easyd.log(msg)`

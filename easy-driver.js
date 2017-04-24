@@ -285,6 +285,15 @@ class EasyDriver {
   }
 
   /**
+   * Get All Window Handles
+   * @return {Thenable<Array<string>>} A promise that will be resolved with an array of window handles.
+   */
+  getAllWindowHandles() {
+    this.log(`  [-] getAllWindowHandles()`);
+    return this.wd.getAllWindowHandles();
+  }
+
+  /**
    * Get a cookie
    * @param {string} name Name of the cookie
    * @return {Thenable<(Options.Cookie|null)>}
@@ -310,6 +319,15 @@ class EasyDriver {
   getTitle() {
     this.log(`  [-] getTitle()`);
     return this.wd.getTitle();
+  }
+
+  /**
+   * Get Window Handle
+   * @return {Thenable<string>} A promise that will be resolved with the current window's handle.
+   */
+  getWindowHandle() {
+    this.log(`  [-] getWindowHandle()`);
+    return this.wd.getWindowHandle();
   }
 
   /**
