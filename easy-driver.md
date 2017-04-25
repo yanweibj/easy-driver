@@ -102,10 +102,12 @@
     * [.createDirectories(dirtree)](#EasyDriver+createDirectories)
     * [.drawAlert()](#EasyDriver+drawAlert) ⇒ <code>WebElementPromise</code>
     * [.drawArrow(from_locator, to_locator)](#EasyDriver+drawArrow) ⇒ <code>WebElementPromise</code>
+    * [.drawColorFill(locator, [color])](#EasyDriver+drawColorFill) ⇒ <code>WebElementPromise</code>
     * [.drawConfirmation([dismiss])](#EasyDriver+drawConfirmation) ⇒ <code>WebElementPromise</code>
     * [.drawFlyover(locator, [settings])](#EasyDriver+drawFlyover) ⇒ <code>WebElementPromise</code>
     * [.drawRedMark(locator, [padding])](#EasyDriver+drawRedMark) ⇒ <code>WebElementPromise</code>
     * [.drawSelect(locator, [offset])](#EasyDriver+drawSelect) ⇒ <code>WebElementPromise</code>
+    * [.drawText(locator, text, [settings])](#EasyDriver+drawText) ⇒ <code>WebElementPromise</code>
     * [.drawValidation(locator, [offset])](#EasyDriver+drawValidation) ⇒ <code>WebElementPromise</code>
     * [.takeElementShot(locator, filename, [offset])](#EasyDriver+takeElementShot)
     * [.takeScrollShot(locator, filename, [offset])](#EasyDriver+takeScrollShot)
@@ -1097,6 +1099,18 @@ Draw an arrow between 2 element
 | from_locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
 | to_locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
 
+<a name="EasyDriver+drawColorFill"></a>
+
+### easyDriver.drawColorFill(locator, [color]) ⇒ <code>WebElementPromise</code>
+Fill an element with color
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| locator | <code>string</code> &#124; <code>WebElement</code> |  | Element locator |
+| [color] | <code>string</code> | <code>&quot;&#x27;rgba(255,0,0,0.8)&#x27;&quot;</code> | Color to fill |
+
 <a name="EasyDriver+drawConfirmation"></a>
 
 ### easyDriver.drawConfirmation([dismiss]) ⇒ <code>WebElementPromise</code>
@@ -1143,6 +1157,19 @@ Draw drop-down menu for SELECT element
 | --- | --- | --- | --- |
 | locator | <code>string</code> &#124; <code>WebElement</code> |  | Element locator |
 | [offset] | <code>Object</code> | <code>{x: 5, y: 15}</code> | Menu offset from the element |
+
+<a name="EasyDriver+drawText"></a>
+
+### easyDriver.drawText(locator, text, [settings]) ⇒ <code>WebElementPromise</code>
+Draw Text after the element
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| locator | <code>string</code> &#124; <code>WebElement</code> |  | Element locator |
+| text | <code>string</code> |  | Text to draw |
+| [settings] | <code>Object</code> | <code>{color: &#x27;#f00&#x27;, fontSize: 13, marginTop: 2, right: 20}</code> | Settings |
 
 <a name="EasyDriver+drawValidation"></a>
 

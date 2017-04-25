@@ -1350,65 +1350,7 @@ class EasyDriver {
    */
   drawAlert() {
     this.log(`  [-] drawAlert()`);
-
-    const self = this;
-    const cId = getId();
-
-    return self.waitForAlertIsPresent().then(function () {
-      return self.switchToAlert().then(function (alert) {
-        return alert.getText().then(function(text) {
-          alert.accept();
-
-          // self.switchToDefaultContent();
-
-          return self.wd.executeScript(`
-            var alertBackground = document.createElement('div');
-            alertBackground.id = "${cId}";
-            alertBackground.style.backgroundColor = 'rgba(0,0,0,0.15)';
-            alertBackground.style.color = "#000";
-            alertBackground.style.display = 'block';
-            alertBackground.style.height = "100%";
-            alertBackground.style.position = 'fixed';
-            alertBackground.style.right = '0px';
-            alertBackground.style.top = '0px';
-            alertBackground.style.width = "100%";
-            alertBackground.style.zIndex = '99999';
-
-            var alertDialog = document.createElement('div');
-            alertDialog.id = "${cId}_dialog";
-            alertDialog.style.backgroundColor = '#fff';
-            alertDialog.style.border = 'solid 1px #000';
-            alertDialog.style.font = "12px Verdana";
-            alertDialog.style.margin = "20% auto";
-            alertDialog.style.maxWidth = "800px";
-            alertDialog.style.width = "50%";
-
-            var alertTextDiv = document.createElement('div');
-            alertTextDiv.id = "${cId}_text";
-            alertTextDiv.innerText = "${text}";
-            alertTextDiv.style.padding = "15px";
-
-            var alertButtonDiv = document.createElement('div');
-            alertButtonDiv.id = "${cId}_button";
-            alertButtonDiv.innerHTML = "<button style='width: 70px; box-shadow: 1px 1px 1px #ccc;' onclick='document.getElementById(\\"${cId}\\").remove();'>OK</button>";
-            alertButtonDiv.style.backgroundColor = '#eee';
-            alertButtonDiv.style.margin = "0";
-            alertButtonDiv.style.padding = "10px";
-            alertButtonDiv.style.textAlign = "right";
-
-            alertDialog.appendChild(alertTextDiv);
-            alertDialog.appendChild(alertButtonDiv);
-            alertBackground.appendChild(alertDialog);
-
-            document.body.appendChild(alertBackground);
-
-            return;
-          `).then(function () {
-            return self.findElement(`[id="${cId}"]`);
-          });
-        });
-      });
-    });
+    return this.drawConfirmation(false, true);
   }
 
   /**
@@ -1481,15 +1423,58 @@ class EasyDriver {
   }
 
   /**
+   * Fill an element with color
+   * @param {(string|WebElement)} locator Element locator
+   * @param {string} [color='rgba(255,0,0,0.8)'] Color to fill
+   * @return {WebElementPromise}
+   */
+  drawColorFill(locator, color = 'rgba(255,0,0,0.8)') {
+    this.log(`  [-] drawColorFill()`);
+
+    const self = this;
+    const element = self.findElement(locator, true);
+    const id = getId();
+
+    return element.getLocation().then(function (location) {
+      return element.getSize().then(function (size) {
+        return self.wd.executeScript(`
+          var colorfill = window.document.createElement('div');
+          colorfill.id = '${id}';
+          colorfill.style.backgroundColor = '${color}';
+          colorfill.style.border = 'none';
+          colorfill.style.display = 'block';
+          colorfill.style.height = ${size.height} + 'px';
+          colorfill.style.left = ${location.x} + 'px';
+          colorfill.style.margin = '0px';
+          colorfill.style.padding = '0px';
+          colorfill.style.position = 'absolute';
+          colorfill.style.top = ${location.y} + 'px';
+          colorfill.style.width = ${size.width} + 'px';
+          colorfill.style.zIndex = '99999';
+
+          window.document.body.appendChild(colorfill);
+
+          return;
+        `)
+        .then(function () {
+          return self.findElement(`[id="${id}"]`);
+        });
+      });
+    });
+  }
+
+  /**
    * Draw Confirmation
    * @param {bool} [dismiss=false] Dismiss confirmation (false means Accept)
    * @return {WebElementPromise}
    */
-  drawConfirmation(dismiss = false) {
+  drawConfirmation(dismiss = false, isAlert = false) {
     this.log(`  [-] drawConfirmation()`);
 
     const self = this;
     const cId = getId();
+    const cancelButton = (isAlert) ? '' : `<button style='width: 70px; box-shadow: 1px 1px 1px #ccc;' onclick='document.getElementById(\\"${cId}\\").remove();'>Cancel</button>`;
+    const okButton = `<button style='width: 70px; box-shadow: 1px 1px 1px #ccc;' onclick='document.getElementById(\\"${cId}\\").remove();'>OK</button>`;
 
     return self.waitForAlertIsPresent().then(function () {
       return self.switchToAlert().then(function (alert) {
@@ -1500,12 +1485,12 @@ class EasyDriver {
             alert.accept();
           }
 
-          // self.switchToDefaultContent();
+          self.switchToDefaultContent();
 
           return self.wd.executeScript(`
             var alertBackground = document.createElement('div');
             alertBackground.id = "${cId}";
-            alertBackground.style.backgroundColor = 'rgba(0,0,0,0.15)';
+            alertBackground.style.backgroundColor = 'rgba(0,0,0,0.2)';
             alertBackground.style.color = "#000";
             alertBackground.style.display = 'block';
             alertBackground.style.height = "100%";
@@ -1519,7 +1504,7 @@ class EasyDriver {
             alertDialog.id = "${cId}_dialog";
             alertDialog.style.backgroundColor = '#fff';
             alertDialog.style.border = 'solid 1px #000';
-            alertDialog.style.font = "12px Verdana";
+            alertDialog.style.font = "12px Verdana, sans-serif";
             alertDialog.style.margin = "20% auto";
             alertDialog.style.maxWidth = "800px";
             alertDialog.style.width = "50%";
@@ -1531,7 +1516,7 @@ class EasyDriver {
 
             var alertButtonDiv = document.createElement('div');
             alertButtonDiv.id = "${cId}_buttons";
-            alertButtonDiv.innerHTML = "<button style='width: 70px; box-shadow: 1px 1px 1px #ccc;' onclick='document.getElementById(\\"${cId}\\").remove();'>Cancel</button><button style='width: 70px; box-shadow: 1px 1px 1px #ccc;' onclick='document.getElementById(\\"${cId}\\").remove();'>OK</button>";
+            alertButtonDiv.innerHTML = "${cancelButton}${okButton}";
             alertButtonDiv.style.backgroundColor = '#eee';
             alertButtonDiv.style.margin = "0";
             alertButtonDiv.style.padding = "10px";
@@ -1617,7 +1602,7 @@ class EasyDriver {
       tooltip.style.position = 'absolute';
       tooltip.style.color = '#000';
       tooltip.style.backgroundColor = '#F5FCDE';
-      tooltip.style.border = '3px solid #ff0000';
+      tooltip.style.border = '3px solid #f00';
       tooltip.style.fontSize = '12px';
       tooltip.style.zIndex = '99999';
       tooltip.style.display = 'block';
@@ -1644,8 +1629,7 @@ class EasyDriver {
   /**
    * Draw red-mark around an element
    * @param {(string|WebElement)} locator Element locator
-   * @param {{top: number, left: number, bottom: number, right: number}} [padding={top: 0, left: 0, bottom: 0, right: 0}]
-            Remark padding
+   * @param {{top: number, left: number, bottom: number, right: number}} [padding={top: 0, left: 0, bottom: 0, right: 0}] Remark padding
    * @return {WebElementPromise}
    */
   drawRedMark(locator, padding = {top: 0, left: 0, bottom: 0, right: 0}) {
@@ -1744,6 +1728,49 @@ class EasyDriver {
     `, element, offset.x, offset.y)
     .then(function () {
       return self.findElement(`[id="${sId}"]`);
+    });
+  }
+
+  /**
+   * Draw Text after the element
+   * @param {(string|WebElement)} locator Element locator
+   * @param {string} text Text to draw
+   * @param {{color: string, fontSize: number, marginTop: 2, right: number}} [settings={color: '#f00', fontSize: 13, marginTop: 2, right: 20}] Settings
+   * @return {WebElementPromise}
+   */
+  drawText(locator, text, settings = {color: '#f00', fontSize: 13, marginTop: 2, right: 20}) {
+    this.log(`  [-] drawText()`);
+
+    const self = this;
+    const element = self.findElement(locator, true);
+    const id = getId();
+
+    return element.getLocation().then(function (location) {
+      return element.getSize().then(function (size) {
+        return self.wd.executeScript(`
+          var redtext = window.document.createElement('div');
+          redtext.id = '${id}';
+          redtext.innerText = '${text}';
+          redtext.style.border = 'none';
+          redtext.style.color = '${settings.color}';
+          redtext.style.display = 'block';
+          redtext.style.font = '${settings.fontSize}px Verdana, sans-serif';
+          redtext.style.left = ${location.x} + 'px';
+          redtext.style.margin = '0px';
+          redtext.style.padding = '0px';
+          redtext.style.position = 'absolute';
+          redtext.style.right = ${settings.right} + 'px';
+          redtext.style.top = (${location.y} + ${size.height} + ${settings.marginTop}) + 'px';
+          redtext.style.zIndex = '99999';
+
+          window.document.body.appendChild(redtext);
+
+          return;
+        `)
+        .then(function () {
+          return self.findElement(`[id="${id}"]`);
+        });
+      });
     });
   }
 
