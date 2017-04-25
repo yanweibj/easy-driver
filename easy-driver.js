@@ -545,6 +545,20 @@ class EasyDriver {
   }
 
   /**
+   * Switch to first window
+   * @return {Thenable<undefined>}
+   */
+  switchToFirstWindow() {
+    this.log(`  [-] switchToFirstWindow()`);
+
+    const self = this;
+
+    return self.wd.getAllWindowHandles().then(function (handles) {
+      return self.wd.switchTo().window(handles[0]);
+    });
+  }
+
+  /**
    * Switch to frame
    * @param {(number|string|WebElement)} locator The frame locator
    * @return {Thenable<undefined>}
@@ -554,6 +568,20 @@ class EasyDriver {
 
     const element = (isNaN(locator)) ? this.findElement(locator) : locator;
     return this.wd.switchTo().frame(element);
+  }
+
+  /**
+   * Switch to last-opened window
+   * @return {Thenable<undefined>}
+   */
+  switchToLastWindow() {
+    this.log(`  [-] switchToLastWindow()`);
+
+    const self = this;
+
+    return self.wd.getAllWindowHandles().then(function (handles) {
+      return self.wd.switchTo().window(handles[handles.length-1]);
+    });
   }
 
   /**

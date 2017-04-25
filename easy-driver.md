@@ -41,7 +41,9 @@
     * [.sleep(ms)](#EasyDriver+sleep) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.switchToAlert()](#EasyDriver+switchToAlert) ⇒ <code>AlertPromise</code>
     * [.switchToDefaultContent()](#EasyDriver+switchToDefaultContent) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.switchToFirstWindow()](#EasyDriver+switchToFirstWindow) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.switchToFrame(locator)](#EasyDriver+switchToFrame) ⇒ <code>Thenable.&lt;undefined&gt;</code>
+    * [.switchToLastWindow()](#EasyDriver+switchToLastWindow) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.switchToWindow(nameOrHandle)](#EasyDriver+switchToWindow) ⇒ <code>Thenable.&lt;undefined&gt;</code>
     * [.takeScreenshot(filename)](#EasyDriver+takeScreenshot)
     * [.wait(condition, [timeout])](#EasyDriver+wait) ⇒ <code>Thenable</code>
@@ -430,6 +432,12 @@ Switch to window.alert(), window.confirm(), or window.prompt()
 Switch to the default content
 
 **Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+<a name="EasyDriver+switchToFirstWindow"></a>
+
+### easyDriver.switchToFirstWindow() ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Switch to first window
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 <a name="EasyDriver+switchToFrame"></a>
 
 ### easyDriver.switchToFrame(locator) ⇒ <code>Thenable.&lt;undefined&gt;</code>
@@ -441,6 +449,12 @@ Switch to frame
 | --- | --- | --- |
 | locator | <code>number</code> &#124; <code>string</code> &#124; <code>WebElement</code> | The frame locator |
 
+<a name="EasyDriver+switchToLastWindow"></a>
+
+### easyDriver.switchToLastWindow() ⇒ <code>Thenable.&lt;undefined&gt;</code>
+Switch to last-opened window
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
 <a name="EasyDriver+switchToWindow"></a>
 
 ### easyDriver.switchToWindow(nameOrHandle) ⇒ <code>Thenable.&lt;undefined&gt;</code>

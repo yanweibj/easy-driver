@@ -149,7 +149,9 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.sleep(ms)`
 * `easyd.switchToAlert() -> AlertPromise` => See  **[AlertPromise](http://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/webdriver_exports_AlertPromise.html)**
 * `easyd.switchToDefaultContent()`
+* `easyd.switchToFirstWindow()`
 * `easyd.switchToFrame(number_or_loc_or_web)`
+* `easyd.switchToLastWindow()`
 * `easyd.switchToWindow(nameOrHandle)`
 * `easyd.takeScreenshot(png_filename)`
 * `easyd.until` => See **until Conditions**
