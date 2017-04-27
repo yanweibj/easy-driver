@@ -217,8 +217,9 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.createDirectories(dirtree)`
 * `easyd.drawAlert()`
 * `easyd.drawArrow(from_loc_or_web, to_loc_or_web)`
-* `easyd.drawColorFill(locator, color = 'rgba(255,0,0,0.8)')`
+* `easyd.drawColorFill(loc_or_web, color = 'rgba(255,0,0,0.8)')`
 * `easyd.drawConfirmation(dismiss = false)`
+* `easyd.drawCross(loc_or_web)`
 * `easyd.drawFlyover(loc_or_web, settings = {attribute: 'title', offsetX: 5, offsetY: 15, fromLastPos: false, drawSymbol: false})`
 * `easyd.drawRedMark(loc_or_web, padding = {top: 0, left: 0, bottom: 0, right: 0})`
 * `easyd.drawSelect(loc_or_web, offset = {x: 0, y: 0})`

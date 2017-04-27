@@ -104,6 +104,7 @@
     * [.drawArrow(from_locator, to_locator)](#EasyDriver+drawArrow) ⇒ <code>WebElementPromise</code>
     * [.drawColorFill(locator, [color])](#EasyDriver+drawColorFill) ⇒ <code>WebElementPromise</code>
     * [.drawConfirmation([dismiss])](#EasyDriver+drawConfirmation) ⇒ <code>WebElementPromise</code>
+    * [.drawCross(locator)](#EasyDriver+drawCross) ⇒ <code>WebElementPromise</code>
     * [.drawFlyover(locator, [settings])](#EasyDriver+drawFlyover) ⇒ <code>WebElementPromise</code>
     * [.drawRedMark(locator, [padding])](#EasyDriver+drawRedMark) ⇒ <code>WebElementPromise</code>
     * [.drawSelect(locator, [offset])](#EasyDriver+drawSelect) ⇒ <code>WebElementPromise</code>
@@ -1121,6 +1122,17 @@ Draw Confirmation
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | [dismiss] | <code>bool</code> | <code>false</code> | Dismiss confirmation (false means Accept) |
+
+<a name="EasyDriver+drawCross"></a>
+
+### easyDriver.drawCross(locator) ⇒ <code>WebElementPromise</code>
+Cross out an element
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
 
 <a name="EasyDriver+drawFlyover"></a>
 

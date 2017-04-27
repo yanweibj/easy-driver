@@ -1538,6 +1538,57 @@ class EasyDriver {
   }
 
   /**
+   * Cross out an element
+   * @param {(string|WebElement)} locator Element locator
+   * @return {WebElementPromise}
+   */
+  drawCross(locator) {
+    this.log(`  [-] drawCross()`);
+
+    const self = this;
+    const element = self.findElement(locator, true);
+    const id = getId();
+
+    self.wd.executeScript(`
+      var element = arguments[0];
+      var rect = element.getBoundingClientRect();
+
+      // create canvas
+      var canvas = document.createElement('canvas');
+      canvas.id = "${id}";
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+      canvas.style.left = window.scrollX + 'px';
+      canvas.style.top = window.scrollY + 'px';
+      canvas.style.position = "absolute";
+      canvas.style.zIndex = '99999';
+
+      document.body.appendChild(canvas);
+
+      var ctx = canvas.getContext("2d");
+
+      ctx.beginPath();
+      ctx.moveTo(rect.left, rect.top);
+      ctx.lineTo(rect.left + rect.width, rect.top + rect.height);
+      ctx.lineWidth  = 3;
+      ctx.strokeStyle = '#f00';
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(rect.left + rect.width, rect.top);
+      ctx.lineTo(rect.left, rect.top + rect.height);
+      ctx.lineWidth  = 3;
+      ctx.strokeStyle = '#f00';
+      ctx.stroke();
+
+      return;
+    `, element)
+    .then(function () {
+      return self.findElement(`[id="${id}"]`);
+    });
+  }
+
+  /**
    * Draw flyover for an element
    * @param {(string|WebElement)} locator Element locator
    * @param {{attribute: string, offsetX: number, offsetY: number, fromLastPos: boolean, drawSymbol: boolean}}
@@ -1586,13 +1637,13 @@ class EasyDriver {
         var symbol = document.createElement('div');
         symbol.id = "${sId}";
         symbol.textContent = String.fromCharCode(easydriverTPSymbol);
-        symbol.style.position = 'absolute';
-        symbol.style.color = '#ff0000';
-        symbol.style.fontSize = '12px';
-        symbol.style.zIndex = '99999';
+        symbol.style.color = '#f00';
         symbol.style.display = 'block';
+        symbol.style.fontSize = '12px';
+        symbol.style.left = (left - 12) + 'px';
+        symbol.style.position = 'absolute';
         symbol.style.top = top + 'px';
-      	symbol.style.left = (left - 12) + 'px';
+        symbol.style.zIndex = '99999';
         document.body.appendChild(symbol);
       }
 
@@ -1644,16 +1695,16 @@ class EasyDriver {
         return self.wd.executeScript(`
           var redmark = window.document.createElement('div');
           redmark.id = '${id}';
-          redmark.style.position = 'absolute';
           redmark.style.border = '3px solid red';
-          redmark.style.zIndex = '99999';
           redmark.style.display = 'block';
-          redmark.style.padding = '0px';
-          redmark.style.margin = '0px';
+          redmark.style.height = (${size.height} + 8 + ${padding.bottom}) + 'px';
           redmark.style.left = (${location.x} - 4 - ${padding.left}) + 'px';
+          redmark.style.margin = '0px';
+          redmark.style.padding = '0px';
+          redmark.style.position = 'absolute';
           redmark.style.top = (${location.y} - 4 - ${padding.top}) + 'px';
           redmark.style.width = (${size.width} + 8 + ${padding.right}) + 'px';
-          redmark.style.height = (${size.height} + 8 + ${padding.bottom}) + 'px';
+          redmark.style.zIndex = '99999';
 
           window.document.body.appendChild(redmark);
 
@@ -1705,16 +1756,16 @@ class EasyDriver {
       var dropdown = document.createElement('div');
       dropdown.id = "${sId}";
       dropdown.innerHTML = content;
-      dropdown.style.position = 'absolute';
-      dropdown.style.color = '#000';
       dropdown.style.backgroundColor = '#fff';
       dropdown.style.border = '1px solid #000';
-      dropdown.style.padding = '2px';
-      dropdown.style.fontSize = '12px';
-      dropdown.style.zIndex = '99999';
+      dropdown.style.color = '#000';
       dropdown.style.display = 'block';
+      dropdown.style.fontSize = '12px';
       dropdown.style.height = '1px';
+      dropdown.style.padding = '2px';
+      dropdown.style.position = 'absolute';
       dropdown.style.width = width + 'px';
+      dropdown.style.zIndex = '99999';
 
       document.body.appendChild(dropdown);
       dropdown.style.height = (dropdown.scrollHeight + 8) + 'px';
