@@ -1538,57 +1538,6 @@ class EasyDriver {
   }
 
   /**
-   * Cross out an element
-   * @param {(string|WebElement)} locator Element locator
-   * @return {WebElementPromise}
-   */
-  drawCross(locator) {
-    this.log(`  [-] drawCross()`);
-
-    const self = this;
-    const element = self.findElement(locator, true);
-    const id = getId();
-
-    self.wd.executeScript(`
-      var element = arguments[0];
-      var rect = element.getBoundingClientRect();
-
-      // create canvas
-      var canvas = document.createElement('canvas');
-      canvas.id = "${id}";
-      canvas.height = window.innerHeight;
-      canvas.width = window.innerWidth;
-      canvas.style.left = window.scrollX + 'px';
-      canvas.style.top = window.scrollY + 'px';
-      canvas.style.position = "absolute";
-      canvas.style.zIndex = '99999';
-
-      document.body.appendChild(canvas);
-
-      var ctx = canvas.getContext("2d");
-
-      ctx.beginPath();
-      ctx.moveTo(rect.left, rect.top);
-      ctx.lineTo(rect.left + rect.width, rect.top + rect.height);
-      ctx.lineWidth  = 3;
-      ctx.strokeStyle = '#f00';
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.moveTo(rect.left + rect.width, rect.top);
-      ctx.lineTo(rect.left, rect.top + rect.height);
-      ctx.lineWidth  = 3;
-      ctx.strokeStyle = '#f00';
-      ctx.stroke();
-
-      return;
-    `, element)
-    .then(function () {
-      return self.findElement(`[id="${id}"]`);
-    });
-  }
-
-  /**
    * Draw flyover for an element
    * @param {(string|WebElement)} locator Element locator
    * @param {{attribute: string, offsetX: number, offsetY: number, fromLastPos: boolean, drawSymbol: boolean}}
@@ -1794,6 +1743,10 @@ class EasyDriver {
 
     const self = this;
     const element = self.findElement(locator, true);
+    const color = settings.color || '#f00';
+    const fontSize = settings.fontSize || 15;
+    const marginTop = settings.marginTop || 2;
+    const right = settings.right || 20;
     const id = getId();
 
     return element.getLocation().then(function (location) {
@@ -1803,15 +1756,15 @@ class EasyDriver {
           redtext.id = '${id}';
           redtext.innerText = '${text}';
           redtext.style.border = 'none';
-          redtext.style.color = '${settings.color}';
+          redtext.style.color = '${color}';
           redtext.style.display = 'block';
-          redtext.style.font = '${settings.fontSize}px Verdana, sans-serif';
+          redtext.style.font = '${fontSize}px Verdana, sans-serif';
           redtext.style.left = ${location.x} + 'px';
-          redtext.style.margin = '0px';
-          redtext.style.padding = '0px';
+          redtext.style.margin = '0';
+          redtext.style.padding = '0';
           redtext.style.position = 'absolute';
-          redtext.style.right = ${settings.right} + 'px';
-          redtext.style.top = (${location.y} + ${size.height} + ${settings.marginTop}) + 'px';
+          redtext.style.right = ${right} + 'px';
+          redtext.style.top = (${location.y} + ${size.height} + ${marginTop}) + 'px';
           redtext.style.zIndex = '99999';
 
           window.document.body.appendChild(redtext);
@@ -1871,6 +1824,57 @@ class EasyDriver {
     `, element, offset.x, offset.y)
     .then(function () {
       return self.findElement(`[id="${vId}"]`);
+    });
+  }
+
+  /**
+   * Cross out an element
+   * @param {(string|WebElement)} locator Element locator
+   * @return {WebElementPromise}
+   */
+  drawX(locator) {
+    this.log(`  [-] drawX()`);
+
+    const self = this;
+    const element = self.findElement(locator, true);
+    const id = getId();
+
+    self.wd.executeScript(`
+      var element = arguments[0];
+      var rect = element.getBoundingClientRect();
+
+      // create canvas
+      var canvas = document.createElement('canvas');
+      canvas.id = "${id}";
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+      canvas.style.left = window.scrollX + 'px';
+      canvas.style.top = window.scrollY + 'px';
+      canvas.style.position = "absolute";
+      canvas.style.zIndex = '99999';
+
+      document.body.appendChild(canvas);
+
+      var ctx = canvas.getContext("2d");
+
+      ctx.beginPath();
+      ctx.moveTo(rect.left, rect.top);
+      ctx.lineTo(rect.left + rect.width, rect.top + rect.height);
+      ctx.lineWidth  = 3;
+      ctx.strokeStyle = '#f00';
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(rect.left + rect.width, rect.top);
+      ctx.lineTo(rect.left, rect.top + rect.height);
+      ctx.lineWidth  = 3;
+      ctx.strokeStyle = '#f00';
+      ctx.stroke();
+
+      return;
+    `, element)
+    .then(function () {
+      return self.findElement(`[id="${id}"]`);
     });
   }
 

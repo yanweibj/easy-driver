@@ -104,12 +104,12 @@
     * [.drawArrow(from_locator, to_locator)](#EasyDriver+drawArrow) ⇒ <code>WebElementPromise</code>
     * [.drawColorFill(locator, [color])](#EasyDriver+drawColorFill) ⇒ <code>WebElementPromise</code>
     * [.drawConfirmation([dismiss])](#EasyDriver+drawConfirmation) ⇒ <code>WebElementPromise</code>
-    * [.drawCross(locator)](#EasyDriver+drawCross) ⇒ <code>WebElementPromise</code>
     * [.drawFlyover(locator, [settings])](#EasyDriver+drawFlyover) ⇒ <code>WebElementPromise</code>
     * [.drawRedMark(locator, [padding])](#EasyDriver+drawRedMark) ⇒ <code>WebElementPromise</code>
     * [.drawSelect(locator, [offset])](#EasyDriver+drawSelect) ⇒ <code>WebElementPromise</code>
     * [.drawText(locator, text, [settings])](#EasyDriver+drawText) ⇒ <code>WebElementPromise</code>
     * [.drawValidation(locator, [offset])](#EasyDriver+drawValidation) ⇒ <code>WebElementPromise</code>
+    * [.drawX(locator)](#EasyDriver+drawX) ⇒ <code>WebElementPromise</code>
     * [.takeElementShot(locator, filename, [offset])](#EasyDriver+takeElementShot)
     * [.takeScrollShot(locator, filename, [offset])](#EasyDriver+takeScrollShot)
 
@@ -1123,17 +1123,6 @@ Draw Confirmation
 | --- | --- | --- | --- |
 | [dismiss] | <code>bool</code> | <code>false</code> | Dismiss confirmation (false means Accept) |
 
-<a name="EasyDriver+drawCross"></a>
-
-### easyDriver.drawCross(locator) ⇒ <code>WebElementPromise</code>
-Cross out an element
-
-**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
-
 <a name="EasyDriver+drawFlyover"></a>
 
 ### easyDriver.drawFlyover(locator, [settings]) ⇒ <code>WebElementPromise</code>
@@ -1194,6 +1183,17 @@ Draw validationMessage of an form element as a flyover
 | --- | --- | --- | --- |
 | locator | <code>string</code> &#124; <code>WebElement</code> |  | Element locator |
 | [offset] | <code>Object</code> | <code>{x: 0, y: 0}</code> | Flyover offset from the element |
+
+<a name="EasyDriver+drawX"></a>
+
+### easyDriver.drawX(locator) ⇒ <code>WebElementPromise</code>
+Cross out an element
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
 
 <a name="EasyDriver+takeElementShot"></a>
 
