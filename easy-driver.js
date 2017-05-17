@@ -976,7 +976,7 @@ class EasyDriver {
    * Move an element
    * @param {(string|WebElement)} from_locator Element locator
    * @param {(string|WebElement|{x: number, y: number})} to_locator The location to move to,
-            either as another locator,  WebElement, or {x,y} positions.
+            either as another locator,  WebElement, or an offset in {x,y}.
    * @return {Thenable}
    */
   move(from_locator, to_locator) {
@@ -992,8 +992,9 @@ class EasyDriver {
       var left = window.scrollX, top = window.scrollY;
 
       if ('x' in to) {
-        left += to.x;
-        top += to.y;
+        var rect = from.getBoundingClientRect();
+        left += rect.left + to.x;
+        top += rect.top + to.y;
       } else {
         var rect = to.getBoundingClientRect();
         left += rect.left;

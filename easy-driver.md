@@ -801,7 +801,7 @@ Move an element
 | Param | Type | Description |
 | --- | --- | --- |
 | from_locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
-| to_locator | <code>string</code> &#124; <code>WebElement</code> &#124; <code>Object</code> | The location to move to,             either as another locator,  WebElement, or {x,y} positions. |
+| to_locator | <code>string</code> &#124; <code>WebElement</code> &#124; <code>Object</code> | The location to move to,             either as another locator,  WebElement, or an offset in {x,y}. |
 
 <a name="EasyDriver+removeAttribute"></a>
 
