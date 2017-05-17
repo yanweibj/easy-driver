@@ -74,6 +74,7 @@
     * [.isEnabled(locator)](#EasyDriver+isEnabled) ⇒ <code>Thenable.&lt;boolean&gt;</code>
     * [.isSelected(locator)](#EasyDriver+isSelected) ⇒ <code>Thenable.&lt;boolean&gt;</code>
     * [.mouseMove(locator, [offset])](#EasyDriver+mouseMove) ⇒ <code>Thenable</code>
+    * [.move(from_locator, to_locator)](#EasyDriver+move) ⇒ <code>Thenable</code>
     * [.removeAttribute(locator, attributeName)](#EasyDriver+removeAttribute) ⇒ <code>Thenable.&lt;(T\|null)&gt;</code>
     * [.rightClick(locator)](#EasyDriver+rightClick) ⇒ <code>Thenable</code>
     * [.rightClickAt(locator, [offset])](#EasyDriver+rightClickAt) ⇒ <code>Thenable</code>
@@ -789,6 +790,18 @@ Move to an element by offset
 | --- | --- | --- | --- |
 | locator | <code>string</code> &#124; <code>WebElement</code> |  | Element locator |
 | [offset] | <code>Object</code> | <code>{x: 0, y: 0}</code> | An offset within the element. |
+
+<a name="EasyDriver+move"></a>
+
+### easyDriver.move(from_locator, to_locator) ⇒ <code>Thenable</code>
+Move an element
+
+**Kind**: instance method of <code>[EasyDriver](#EasyDriver)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| from_locator | <code>string</code> &#124; <code>WebElement</code> | Element locator |
+| to_locator | <code>string</code> &#124; <code>WebElement</code> &#124; <code>Object</code> | The location to move to,             either as another locator,  WebElement, or {x,y} positions. |
 
 <a name="EasyDriver+removeAttribute"></a>
 

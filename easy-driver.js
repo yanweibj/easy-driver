@@ -973,6 +973,40 @@ class EasyDriver {
   }
 
   /**
+   * Move an element
+   * @param {(string|WebElement)} from_locator Element locator
+   * @param {(string|WebElement|{x: number, y: number})} to_locator The location to move to,
+            either as another locator,  WebElement, or {x,y} positions.
+   * @return {Thenable}
+   */
+  move(from_locator, to_locator) {
+    this.log(`  [-] move()`);
+
+    const from = this.findElement(from_locator, true);
+    const to = (typeof to_locator === 'object' && 'x' in to_locator) ? to_locator : this.findElement(to_locator);
+
+    return this.wd.executeScript(`
+      var from = arguments[0];
+      var to = arguments[1];
+
+      var left = window.scrollX, top = window.scrollY;
+
+      if ('x' in to) {
+        left += to.x;
+        top += to.y;
+      } else {
+        var rect = to.getBoundingClientRect();
+        left += rect.left;
+        top += rect.top;
+      }
+
+    	from.style.left = left + 'px';
+    	from.style.top = top + 'px';
+
+    `, from, to);
+  }
+
+  /**
    * Remove an attribute from an element
    * @param {(string|WebElement)} locator Element locator
    * @param {string} attributeName The name of the attribute to remove

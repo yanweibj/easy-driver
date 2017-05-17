@@ -173,7 +173,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.click(loc_or_web)`
 * `easyd.clickAt(loc_or_web, offset = {x: 0, y: 0})`
 * `easyd.doubleClick(loc_or_web, offset = {x: 0, y: 0})`
-* `easyd.dragAndDrop(from_loc_or_web, to_loc_or_web_or_position)`
+* `easyd.dragAndDrop(from_loc_or_web, to_loc_or_web_or_positions)`
 * `easyd.focus(loc_or_web)`
 * `easyd.getAttribute(loc_or_web, attributeName) -> Thenable<(string|null)>`
 * `easyd.getRect(loc_or_web) -> Thenable<{x: number, y: number, height: number, width: number}>`
@@ -186,6 +186,7 @@ const easyd = new EasyDriver({locale: 'ja', browser: 'chrome'});
 * `easyd.isEnabled(loc_or_web) -> Thenable<boolean>`
 * `easyd.isSelected(loc_or_web) -> Thenable<boolean>`
 * `easyd.mouseMove(loc_or_web, offset = {x: 0, y: 0})`
+* `easyd.move(loc_or_web, to_loc_or_web_or_positions)`
 * `easyd.removeAttribute(loc_or_web, attributeName)`
 * `easyd.rightClick(loc_or_web)`
 * `easyd.rightClickAt(loc_or_web, offset = {x: 0, y: 0})`
