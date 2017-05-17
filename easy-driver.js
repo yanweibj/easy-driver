@@ -1578,8 +1578,8 @@ class EasyDriver {
 
       var title = element.getAttribute("${attribute}") || 'N/A';
 
-      var left = rect.left;
-      var top = rect.top;
+      var left = window.scrollX + rect.left;
+      var top = window.scrollY + rect.top;
 
       if (drawSymbol) {
         window.easydriverTPSymbol++;
@@ -1617,7 +1617,7 @@ class EasyDriver {
       }
 
       var lastPos = tooltip.getBoundingClientRect();
-      window.easydriverTPLastPos = {x: lastPos.left, y: lastPos.bottom};
+      window.easydriverTPLastPos = {x: window.scrollX + lastPos.left, y: window.scrollY + lastPos.bottom};
 
       return;
     `, element, offsetX, offsetY, fromLastPos, drawSymbol)
