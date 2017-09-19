@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aaronchen/easy-driver"
+    "url": "https://github.ibm.com/aaronhc/easy-driver"
   },
   "keywords": [
     "selenium",
     "webdriver",
     "javascript"
   ],
-  "author": "Aaron Chen <aaron@611b.com>",
+  "author": "Aaron Chen <aaronhc@tw.ibm.com>",
   "license": "MIT",
   "dependencies": {
     "chromedriver": "2.31.0",
