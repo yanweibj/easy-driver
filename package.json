@@ -19,7 +19,7 @@
   "author": "Aaron Chen <aaronhc@tw.ibm.com>",
   "license": "MIT",
   "dependencies": {
-    "chromedriver": "2.33.0",
+    "chromedriver": "2.33.2",
     "fs-extra": "4.0.2",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
