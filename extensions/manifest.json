@@ -1,0 +1,9 @@
+{
+  "manifest_version": 2,
+  "name": "Basic-Auth",
+  "version": "1.0",
+  "permissions": ["<all_urls>", "webRequest", "webRequestBlocking"],
+  "background": {
+    "scripts": ["background.js"]
+  }
+}

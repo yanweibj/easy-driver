@@ -45,6 +45,7 @@ class EasyDriver {
     // chromeOptions.addExtensions(`extensions/Advanced-Font-Settings_v0.67.crx`);
     // chromeOptions.addExtensions('extensions/Chrome-extension-source-viewer_v1.5.crx');
     // chromeOptions.addExtensions('extensions/Full-Page-Screen-Capture_v2.2.crx');
+    // chromeOptions.addExtensions('extensions/Basic-Auth_v1.0.crx');
 
     // Firefox Options
     const profile = new firefox.Profile();
