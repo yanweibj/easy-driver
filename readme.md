@@ -32,7 +32,7 @@ In Terminal, run:
 ```shell
 cd /path/to/all_projects_root
 
-git clone https://github.com/aaronchen/easy-driver
+git clone https://github.ibm.com/aaronhc/easy-driver
 
 cd easy-driver
 
