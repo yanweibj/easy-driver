@@ -11,7 +11,10 @@
 ```shell
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
-
+Use below command in China
+```shell
+/bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
+```
 ## Install Node.js
 
 > (For Windows) Please download [Nodes.js](https://nodejs.org/en/download/) and install.
